@@ -84,6 +84,8 @@ class CAN_DataFrame(Structure):
     ]
 
 # CAN初始化配置
+
+
 class CAN_InitConfig(Structure):
     _fields_ = [
         ("bMode",      c_ubyte),    # 工作模式(0表示正常模式,1表示只听模式)
@@ -96,6 +98,8 @@ class CAN_InitConfig(Structure):
     ]
 
 # CAN设备信息
+
+
 class CAN_DeviceInformation(Structure):
     _fields_ = [
         ("uHardWareVersion",  c_ushort),   # 硬件版本
@@ -110,6 +114,8 @@ class CAN_DeviceInformation(Structure):
     ]
 
 # CAN错误信息
+
+
 class CAN_ErrorInformation(Structure):
     _fields_ = [
         ("uErrorCode",     c_uint),     # 错误类型
@@ -117,7 +123,29 @@ class CAN_ErrorInformation(Structure):
         ("ArLostErrData",  c_ubyte)     # 仲裁错误数据
     ]
 
+
 pDll = CDLL("./NJLikeLib/CanCmd.dll")
+
+devHandle = 0  # device handle
+devInfo = CAN_DeviceInformation()
+init_config = CAN_InitConfig(bMode=0, nBtrType=1)
+err_info = CAN_ErrorInformation()
+send_data = CAN_DataFrame(nSendType=0, bRemoteFlag=0,
+                          bExternFlag=0, nDataLen=8)
+
+dwBtr_table = {
+    '5Kbps': [0xBF, 0xFF],
+    '10Kbps': [0x31, 0x1C],
+    '20Kbps': [0x18, 0x1C],
+    '50Kbps': [0x09, 0x1C],
+    '100Kbps': [0x04, 0x1C],
+    '125Kbps': [0x03, 0x1C],
+    '250Kbps': [0x01, 0x1C],
+    '500Kbps': [0x00, 0x1C],
+    '800Kbps': [0x00, 0x16],
+    '1000Kbps': [0x00, 0x14],
+}
+
 
 def get_error_code(devHandle):
     print("获取错误信息:")
