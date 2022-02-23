@@ -133,6 +133,7 @@ init_config = CAN_InitConfig(bMode=0, nBtrType=1)
 err_info = CAN_ErrorInformation()
 send_data = CAN_DataFrame(nSendType=0, bRemoteFlag=0,
                           bExternFlag=0, nDataLen=8)
+recv_data = CAN_DataFrame()
 
 dwBtr_table = {
     '5Kbps': [0xBF, 0xFF],
