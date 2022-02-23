@@ -128,6 +128,7 @@ pDll = CDLL("./NJLikeLib/CanCmd.dll")
 
 devHandle = 0  # device handle
 devInfo = CAN_DeviceInformation()
+devCOM = 0  # device comm
 init_config = CAN_InitConfig(bMode=0, nBtrType=1)
 err_info = CAN_ErrorInformation()
 send_data = CAN_DataFrame(nSendType=0, bRemoteFlag=0,
@@ -144,6 +145,25 @@ dwBtr_table = {
     '500Kbps': [0x00, 0x1C],
     '800Kbps': [0x00, 0x16],
     '1000Kbps': [0x00, 0x14],
+}
+
+dwIndex_table = {
+    'USB1': 0,
+    'USB2': 1,
+    'USB3': 2,
+    'USB4': 3,
+    'USB5': 4,
+    'USB6': 5,
+    'USB7': 6,
+    'USB8': 7,
+    'USB9': 8,
+    'USB10': 9,
+    'USB11': 10,
+    'USB12': 11,
+    'USB13': 12,
+    'USB14': 13,
+    'USB15': 14,
+    'USB16': 15,
 }
 
 

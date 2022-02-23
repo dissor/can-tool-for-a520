@@ -1,19 +1,30 @@
 import sys
 from NJLikeLib.CanCmd import *
 from PySide6 import QtWidgets
-from UI.ui_main import *
+from UI import ui_00login,ui_01test, ui_02upgrade, ui_03write
 
 
 class MyWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
-        for i in range(len(dwBtr_table['5Kbps'])):
-            init_config.dwBtr[i] = dwBtr_table['5Kbps'][i]
-            print('0x%x' % init_config.dwBtr[i], type(init_config.dwBtr[i]))
+        for i in range(len(dwBtr_table['500Kbps'])):
+            init_config.dwBtr[i] = dwBtr_table['500Kbps'][i]
+            print('0x%x' % init_config.dwBtr[i], type(init_config.dwBtr[i]), end='\t')
 
-        ui = Ui_Form()  # 实例化UI对象
+        print("--> 500Kbps")
+
+        ui = ui_00login.Ui_Form()  # 实例化UI对象
         ui.setupUi(self)  # 初始化
+
+    def login(self):
+        print("login")
+
+    def select_dev_comm(self, dwIndex):
+        print("dwIndex: ", dwIndex, type(dwIndex), end='\t')
+        global devCOM
+        devCOM = dwIndex_table[dwIndex]
+        print("devCOM: ", dwIndex_table[dwIndex])
 
     def modify_dwBtr(self, bandRate):
         print("modify_dwBtr: ", bandRate, type(bandRate))
@@ -23,17 +34,17 @@ class MyWidget(QtWidgets.QWidget):
 
     def devOpen(self):
         print("打开设备:", USBCAN_1CH, end='\t')
-        global devHandle
-        devHandle = pDll.CAN_DeviceOpen(USBCAN_1CH, 0)
+        global devHandle,devCOM
+        devHandle = pDll.CAN_DeviceOpen(USBCAN_1CH, devCOM)
         if devHandle != CAN_RESULT_ERROR:
-            print("句柄:", devHandle)
+            print("句柄:", devHandle, " USB", devCOM+1)
         else:
             print("失败")
 
         print("开启通道:", end='\t')
         res = pDll.CAN_ChannelStart(devHandle, 0, pointer(init_config))
         for i in range(len(init_config.dwBtr)):
-            print('0x%02x' % init_config.dwBtr[i], type(init_config.dwBtr[i]))
+            print('0x%02x' % init_config.dwBtr[i], type(init_config.dwBtr[i]), end='\t')
         if res != CAN_RESULT_ERROR:
             print("成功")
         else:

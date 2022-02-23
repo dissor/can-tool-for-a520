@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>481</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QComboBox" name="comboBox_bandRate">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>190</y>
+     <width>69</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="editable">
+    <bool>false</bool>
+   </property>
+   <property name="currentText">
+    <string>500Kbps</string>
+   </property>
+   <property name="currentIndex">
+    <number>7</number>
+   </property>
+   <item>
+    <property name="text">
+     <string>5Kbps</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>10Kbps</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>20Kbps</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>50Kbps</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>100Kbps</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>125Kbps</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>250Kbps</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>500Kbps</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>800Kbps</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1000Kbps</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="pushButton_devClose">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>230</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>关闭</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_bandRate">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>190</y>
+     <width>53</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>波特率</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_devOpen">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>230</y>
+     <width>75</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>打开</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_bandRate_devCOM">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>150</y>
+     <width>69</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="editable">
+    <bool>false</bool>
+   </property>
+   <property name="currentText">
+    <string>USB1</string>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <item>
+    <property name="text">
+     <string>USB1</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>USB2</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>USB3</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>USB4</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>USB5</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>USB6</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>USB7</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>USB8</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>USB9</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>USB10</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>USB11</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>USB12</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>USB13</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>USB14</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>USB15</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>USB16</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_bandRate_2">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>150</y>
+     <width>53</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>端口</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>comboBox_bandRate_devCOM</sender>
+   <signal>currentTextChanged(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>select_dev_comm()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>336</x>
+     <y>155</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>398</x>
+     <y>51</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_bandRate</sender>
+   <signal>currentTextChanged(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>modify_dwBtr()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>319</x>
+     <y>200</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>511</x>
+     <y>202</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_devOpen</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>devOpen()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>234</x>
+     <y>241</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>91</x>
+     <y>245</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_devClose</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>devClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>361</x>
+     <y>242</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>426</x>
+     <y>326</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>select_dev_comm()</slot>
+  <slot>modify_dwBtr()</slot>
+  <slot>devOpen()</slot>
+  <slot>devClose()</slot>
+ </slots>
+</ui>
