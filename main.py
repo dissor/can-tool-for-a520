@@ -1,5 +1,6 @@
 import sys
 import time
+import os
 from NJLikeLib.CanCmd import *
 from PySide6 import QtWidgets, QtCore
 from UI import ui_00login, ui_01test, ui_02upgrade, ui_03write
@@ -83,15 +84,21 @@ class MyWidget(QtWidgets.QWidget):
     def openBinFile(self):
         print(sys._getframe().f_code.co_name)
         upgrade.FILE_NAME = ""
-        upgrade.FILE_NAME = QtWidgets.QFileDialog.getOpenFileName(
+        # 参数 _ 用于分割第二个返回值，防止 upgrade.FILE_NAME 生成数组
+        upgrade.FILE_NAME, _ = QtWidgets.QFileDialog.getOpenFileName(
             self, "选择文件", "", "BIN(*.bin);;All Files(*)")
-        self.ui.lb_binpath.setText(upgrade.FILE_NAME[0])
+        self.ui.lb_binpath.setText(upgrade.FILE_NAME)
+
+        fsize = os.path.getsize(upgrade.FILE_NAME)
+        print(fsize)
+        self.ui.lb_binsize.setText("%d"%fsize+" bytes")
 
         # 使用open函数打开文件，打开模式选择二进制读取'rb'
-        f = open(upgrade.FILE_NAME[0], 'rb')
-        for i in f:
-            print(i)
-        f.close()
+        upgrade.FILE_FD = open(upgrade.FILE_NAME, 'rb')
+
+        # for i in upgrade.FILE_FD:
+        #     print(i)
+        # upgrade.FILE_FD.close()
 
     def startUpgrade(self):
         print(sys._getframe().f_code.co_name)
