@@ -109,6 +109,7 @@ class MyWidget(QtWidgets.QWidget):
 
     def startUpgrade(self):
         print(sys._getframe().f_code.co_name)
+        global devHandle
 
         # '//'表示向下取整除法
         upgrade.FILE_CNT = upgrade.FILE_SZ//6
@@ -120,7 +121,7 @@ class MyWidget(QtWidgets.QWidget):
         print(type(upgrade.FILE_SZ), type(upgrade.FILE_CNT))
 
         psend_data = CAN_DataFrame(nSendType=0, bRemoteFlag=0,
-                                   bExternFlag=0, nDataLen=8)
+                                   bExternFlag=0, nDataLen=8, uID= 0x730)
 
         # 固件大小
         for i in range(0, 4):
@@ -135,7 +136,7 @@ class MyWidget(QtWidgets.QWidget):
         for i in range(0, 8):
             print( hex(psend_data.arryData[i]), end='\t')
 
-        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(psend_data), 1)
         if res != CAN_RESULT_ERROR:
             print("成功")
         else:
@@ -231,6 +232,7 @@ class MyWidget(QtWidgets.QWidget):
 
     def devClose(self):
         print("关闭通道:", end='\t')
+        global devHandle
         res = pDll.CAN_ChannelStop(devHandle, 0)
         if res != CAN_RESULT_ERROR:
             print("成功")
