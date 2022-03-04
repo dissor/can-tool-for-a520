@@ -12,41 +12,7 @@ from DB import test, upgrade
 update_event = Event()
 
 
-class test_class():
-    def sn(self):
-        print("sn")
-
-    def state(self):
-        print("state")
-
-    def uuid(self):
-        print("uuid")
-
-    def okey(self):
-        print("okey")
-
-    def usrkey(self):
-        print("usrkey")
-
-    def usrdata(self):
-        print("usrdata")
-
-    def mkeya(self):
-        print("mkeya")
-
-    def mkeyb(self):
-        print("mkeyb")
-
-    def musrdata(self):
-        print("musrdata")
-
-    def muuid(self):
-        print("muuid")
-
-    def vmuuid(self):
-        print("vmuuid")
-
-
+# 接收线程类
 class recv_worker(QtCore.QThread):
     def __init__(self):
         super().__init__()
@@ -82,10 +48,12 @@ class MyWidget(QtWidgets.QWidget):
 
         self.init_data()
 
+    # 测试接口
     def ceshi_api(self):
         print(sys._getframe().f_code.co_name)
         # self.ui.lb_sn.setText(recv_data.arryData[0])
 
+    # 打开升级文件
     def openBinFile(self):
         print(sys._getframe().f_code.co_name)
         upgrade.FILE_NAME = ""
@@ -107,14 +75,16 @@ class MyWidget(QtWidgets.QWidget):
         #     print(i)
         # upgrade.FILE_FD.close()
 
+    # 开始升级
     def startUpgrade(self):
         print(sys._getframe().f_code.co_name)
         global devHandle
+        bytes = 7
 
         # '//'表示向下取整除法
-        upgrade.FILE_CNT = upgrade.FILE_SZ//6
+        upgrade.FILE_CNT = upgrade.FILE_SZ//bytes
 
-        if upgrade.FILE_SZ % 6 > 0:
+        if upgrade.FILE_SZ % bytes > 0:
             upgrade.FILE_CNT += 1
 
         # 都是int型
@@ -142,6 +112,9 @@ class MyWidget(QtWidgets.QWidget):
         else:
             print("失败")
 
+
+
+    # 接收线程
     def recv_data_loop(self):
         global update_event
         if recv_data.uID == 0x702:
@@ -166,6 +139,7 @@ class MyWidget(QtWidgets.QWidget):
         elif recv_data.uID == 0x733:
             print("0x733")
 
+    # 初始化开启界面
     def init_data(self):
         for i in range(len(dwBtr_table['500Kbps'])):
             init_config.dwBtr[i] = dwBtr_table['500Kbps'][i]
@@ -174,11 +148,13 @@ class MyWidget(QtWidgets.QWidget):
 
         print("-->\t500Kbps")
 
+    # 设备开启回调，启动接收线程
     def cb_dev_open(self):
         print("================================")
         self.worker = recv_worker()
         self.worker.start()
 
+    # 开关测试模式
     def test_mode(self, mode):
         send_data = CAN_DataFrame(
             nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=8, uID=0x700)
@@ -190,26 +166,31 @@ class MyWidget(QtWidgets.QWidget):
             print("失败")
             get_error_code(devHandle)
 
+    # 打开测试模式
     def test_start(self):
         print("Start")
         self.test_mode(1)
 
+    # 关闭测试模式
     def test_end(self):
         print("End")
         self.test_mode(0)
 
+    # 选择USB端口
     def select_dev_comm(self, dwIndex):
         print("dwIndex: ", dwIndex, type(dwIndex), end='\t')
         global devCOM
         devCOM = dwIndex_table[dwIndex]
         print("devCOM: ", dwIndex_table[dwIndex])
 
+    # 选择波特率
     def modify_dwBtr(self, bandRate):
         print("modify_dwBtr: ", bandRate, type(bandRate))
         for i in range(len(dwBtr_table[bandRate])):
             init_config.dwBtr[i] = dwBtr_table[bandRate][i]
             print('0x%x' % init_config.dwBtr[i], type(init_config.dwBtr[i]))
 
+    # 打开设备
     def devOpen(self):
         print("打开设备:", USBCAN_1CH, end='\t')
         global devHandle, devCOM
@@ -230,6 +211,7 @@ class MyWidget(QtWidgets.QWidget):
         else:
             print("失败")
 
+    # 关闭设备
     def devClose(self):
         print("关闭通道:", end='\t')
         global devHandle
@@ -245,6 +227,7 @@ class MyWidget(QtWidgets.QWidget):
         else:
             print("失败")
 
+    # 发送测试（没有用）
     def test_sendData(self):
         print("你点击了test_sendData")
         print("发送数据:", end='\t')
