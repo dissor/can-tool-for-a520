@@ -1,10 +1,15 @@
 import sys
 import time
 import os
+import crc16
 from NJLikeLib.CanCmd import *
 from PySide6 import QtWidgets, QtCore
+from threading import Thread, Event
 from UI import ui_00login, ui_01test, ui_02upgrade, ui_03write
 from DB import test, upgrade
+
+# 升级同步事件
+update_event = Event()
 
 
 class test_class():
@@ -53,7 +58,7 @@ class recv_worker(QtCore.QThread):
             if len > 0:
                 res = pDll.CAN_ChannelReceive(
                     devHandle, 0, pointer(recv_data), 1, -1)
-                print("get date", res, len)
+                # print("get date", res, len)
                 if res != CAN_RESULT_ERROR:
                     self.cb_can_receive(recv_data)
                 else:
@@ -63,9 +68,9 @@ class recv_worker(QtCore.QThread):
                 time.sleep(1)
 
     def cb_can_receive(self, recv_data1):
-        print("cb_can_receive:0x%x" % recv_data1.uID,
-              "len: ", len(recv_data1.arryData))
-        widget.modify_test_data()
+        # print("cb_can_receive:0x%x" % recv_data1.uID,
+        #       "len: ", len(recv_data1.arryData))
+        widget.recv_data_loop()
 
 
 class MyWidget(QtWidgets.QWidget):
@@ -89,13 +94,15 @@ class MyWidget(QtWidgets.QWidget):
             self, "选择文件", "", "BIN(*.bin);;All Files(*)")
         self.ui.lb_binpath.setText(upgrade.FILE_NAME)
 
-        fsize = os.path.getsize(upgrade.FILE_NAME)
-        print(fsize)
-        self.ui.lb_binsize.setText("%d"%fsize+" bytes")
+        upgrade.FILE_SZ = os.path.getsize(upgrade.FILE_NAME)
+        print(upgrade.FILE_SZ)
+        self.ui.lb_binsize.setText("%d" % upgrade.FILE_SZ+" bytes")
 
         # 使用open函数打开文件，打开模式选择二进制读取'rb'
         upgrade.FILE_FD = open(upgrade.FILE_NAME, 'rb')
 
+        # upgrade.FILE_FD.seek(0)
+        # print(upgrade.FILE_FD.read(4))
         # for i in upgrade.FILE_FD:
         #     print(i)
         # upgrade.FILE_FD.close()
@@ -103,20 +110,60 @@ class MyWidget(QtWidgets.QWidget):
     def startUpgrade(self):
         print(sys._getframe().f_code.co_name)
 
-    def modify_test_data(self):
+        # '//'表示向下取整除法
+        upgrade.FILE_CNT = upgrade.FILE_SZ//6
+
+        if upgrade.FILE_SZ % 6 > 0:
+            upgrade.FILE_CNT += 1
+
+        # 都是int型
+        print(type(upgrade.FILE_SZ), type(upgrade.FILE_CNT))
+
+        psend_data = CAN_DataFrame(nSendType=0, bRemoteFlag=0,
+                                   bExternFlag=0, nDataLen=8)
+
+        # 固件大小
+        for i in range(0, 4):
+            psend_data.arryData[i] = (upgrade.FILE_SZ >> (8*i)) & 0xFF
+
+        # 总包数
+        for i in range(0, 2):
+            psend_data.arryData[i+4] = (upgrade.FILE_CNT >> (8*i)) & 0xFF
+
+        # CRC16校验
+
+        for i in range(0, 8):
+            print( hex(psend_data.arryData[i]), end='\t')
+
+        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        if res != CAN_RESULT_ERROR:
+            print("成功")
+        else:
+            print("失败")
+
+    def recv_data_loop(self):
+        global update_event
         if recv_data.uID == 0x702:
+            print("0x702")
             test.SN = ""
             for i in recv_data.arryData:
                 # print("0x%02x" % i, end='\t')
                 test.SN += "%02x" % i
 
         elif recv_data.uID == 0x703:
+            print("0x703")
             for i in recv_data.arryData:
                 # print("0x%02x" % i, end='\t')
                 test.SN += "%02x" % i
             self.ui.lb_sn.setText(test.SN)
             print(test.SN)
             test.SN = ""
+
+        elif recv_data.uID == 0x731:
+            print("0x731")
+
+        elif recv_data.uID == 0x733:
+            print("0x733")
 
     def init_data(self):
         for i in range(len(dwBtr_table['500Kbps'])):
