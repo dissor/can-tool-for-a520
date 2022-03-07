@@ -5,12 +5,14 @@ import crc16
 from NJLikeLib.CanCmd import *
 from PySide6 import QtWidgets, QtCore
 from threading import Thread, Event
+from queue import Queue
 from UI import ui_00login, ui_01test, ui_02upgrade, ui_03write
 from DB import test, upgrade
 
 # 升级同步事件
 update_event = Event()
-
+update_queue_start_cb = Queue()
+update_queue_send_cb = Queue()
 
 # 接收线程类
 class recv_worker(QtCore.QThread):
@@ -20,6 +22,7 @@ class recv_worker(QtCore.QThread):
     def run(self):
         global recv_data
         while True:
+            # print("recv worker is loop")
             len = pDll.CAN_GetReceiveCount(devHandle, 0)
             if len > 0:
                 res = pDll.CAN_ChannelReceive(
@@ -30,13 +33,14 @@ class recv_worker(QtCore.QThread):
                 else:
                     pDll.CAN_ClearReceiveBuffer(devHandle, 0)
                     print("recv worker is running")
-            else:
-                time.sleep(1)
+            # else:
+            #     time.sleep(1)
+            #     print("recv worker is sleep")
 
     def cb_can_receive(self, recv_data1):
         # print("cb_can_receive:0x%x" % recv_data1.uID,
         #       "len: ", len(recv_data1.arryData))
-        widget.recv_data_loop()
+        widget.recv_data_loop(recv_data1)
 
 
 class MyWidget(QtWidgets.QWidget):
@@ -77,9 +81,10 @@ class MyWidget(QtWidgets.QWidget):
 
     # 开始升级
     def startUpgrade(self):
+        global update_event, update_queue_start_cb, update_queue_send_cb
         print(sys._getframe().f_code.co_name)
         global devHandle
-        bytes = 7
+        bytes = 6
 
         # '//'表示向下取整除法
         upgrade.FILE_CNT = upgrade.FILE_SZ//bytes
@@ -88,7 +93,7 @@ class MyWidget(QtWidgets.QWidget):
             upgrade.FILE_CNT += 1
 
         # 都是int型
-        print(type(upgrade.FILE_SZ), type(upgrade.FILE_CNT))
+        # print(type(upgrade.FILE_SZ), type(upgrade.FILE_CNT))
 
         psend_data = CAN_DataFrame(nSendType=0, bRemoteFlag=0,
                                    bExternFlag=0, nDataLen=8, uID= 0x730)
@@ -103,8 +108,9 @@ class MyWidget(QtWidgets.QWidget):
 
         # CRC16校验
 
-        for i in range(0, 8):
-            print( hex(psend_data.arryData[i]), end='\t')
+        # 打印报文
+        # for i in range(0, 8):
+        #     print( hex(psend_data.arryData[i]), end='\t')
 
         res = pDll.CAN_ChannelSend(devHandle, 0, pointer(psend_data), 1)
         if res != CAN_RESULT_ERROR:
@@ -112,32 +118,98 @@ class MyWidget(QtWidgets.QWidget):
         else:
             print("失败")
 
+        data_res = update_queue_start_cb.get()
+        # for i in data_res:
+        #     print(hex(i))
+
+        if data_res[0] == 0:
+            print("允许升级")
+            for i in range(0, upgrade.FILE_CNT):
+                upgrade.FILE_FD.seek(bytes*upgrade.FILE_CNT)
+                print(upgrade.FILE_FD.read(bytes))
+
+        else:
+            print("禁止升级")
+
+        psend_data.uID= 0x732
+
+        for index in range(0, upgrade.FILE_CNT):
+            upgrade.FILE_FD.seek(bytes*index)
+            print(index, bytes*index, end='\t')
+            # for i in upgrade.FILE_FD.read(bytes):
+            #     print(hex(i), end='\t')
+
+            # 包索引
+            for i in range(0, 2):
+                psend_data.arryData[i] = (index >> (8*i)) & 0xFF
+
+            # 数据
+            tmp = 2
+            for i in upgrade.FILE_FD.read(bytes):
+                psend_data.arryData[tmp] = i
+                tmp += 1
+                # print(hex(upgrade.FILE_FD.read(bytes)[i]), end='\t')
+
+            # for i in psend_data.arryData:
+            #     print(hex(i), end='\t')
+
+            res = pDll.CAN_ChannelSend(devHandle, 0, pointer(psend_data), 1)
+            if res != CAN_RESULT_ERROR:
+                # print("升级包发送成功")
+
+                # 等待设备回复
+                data_res = update_queue_send_cb.get()
+                if data_res[0] == 0:
+                    print("接收成功: ",index/upgrade.FILE_CNT*100)
+                    self.ui.progressBar.setValue(index/upgrade.FILE_CNT*100)
+                else:
+                    print("接收失败")
+                    for i in data_res:
+                        print(hex(i), end='\t')
+            else:
+                print("升级包发送失败")
 
 
     # 接收线程
-    def recv_data_loop(self):
-        global update_event
-        if recv_data.uID == 0x702:
-            print("0x702")
-            test.SN = ""
-            for i in recv_data.arryData:
+    def recv_data_loop(self, recv_data2):
+        global update_event, update_queue_start_cb, update_queue_send_cb
+        if recv_data2.uID == 0x702:
+            # print("0x702")
+            test.SN1 = ""
+            for i in recv_data2.arryData:
                 # print("0x%02x" % i, end='\t')
-                test.SN += "%02x" % i
+                test.SN1 += "%02x" % i
 
-        elif recv_data.uID == 0x703:
-            print("0x703")
-            for i in recv_data.arryData:
+        elif recv_data2.uID == 0x703:
+            # print("0x703")
+            test.SN2 = ""
+            for i in recv_data2.arryData:
                 # print("0x%02x" % i, end='\t')
-                test.SN += "%02x" % i
-            self.ui.lb_sn.setText(test.SN)
-            print(test.SN)
-            test.SN = ""
+                test.SN2 += "%02x" % i
+            self.ui.lb_sn.setText(test.SN1 + test.SN2)
+            # print(test.SN)
 
-        elif recv_data.uID == 0x731:
+        elif recv_data2.uID == 0x704:
+            # print("0x704")
+            test.STATE_MN = recv_data2.arryData[0]&0xF0 >> 4
+            test.STATE_CPUN= recv_data2.arryData[0]&0x0F
+            test.STATE_VMN= recv_data2.arryData[1]&0xF0 >> 4
+            test.STATE_PN = recv_data2.arryData[1]&0x0F
+
+            # self.ui.lb_sn.setText(test.SN1 + test.SN2)
+            print(test.STATE_MN, test.STATE_CPUN, test.STATE_VMN, test.STATE_PN)
+
+
+
+        elif recv_data2.uID == 0x731:
             print("0x731")
+            update_queue_start_cb.put(recv_data2.arryData)
 
-        elif recv_data.uID == 0x733:
-            print("0x733")
+        elif recv_data2.uID == 0x733:
+            # print("0x733")
+            update_queue_send_cb.put(recv_data2.arryData)
+
+
 
     # 初始化开启界面
     def init_data(self):
@@ -147,6 +219,7 @@ class MyWidget(QtWidgets.QWidget):
                 init_config.dwBtr[i]), end='\t')
 
         print("-->\t500Kbps")
+        self.ui.pushButton_devClose.setEnabled(False)
 
     # 设备开启回调，启动接收线程
     def cb_dev_open(self):
@@ -208,6 +281,8 @@ class MyWidget(QtWidgets.QWidget):
         if res != CAN_RESULT_ERROR:
             print("成功")
             self.cb_dev_open()
+            self.ui.pushButton_devOpen.setEnabled(False)
+            self.ui.pushButton_devClose.setEnabled(True)
         else:
             print("失败")
 
@@ -224,6 +299,8 @@ class MyWidget(QtWidgets.QWidget):
         res = pDll.CAN_DeviceClose(devHandle)
         if res != CAN_RESULT_ERROR:
             print("成功")
+            self.ui.pushButton_devOpen.setEnabled(True)
+            self.ui.pushButton_devClose.setEnabled(False)
         else:
             print("失败")
 

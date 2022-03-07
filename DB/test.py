@@ -16,8 +16,8 @@ cur.execute(sql_test_1)
 
 print("tishiiiii")
 
-SN = ""
-STATE = ""
+SN1, SN2 = "", ""
+STATE_MN, STATE_CPUN, STATE_VMN, STATE_PN = "", "", "", ""
 UUID = ""
 OKEY = ""
 USRKEY = ""
@@ -27,6 +27,3 @@ MKEYB = ""
 MUSRDATA = ""
 MUUID = ""
 VMUUID = ""
-
-
-
