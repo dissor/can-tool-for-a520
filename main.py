@@ -196,8 +196,8 @@ class MyWidget(QtWidgets.QWidget):
             test.STATE_VMN= recv_data2.arryData[1]&0xF0 >> 4
             test.STATE_PN = recv_data2.arryData[1]&0x0F
 
-            # self.ui.lb_sn.setText(test.SN1 + test.SN2)
-            print(test.STATE_MN, test.STATE_CPUN, test.STATE_VMN, test.STATE_PN)
+            self.ui.lb_state.setText(str(test.STATE_MN)+'\t'+str(test.STATE_CPUN)+'\t'+str(test.STATE_VMN)+'\t'+str(test.STATE_PN))
+            # print(test.STATE_MN, test.STATE_CPUN, test.STATE_VMN, test.STATE_PN)
 
 
 
