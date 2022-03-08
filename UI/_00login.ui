@@ -16,14 +16,14 @@
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>10</y>
-     <width>561</width>
+     <x>0</x>
+     <y>0</y>
+     <width>601</width>
      <height>461</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -296,8 +296,8 @@
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>50</y>
+       <x>10</x>
+       <y>40</y>
        <width>131</width>
        <height>21</height>
       </rect>
@@ -361,8 +361,8 @@
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
-       <x>81</x>
-       <y>135</y>
+       <x>80</x>
+       <y>130</y>
        <width>53</width>
        <height>16</height>
       </rect>
@@ -400,8 +400,8 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>20</y>
+       <x>10</x>
+       <y>10</y>
        <width>17</width>
        <height>16</height>
       </rect>
@@ -413,7 +413,7 @@
     <widget class="QLabel" name="lb_sn">
      <property name="geometry">
       <rect>
-       <x>240</x>
+       <x>210</x>
        <y>10</y>
        <width>141</width>
        <height>21</height>
@@ -421,19 +421,6 @@
      </property>
      <property name="text">
       <string>空</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lb_state">
-     <property name="geometry">
-      <rect>
-       <x>240</x>
-       <y>50</y>
-       <width>171</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>TextLabel</string>
      </property>
     </widget>
     <widget class="QLabel" name="lb_uuid">
@@ -446,7 +433,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>空</string>
      </property>
     </widget>
     <widget class="QLabel" name="lb_okey">
@@ -459,7 +446,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>空</string>
      </property>
     </widget>
     <widget class="QLabel" name="lb_usrkey">
@@ -472,7 +459,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>空</string>
      </property>
     </widget>
     <widget class="QLabel" name="lb_usrdata">
@@ -485,7 +472,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>空</string>
      </property>
     </widget>
     <widget class="QLabel" name="lb_mkeya">
@@ -498,7 +485,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>空</string>
      </property>
     </widget>
     <widget class="QLabel" name="lb_mkeyb">
@@ -511,7 +498,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>空</string>
      </property>
     </widget>
     <widget class="QLabel" name="lb_musrdata">
@@ -524,7 +511,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>空</string>
      </property>
     </widget>
     <widget class="QLabel" name="lb_muuid">
@@ -537,7 +524,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>空</string>
      </property>
     </widget>
     <widget class="QLabel" name="lb_vmuuid">
@@ -550,7 +537,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>空</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_4">
@@ -564,6 +551,19 @@
      </property>
      <property name="text">
       <string>结束</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_state">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>541</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>空</string>
      </property>
     </widget>
    </widget>
@@ -607,7 +607,7 @@
       </rect>
      </property>
      <property name="value">
-      <number>24</number>
+      <number>0</number>
      </property>
     </widget>
     <widget class="QLabel" name="lb_updatestate">
@@ -620,7 +620,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>升级成功</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLabel" name="lb_binpath">
@@ -673,18 +673,50 @@
  <resources/>
  <connections>
   <connection>
-   <sender>pushButton_devOpen</sender>
+   <sender>pushButton_devClose</sender>
    <signal>clicked()</signal>
    <receiver>Form</receiver>
-   <slot>devOpen()</slot>
+   <slot>devClose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>116</x>
+     <x>216</x>
      <y>217</y>
     </hint>
     <hint type="destinationlabel">
-     <x>91</x>
-     <y>245</y>
+     <x>426</x>
+     <y>326</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pb_selectbin</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>openBinFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>128</x>
+     <y>141</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>614</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_4</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>test_end()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>526</x>
+     <y>437</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>614</x>
+     <y>436</y>
     </hint>
    </hints>
   </connection>
@@ -721,66 +753,18 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_devClose</sender>
+   <sender>pushButton_devOpen</sender>
    <signal>clicked()</signal>
    <receiver>Form</receiver>
-   <slot>devClose()</slot>
+   <slot>devOpen()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>216</x>
+     <x>116</x>
      <y>217</y>
     </hint>
     <hint type="destinationlabel">
-     <x>426</x>
-     <y>326</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton</sender>
-   <signal>clicked()</signal>
-   <receiver>Form</receiver>
-   <slot>test_start()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>444</x>
-     <y>447</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>611</x>
-     <y>74</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_4</sender>
-   <signal>clicked()</signal>
-   <receiver>Form</receiver>
-   <slot>test_end()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>526</x>
-     <y>437</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>614</x>
-     <y>436</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pb_selectbin</sender>
-   <signal>clicked()</signal>
-   <receiver>Form</receiver>
-   <slot>openBinFile()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>128</x>
-     <y>141</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>614</x>
-     <y>138</y>
+     <x>91</x>
+     <y>245</y>
     </hint>
    </hints>
   </connection>
@@ -797,6 +781,22 @@
     <hint type="destinationlabel">
      <x>616</x>
      <y>217</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>test_start()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>444</x>
+     <y>447</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>611</x>
+     <y>74</y>
     </hint>
    </hints>
   </connection>
