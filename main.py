@@ -199,6 +199,59 @@ class MyWidget(QtWidgets.QWidget):
             self.ui.lb_state.setText(str(test.STATE_MN)+'\t'+str(test.STATE_CPUN)+'\t'+str(test.STATE_VMN)+'\t'+str(test.STATE_PN))
             # print(test.STATE_MN, test.STATE_CPUN, test.STATE_VMN, test.STATE_PN)
 
+        elif recv_data2.uID == 0x705:
+            print("0x705")
+
+        elif recv_data2.uID == 0x706:
+            print("0x706")
+
+        elif recv_data2.uID == 0x707:
+            print("0x707")
+
+        elif recv_data2.uID == 0x708:
+            print("0x708")
+
+        elif recv_data2.uID == 0x709:
+            print("0x709")
+
+        elif recv_data2.uID == 0x70A:
+            print("0x70A")
+
+        elif recv_data2.uID == 0x70B:
+            print("0x70B")
+
+        elif recv_data2.uID == 0x70C:
+            print("0x70C")
+
+        elif recv_data2.uID == 0x70D:
+            print("0x70D")
+
+        elif recv_data2.uID == 0x70E:
+            print("0x70E")
+
+        elif recv_data2.uID == 0x70F:
+            print("0x70F")
+
+        elif recv_data2.uID == 0x710:
+            print("0x710")
+
+        elif recv_data2.uID == 0x711:
+            print("0x711")
+
+        elif recv_data2.uID == 0x712:
+            print("0x712")
+
+        elif recv_data2.uID == 0x713:
+            print("0x713")
+
+        elif recv_data2.uID == 0x714:
+            print("0x714")
+
+        elif recv_data2.uID == 0x715:
+            print("0x715")
+
+        elif recv_data2.uID == 0x716:
+            print("0x716")
 
 
         elif recv_data2.uID == 0x731:

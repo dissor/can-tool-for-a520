@@ -420,7 +420,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>空</string>
      </property>
     </widget>
     <widget class="QLabel" name="lb_state">

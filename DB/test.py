@@ -18,7 +18,7 @@ print("tishiiiii")
 
 SN1, SN2 = "", ""
 STATE_MN, STATE_CPUN, STATE_VMN, STATE_PN = "", "", "", ""
-UUID = ""
+UUID1, UUID2 = "", ""
 OKEY = ""
 USRKEY = ""
 USRDATA = ""
