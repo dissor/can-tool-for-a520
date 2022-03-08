@@ -15,17 +15,18 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QLabel, QProgressBar,
-    QPushButton, QSizePolicy, QTabWidget, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QLabel, QLineEdit,
+    QProgressBar, QPushButton, QSizePolicy, QTabWidget,
+    QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(640, 481)
+        Form.resize(720, 584)
         self.tabWidget = QTabWidget(Form)
         self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setGeometry(QRect(0, 0, 601, 461))
+        self.tabWidget.setGeometry(QRect(10, 10, 641, 481))
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
         self.pushButton_devClose = QPushButton(self.tab)
@@ -176,18 +177,22 @@ class Ui_Form(object):
         self.tab_4.setObjectName(u"tab_4")
         self.pushButton_3 = QPushButton(self.tab_4)
         self.pushButton_3.setObjectName(u"pushButton_3")
-        self.pushButton_3.setGeometry(QRect(10, 10, 75, 24))
+        self.pushButton_3.setGeometry(QRect(280, 70, 75, 24))
+        self.lineEdit = QLineEdit(self.tab_4)
+        self.lineEdit.setObjectName(u"lineEdit")
+        self.lineEdit.setGeometry(QRect(130, 70, 113, 21))
         self.tabWidget.addTab(self.tab_4, "")
 
         self.retranslateUi(Form)
-        self.pushButton_devClose.clicked.connect(Form.devClose)
-        self.pb_selectbin.clicked.connect(Form.openBinFile)
-        self.pushButton_4.clicked.connect(Form.test_end)
         self.comboBox_bandRate.currentTextChanged.connect(Form.modify_dwBtr)
-        self.comboBox_bandRate_devCOM.currentTextChanged.connect(Form.select_dev_comm)
         self.pushButton_devOpen.clicked.connect(Form.devOpen)
+        self.pushButton_3.clicked.connect(Form.writeNumber)
+        self.pushButton_4.clicked.connect(Form.test_end)
         self.pb_state.clicked.connect(Form.startUpgrade)
+        self.pb_selectbin.clicked.connect(Form.openBinFile)
+        self.pushButton_devClose.clicked.connect(Form.devClose)
         self.pushButton.clicked.connect(Form.test_start)
+        self.comboBox_bandRate_devCOM.currentTextChanged.connect(Form.select_dev_comm)
 
         self.tabWidget.setCurrentIndex(0)
         self.comboBox_bandRate_devCOM.setCurrentIndex(0)
@@ -265,7 +270,7 @@ class Ui_Form(object):
         self.lb_binpath.setText(QCoreApplication.translate("Form", u"\u6587\u4ef6\u8def\u5f84", None))
         self.lb_binsize.setText(QCoreApplication.translate("Form", u"\u6587\u4ef6\u5927\u5c0f", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("Form", u"\u5347\u7ea7", None))
-        self.pushButton_3.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb", None))
+        self.pushButton_3.setText(QCoreApplication.translate("Form", u"\u5199\u5165", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QCoreApplication.translate("Form", u"\u5199\u53f7", None))
     # retranslateUi
 

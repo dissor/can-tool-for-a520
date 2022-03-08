@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>481</height>
+    <width>720</width>
+    <height>584</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,10 @@
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>601</width>
-     <height>461</height>
+     <x>10</x>
+     <y>10</y>
+     <width>641</width>
+     <height>481</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -657,14 +657,24 @@
     <widget class="QPushButton" name="pushButton_3">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>10</y>
+       <x>280</x>
+       <y>70</y>
        <width>75</width>
        <height>24</height>
       </rect>
      </property>
      <property name="text">
-      <string>开始</string>
+      <string>写入</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>70</y>
+       <width>113</width>
+       <height>21</height>
+      </rect>
      </property>
     </widget>
    </widget>
@@ -673,34 +683,50 @@
  <resources/>
  <connections>
   <connection>
-   <sender>pushButton_devClose</sender>
-   <signal>clicked()</signal>
+   <sender>comboBox_bandRate</sender>
+   <signal>currentTextChanged(QString)</signal>
    <receiver>Form</receiver>
-   <slot>devClose()</slot>
+   <slot>modify_dwBtr()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>216</x>
-     <y>217</y>
+     <x>180</x>
+     <y>165</y>
     </hint>
     <hint type="destinationlabel">
-     <x>426</x>
-     <y>326</y>
+     <x>511</x>
+     <y>202</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>pb_selectbin</sender>
+   <sender>pushButton_devOpen</sender>
    <signal>clicked()</signal>
    <receiver>Form</receiver>
-   <slot>openBinFile()</slot>
+   <slot>devOpen()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>128</x>
-     <y>141</y>
+     <x>96</x>
+     <y>207</y>
     </hint>
     <hint type="destinationlabel">
-     <x>614</x>
-     <y>138</y>
+     <x>91</x>
+     <y>245</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>writeNumber()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>330</x>
+     <y>106</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>626</x>
+     <y>110</y>
     </hint>
    </hints>
   </connection>
@@ -721,54 +747,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>comboBox_bandRate</sender>
-   <signal>currentTextChanged(QString)</signal>
-   <receiver>Form</receiver>
-   <slot>modify_dwBtr()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>200</x>
-     <y>175</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>511</x>
-     <y>202</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>comboBox_bandRate_devCOM</sender>
-   <signal>currentTextChanged(QString)</signal>
-   <receiver>Form</receiver>
-   <slot>select_dev_comm()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>200</x>
-     <y>135</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>398</x>
-     <y>51</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_devOpen</sender>
-   <signal>clicked()</signal>
-   <receiver>Form</receiver>
-   <slot>devOpen()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>116</x>
-     <y>217</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>91</x>
-     <y>245</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>pb_state</sender>
    <signal>clicked()</signal>
    <receiver>Form</receiver>
@@ -785,18 +763,66 @@
    </hints>
   </connection>
   <connection>
+   <sender>pb_selectbin</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>openBinFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>130</x>
+     <y>97</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>614</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_devClose</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>devClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>196</x>
+     <y>207</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>426</x>
+     <y>326</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>pushButton</sender>
    <signal>clicked()</signal>
    <receiver>Form</receiver>
    <slot>test_start()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>444</x>
-     <y>447</y>
+     <x>436</x>
+     <y>437</y>
     </hint>
     <hint type="destinationlabel">
      <x>611</x>
      <y>74</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_bandRate_devCOM</sender>
+   <signal>currentTextChanged(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>select_dev_comm()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>180</x>
+     <y>125</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>398</x>
+     <y>51</y>
     </hint>
    </hints>
   </connection>
@@ -810,5 +836,6 @@
   <slot>test_end()</slot>
   <slot>openBinFile()</slot>
   <slot>startUpgrade()</slot>
+  <slot>writeNumber()</slot>
  </slots>
 </ui>

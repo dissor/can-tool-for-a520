@@ -147,6 +147,10 @@ class MyWidget(QtWidgets.QWidget):
 
         self.init_data()
 
+    # 写SN号
+    def writeNumber(self):
+        print(sys._getframe().f_code.co_name)
+
     # 测试接口
     def ceshi_api(self):
         print(sys._getframe().f_code.co_name)
@@ -300,7 +304,22 @@ class MyWidget(QtWidgets.QWidget):
             # print(test.STATE_MN, test.STATE_CPUN, test.STATE_VMN, test.STATE_PN)
 
         elif recv_data2.uID == 0x705:
-            print("0x705")
+            print("0x705", end="\t")
+            number = recv_data2.arryData[0]
+            index = test.check_card_list(test.cpu_list, number)
+            # print(index)
+            if index < 0:
+                # print("新序号")
+                test.cpu_list.append(test.CPU_Card(number))
+                # 获取索引
+                index = test.check_card_list(test.cpu_list, number)
+
+            test.cpu_list[index].uuid1 = ""
+            length = recv_data2.arryData[1]
+            for i in range(0, length):
+                test.cpu_list[index].uuid1 += chr(recv_data2.arryData[i+2])
+            # print(test.cpu_list[index].uuid1)
+
 
         elif recv_data2.uID == 0x706:
             print("0x706")
