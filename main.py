@@ -277,8 +277,8 @@ class MyWidget(QtWidgets.QWidget):
     # 设备开启回调，启动接收线程
     def cb_dev_open(self):
         print("================================")
-        self.worker = recv_worker()
-        self.worker.start()
+        # self.worker = recv_worker()
+        recv_loop.start()
 
     # 开关测试模式
     def test_mode(self, mode):
@@ -352,6 +352,7 @@ class MyWidget(QtWidgets.QWidget):
         res = pDll.CAN_DeviceClose(devHandle)
         if res != CAN_RESULT_ERROR:
             print("成功")
+            recv_loop.terminate()
             self.ui.pushButton_devOpen.setEnabled(True)
             self.ui.pushButton_devClose.setEnabled(False)
         else:
@@ -373,6 +374,7 @@ class MyWidget(QtWidgets.QWidget):
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
+    recv_loop = recv_worker()
     widget = MyWidget()
     widget.show()
     sys.exit(app.exec())
