@@ -42,6 +42,29 @@ class recv_worker(QtCore.QThread):
         #       "len: ", len(recv_data1.arryData))
         widget.recv_data_loop(recv_data1)
 
+
+# 测试模式保持线程
+class test_mode_keepalive(QtCore.QThread):
+    def __init__(self):
+        super().__init__()
+
+    def run(self):
+        while True:
+            psend_data = CAN_DataFrame(nSendType=0, bRemoteFlag=0,
+                                   bExternFlag=0, nDataLen=8, uID= 0x750)
+
+            for i in range(0, 8):
+                psend_data.arryData[i] = 0x00
+
+            res = pDll.CAN_ChannelSend(devHandle, 0, pointer(psend_data), 1)
+            if res != CAN_RESULT_ERROR:
+                # print("心跳发送成功")
+                pass
+            else:
+                print("心跳发送失败")
+            time.sleep(1)
+
+
 # 升级线程类
 class update_worker(QtCore.QThread):
     def __init__(self):
@@ -414,11 +437,13 @@ class MyWidget(QtWidgets.QWidget):
     # 打开测试模式
     def test_start(self):
         print("Start")
+        test_mode_loop.start()
         self.test_mode(1)
 
     # 关闭测试模式
     def test_end(self):
         print("End")
+        test_mode_loop.terminate()
         self.test_mode(0)
 
     # 选择USB端口
@@ -495,6 +520,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     recv_loop = recv_worker()
     update_loop = update_worker()
+    test_mode_loop = test_mode_keepalive()
     widget = MyWidget()
     widget.show()
     sys.exit(app.exec())
