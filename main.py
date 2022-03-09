@@ -4,7 +4,7 @@ import os
 import crc16
 from NJLikeLib.CanCmd import *
 from PySide6 import QtWidgets, QtCore
-from threading import Thread, Event
+from threading import Thread, Event, Timer
 from queue import Queue
 from UI import ui_00login, ui_01test, ui_02upgrade, ui_03write
 from DB import test, upgrade
@@ -16,11 +16,13 @@ update_queue_send_cb = Queue()
 
 # 接收线程类
 class recv_worker(QtCore.QThread):
+    global recv_data
+    signal = QtCore.Signal(type(recv_data))
     def __init__(self):
         super().__init__()
 
     def run(self):
-        global recv_data
+        # global recv_data
         while True:
             # print("recv worker is loop")
             len = pDll.CAN_GetReceiveCount(devHandle, 0)
@@ -40,7 +42,8 @@ class recv_worker(QtCore.QThread):
     def cb_can_receive(self, recv_data1):
         # print("cb_can_receive:0x%x" % recv_data1.uID,
         #       "len: ", len(recv_data1.arryData))
-        widget.recv_data_loop(recv_data1)
+        # widget.recv_data_loop(recv_data1)
+        self.signal.emit(recv_data1)
 
 
 # 测试模式保持线程
@@ -217,6 +220,7 @@ class MyWidget(QtWidgets.QWidget):
 
         # 都是int型
         # print(type(upgrade.FILE_SZ), type(upgrade.FILE_CNT))
+        print(upgrade.FILE_SZ, upgrade.FILE_CNT)
 
         psend_data = CAN_DataFrame(nSendType=0, bRemoteFlag=0,
                                    bExternFlag=0, nDataLen=8, uID= 0x730)
@@ -224,10 +228,12 @@ class MyWidget(QtWidgets.QWidget):
         # 固件大小
         for i in range(0, 4):
             psend_data.arryData[i] = (upgrade.FILE_SZ >> (8*i)) & 0xFF
+            print(hex((upgrade.FILE_SZ >> (8*i)) & 0xFF))
 
         # 总包数
         for i in range(0, 2):
             psend_data.arryData[i+4] = (upgrade.FILE_CNT >> (8*i)) & 0xFF
+            print(hex((upgrade.FILE_CNT >> (8*i)) & 0xFF))
 
         # CRC16校验
 
@@ -404,6 +410,13 @@ class MyWidget(QtWidgets.QWidget):
             # print("0x733")
             update_queue_send_cb.put(recv_data2.arryData)
 
+        elif recv_data2.uID == 0x760:
+            print("0x760")
+            length = recv_data2.arryData[0]
+            UID = ""
+            for i in range(0, length):
+                UID += chr(recv_data2.arryData[i+1])
+            QtWidgets.QMessageBox.information(self,"刷卡反馈", UID)
 
 
     # 初始化开启界面
@@ -420,6 +433,7 @@ class MyWidget(QtWidgets.QWidget):
     def cb_dev_open(self):
         print("================================")
         # self.worker = recv_worker()
+        recv_loop.signal.connect(self.recv_data_loop)
         recv_loop.start()
 
     # 开关测试模式
@@ -524,3 +538,4 @@ if __name__ == "__main__":
     widget = MyWidget()
     widget.show()
     sys.exit(app.exec())
+
