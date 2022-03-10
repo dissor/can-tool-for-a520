@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -649,6 +649,19 @@
       <string>文件大小</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="pb_state_2">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>220</y>
+       <width>75</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>中止</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_4">
     <attribute name="title">
@@ -753,8 +766,8 @@
    <slot>startUpgrade()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>110</x>
-     <y>215</y>
+     <x>112</x>
+     <y>239</y>
     </hint>
     <hint type="destinationlabel">
      <x>616</x>
@@ -826,6 +839,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pb_state_2</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>Form</receiver>
+   <slot>update_term()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>83</x>
+     <y>266</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>691</x>
+     <y>323</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>select_dev_comm()</slot>
@@ -837,5 +866,6 @@
   <slot>openBinFile()</slot>
   <slot>startUpgrade()</slot>
   <slot>writeNumber()</slot>
+  <slot>update_term()</slot>
  </slots>
 </ui>

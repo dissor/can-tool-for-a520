@@ -172,6 +172,9 @@ class Ui_Form(object):
         self.lb_binsize = QLabel(self.tab_3)
         self.lb_binsize.setObjectName(u"lb_binsize")
         self.lb_binsize.setGeometry(QRect(150, 140, 311, 16))
+        self.pb_state_2 = QPushButton(self.tab_3)
+        self.pb_state_2.setObjectName(u"pb_state_2")
+        self.pb_state_2.setGeometry(QRect(50, 220, 75, 24))
         self.tabWidget.addTab(self.tab_3, "")
         self.tab_4 = QWidget()
         self.tab_4.setObjectName(u"tab_4")
@@ -193,8 +196,9 @@ class Ui_Form(object):
         self.pushButton_devClose.clicked.connect(Form.devClose)
         self.pushButton.clicked.connect(Form.test_start)
         self.comboBox_bandRate_devCOM.currentTextChanged.connect(Form.select_dev_comm)
+        self.pb_state_2.clicked["bool"].connect(Form.update_term)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
         self.comboBox_bandRate_devCOM.setCurrentIndex(0)
         self.comboBox_bandRate.setCurrentIndex(7)
 
@@ -269,6 +273,7 @@ class Ui_Form(object):
         self.lb_updatestate.setText("")
         self.lb_binpath.setText(QCoreApplication.translate("Form", u"\u6587\u4ef6\u8def\u5f84", None))
         self.lb_binsize.setText(QCoreApplication.translate("Form", u"\u6587\u4ef6\u5927\u5c0f", None))
+        self.pb_state_2.setText(QCoreApplication.translate("Form", u"\u4e2d\u6b62", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("Form", u"\u5347\u7ea7", None))
         self.pushButton_3.setText(QCoreApplication.translate("Form", u"\u5199\u5165", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QCoreApplication.translate("Form", u"\u5199\u53f7", None))
