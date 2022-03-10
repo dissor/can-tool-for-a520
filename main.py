@@ -75,9 +75,7 @@ class update_worker(QtCore.QThread):
         super().__init__()
 
     def run(self):
-        global update_event, update_queue_start_cb, update_queue_send_cb
-        print(sys._getframe().f_code.co_name)
-        global devHandle
+        global update_event, update_queue_start_cb, update_queue_send_cb, devHandle
         bytes = 6
 
         # '//'表示向下取整除法
@@ -88,6 +86,7 @@ class update_worker(QtCore.QThread):
 
         # 都是int型
         # print(type(upgrade.FILE_SZ), type(upgrade.FILE_CNT))
+        print(upgrade.FILE_SZ, upgrade.FILE_CNT)
 
         psend_data = CAN_DataFrame(nSendType=0, bRemoteFlag=0,
                                    bExternFlag=0, nDataLen=8, uID= 0x730)
@@ -101,6 +100,8 @@ class update_worker(QtCore.QThread):
             psend_data.arryData[i+4] = (upgrade.FILE_CNT >> (8*i)) & 0xFF
 
         # CRC16校验
+        for i in range(0, 2):
+            psend_data.arryData[i+6] = (upgrade.CRC16>> (8*i)) & 0xFF
 
         # 打印报文
         # for i in range(0, 8):
@@ -120,18 +121,22 @@ class update_worker(QtCore.QThread):
             print("允许升级")
             for i in range(0, upgrade.FILE_CNT):
                 upgrade.FILE_FD.seek(bytes*upgrade.FILE_CNT)
-                print(upgrade.FILE_FD.read(bytes))
+                # print(upgrade.FILE_FD.read(bytes))
 
         else:
             print("禁止升级")
 
         psend_data.uID= 0x732
 
-        for index in range(0, upgrade.FILE_CNT):
+        for index in range(upgrade.FILE_CNT):
             upgrade.FILE_FD.seek(bytes*index)
-            print(index, bytes*index, end='\t')
+            print(hex(index), hex(bytes*index), end='\t')
             # for i in upgrade.FILE_FD.read(bytes):
             #     print(hex(i), end='\t')
+
+            # 初始化
+            for i in range(8):
+                psend_data.arryData[i] = 0xFF
 
             # 包索引
             for i in range(0, 2):
@@ -152,18 +157,23 @@ class update_worker(QtCore.QThread):
                 # print("升级包发送成功")
 
                 # 等待设备回复
-                data_res = update_queue_send_cb.get()
+                data_res = update_queue_send_cb.get(timeout = 5)
                 progress = index/upgrade.FILE_CNT*100
                 if data_res[0] == 0:
-                    print("接收成功: ",progress)
+                    print("回复成功: ",progress)
                     self.signal.emit(progress)
-                    # widget.ui.progressBar.setValue(progress)
+                    if i == upgrade.FILE_CNT-1:
+                        self.signal.emit(100)
                 else:
-                    print("接收失败")
+                    print("回复失败：")
                     for i in data_res:
                         print(hex(i), end='\t')
+                    break
             else:
                 print("升级包发送失败")
+                break
+
+        print("升级结束")
 
 
 
@@ -201,14 +211,22 @@ class MyWidget(QtWidgets.QWidget):
         # 使用open函数打开文件，打开模式选择二进制读取'rb'
         upgrade.FILE_FD = open(upgrade.FILE_NAME, 'rb')
 
-        # upgrade.FILE_FD.seek(0)
-        # print(upgrade.FILE_FD.read(4))
-        # for i in upgrade.FILE_FD:
-        #     print(i)
-        # upgrade.FILE_FD.close()
+        # CRC16校验
+        upgrade.CRC16, key = 0, 0xE32A
+        print(type(upgrade.CRC16))
+        for i in upgrade.FILE_FD.read():
+            # print(hex(i), end=",")
+            upgrade.CRC16 ^= i
+            for j in range(8):
+                if upgrade.CRC16 & 1 != 0:
+                    upgrade.CRC16 = (upgrade.CRC16 >> 1)^key
+                else:
+                    upgrade.CRC16 = (upgrade.CRC16 >> 1)
+
+        print("upgrade.CRC16: ", upgrade.CRC16, hex(upgrade.CRC16))
 
     def upgrade_progress(self, progress):
-        print(sys._getframe().f_code.co_name)
+        # print(sys._getframe().f_code.co_name)
         self.ui.progressBar.setValue(progress)
 
     # 中止升级
@@ -221,102 +239,6 @@ class MyWidget(QtWidgets.QWidget):
         print(sys._getframe().f_code.co_name)
         update_loop.signal.connect(self.upgrade_progress)
         update_loop.start()
-
-        # global update_event, update_queue_start_cb, update_queue_send_cb
-        # print(sys._getframe().f_code.co_name)
-        # global devHandle
-        # bytes = 6
-
-        # # '//'表示向下取整除法
-        # upgrade.FILE_CNT = upgrade.FILE_SZ//bytes
-
-        # if upgrade.FILE_SZ % bytes > 0:
-        #     upgrade.FILE_CNT += 1
-
-        # # 都是int型
-        # # print(type(upgrade.FILE_SZ), type(upgrade.FILE_CNT))
-        # print(upgrade.FILE_SZ, upgrade.FILE_CNT)
-
-        # psend_data = CAN_DataFrame(nSendType=0, bRemoteFlag=0,
-        #                            bExternFlag=0, nDataLen=8, uID= 0x730)
-
-        # # 固件大小
-        # for i in range(0, 4):
-        #     psend_data.arryData[i] = (upgrade.FILE_SZ >> (8*i)) & 0xFF
-        #     print(hex((upgrade.FILE_SZ >> (8*i)) & 0xFF))
-
-        # # 总包数
-        # for i in range(0, 2):
-        #     psend_data.arryData[i+4] = (upgrade.FILE_CNT >> (8*i)) & 0xFF
-        #     print(hex((upgrade.FILE_CNT >> (8*i)) & 0xFF))
-
-        # # CRC16校验
-
-        # # 打印报文
-        # # for i in range(0, 8):
-        # #     print( hex(psend_data.arryData[i]), end='\t')
-
-        # res = pDll.CAN_ChannelSend(devHandle, 0, pointer(psend_data), 1)
-        # if res != CAN_RESULT_ERROR:
-        #     print("成功")
-        # else:
-        #     print("失败")
-
-        # data_res = update_queue_start_cb.get()
-        # # for i in data_res:
-        # #     print(hex(i))
-
-        # if data_res[0] == 0:
-        #     print("允许升级")
-        #     for i in range(0, upgrade.FILE_CNT):
-        #         upgrade.FILE_FD.seek(bytes*upgrade.FILE_CNT)
-        #         print(upgrade.FILE_FD.read(bytes))
-
-        # else:
-        #     print("禁止升级")
-
-        # psend_data.uID= 0x732
-
-        # for index in range(0, upgrade.FILE_CNT):
-        #     upgrade.FILE_FD.seek(bytes*index)
-        #     print(index, bytes*index, end='\t')
-        #     # for i in upgrade.FILE_FD.read(bytes):
-        #     #     print(hex(i), end='\t')
-
-        #     # 包索引
-        #     for i in range(0, 2):
-        #         psend_data.arryData[i] = (index >> (8*i)) & 0xFF
-
-        #     # 数据
-        #     tmp = 2
-        #     for i in upgrade.FILE_FD.read(bytes):
-        #         psend_data.arryData[tmp] = i
-        #         tmp += 1
-        #         # print(hex(upgrade.FILE_FD.read(bytes)[i]), end='\t')
-
-        #     # for i in psend_data.arryData:
-        #     #     print(hex(i), end='\t')
-
-        #     res = pDll.CAN_ChannelSend(devHandle, 0, pointer(psend_data), 1)
-        #     if res != CAN_RESULT_ERROR:
-        #         # print("升级包发送成功")
-
-        #         # 等待设备回复
-        #         data_res = update_queue_send_cb.get(timeout = 5)
-        #         if data_res[0] == 0:
-        #             print("接收成功: ",index/upgrade.FILE_CNT*100)
-        #             self.ui.progressBar.setValue(index/upgrade.FILE_CNT*100)
-        #         else:
-        #             print("接收失败")
-        #             for i in data_res:
-        #                 print(hex(i), end='\t')
-        #             break
-        #     else:
-        #         print("升级包发送失败")
-        #         break
-
-        # print("升级结束")
-
 
     # 接收线程
     def recv_data_loop(self, recv_data2):
