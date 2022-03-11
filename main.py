@@ -194,6 +194,59 @@ class MyWidget(QtWidgets.QWidget):
     # 写SN号
     def writeNumber(self):
         print(sys._getframe().f_code.co_name)
+        m_str = self.ui.lineEdit.text()
+
+        msend_data = CAN_DataFrame(
+            nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=8)
+        msend_data.uID=0x740
+
+        print("第一组")
+        # for i in m_str[0:8]:
+        #     print(type(i), i, end='\t')
+
+        for i in range(0, 8):
+            print(str.encode(m_str[i]), m_str[i], end='\t')
+            msend_data.arryData[i] = str.encode(m_str[i])
+
+        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(msend_data), 1)
+        if res != CAN_RESULT_ERROR:
+            print("成功")
+        else:
+            print("失败")
+            get_error_code(devHandle)
+
+        print("第二组")
+        # for i in m_str[8:16]:
+        #     print(type(i), i, end='\t')
+        print("结束")
+
+
+        # m_bytes = str.encode(m_str)
+        # for i in m_bytes:
+        #     print(type(i), i)
+        # print(type(m_bytes),m_bytes)
+
+        # for i in range(0, 8):
+        #     print(m_bytes[i])
+
+        # # str to bytes
+        # str.encode(s)
+
+        # # bytes to str
+        # bytes.decode(b)
+
+        # msend_data = CAN_DataFrame(
+        #     nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=8, uID=0x740)
+
+        # for i in range(0, 8):
+        #     msend_data.arryData[i] = (upgrade.FILE_SZ >> (8*i)) & 0xFF
+
+        # res = pDll.CAN_ChannelSend(devHandle, 0, pointer(msend_data), 1)
+        # if res != CAN_RESULT_ERROR:
+        #     print("成功")
+        # else:
+        #     print("失败")
+        #     get_error_code(devHandle)
 
     # 测试接口
     def ceshi_api(self):
@@ -220,7 +273,7 @@ class MyWidget(QtWidgets.QWidget):
         upgrade.CRC16, key = 0, 0xE32A
         # print(type(upgrade.CRC16))
         for i in upgrade.FILE_FD.read():
-            print(hex(i), end=",")
+            # print(hex(i), end=",")
             upgrade.CRC16 ^= i
             for j in range(8):
                 if upgrade.CRC16 & 1 != 0:
@@ -289,6 +342,7 @@ class MyWidget(QtWidgets.QWidget):
                 test.SN1 += "%02x" % i
 
         elif recv_data2.uID == 0x703:
+            self.setWindowTitle("测试进行中。。。")
             # print("0x703")
             test.SN2 = ""
             for i in recv_data2.arryData:
@@ -303,8 +357,9 @@ class MyWidget(QtWidgets.QWidget):
             test.STATE_CPUN= recv_data2.arryData[0]&0x0F
             test.STATE_VMN= recv_data2.arryData[1]&0xF0 >> 4
             test.STATE_PN = recv_data2.arryData[1]&0x0F
+            test.VERSION = recv_data2.arryData[2]
 
-            self.ui.lb_state.setText("M卡数量："+str(test.STATE_MN)+'\t'+"CPU卡数量："+str(test.STATE_CPUN)+'\t'+"虚拟卡数量："+str(test.STATE_VMN)+'\t'+"唤醒引脚："+str(test.STATE_PN))
+            self.ui.lb_state.setText("M卡数量："+str(test.STATE_MN)+'\t'+"CPU卡数量："+str(test.STATE_CPUN)+'\t'+"虚拟卡数量："+str(test.STATE_VMN)+'\t'+"唤醒引脚："+str(test.STATE_PN)+'\t'+"软件版本："+str(test.VERSION))
             # print(test.STATE_MN, test.STATE_CPUN, test.STATE_VMN, test.STATE_PN)
 
         elif recv_data2.uID == 0x705:
@@ -392,6 +447,11 @@ class MyWidget(QtWidgets.QWidget):
             for i in range(0, length):
                 UID += chr(recv_data2.arryData[i+1])
             QtWidgets.QMessageBox.information(self,"刷卡反馈", UID)
+
+        elif recv_data2.uID == 0x3AE:
+            # print("0x3AE")
+            self.setWindowTitle("测试工具")
+
 
 
     # 初始化开启界面

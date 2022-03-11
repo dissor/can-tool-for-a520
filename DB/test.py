@@ -10,6 +10,7 @@ MKEYB = ""
 MUSRDATA = ""
 MUUID = ""
 VMUUID = ""
+VERSION = 0
 
 # CPU卡
 class CPU_Card(object):

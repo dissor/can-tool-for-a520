@@ -201,7 +201,7 @@ class Ui_Form(object):
         self.comboBox_bandRate_devCOM.currentTextChanged.connect(Form.select_dev_comm)
         self.pb_state_2.clicked["bool"].connect(Form.update_term)
 
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
         self.comboBox_bandRate_devCOM.setCurrentIndex(0)
         self.comboBox_bandRate.setCurrentIndex(7)
 
@@ -210,7 +210,7 @@ class Ui_Form(object):
     # setupUi
 
     def retranslateUi(self, Form):
-        Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
+        Form.setWindowTitle(QCoreApplication.translate("Form", u"\u6d4b\u8bd5\u5de5\u5177", None))
         self.pushButton_devClose.setText(QCoreApplication.translate("Form", u"\u5173\u95ed", None))
         self.comboBox_bandRate_devCOM.setItemText(0, QCoreApplication.translate("Form", u"USB1", None))
         self.comboBox_bandRate_devCOM.setItemText(1, QCoreApplication.translate("Form", u"USB2", None))
