@@ -160,7 +160,7 @@ class update_worker(QtCore.QThread):
                 data_res = update_queue_send_cb.get(timeout = 5)
                 progress = index/upgrade.FILE_CNT*100
                 if data_res[0] == 0:
-                    print("回复成功: ",progress)
+                    print("回复成功：",progress)
                     self.signal.emit(progress)
                     if i == upgrade.FILE_CNT-1:
                         self.signal.emit(100)
@@ -228,6 +228,9 @@ class MyWidget(QtWidgets.QWidget):
     def upgrade_progress(self, progress):
         # print(sys._getframe().f_code.co_name)
         self.ui.progressBar.setValue(progress)
+        speed = progress/100.0*upgrade.FILE_SZ/(time.time() - upgrade.START_TIME)
+        remaining = (100.0 - progress)/100.0*upgrade.FILE_SZ/speed
+        self.ui.lb_progress.setText("速度(Byte/s)："+str(speed)+'\n'+"剩余时间："+time.strftime("%H时%M分%S秒", time.gmtime(remaining)))
 
     # 中止升级
     def update_term(self):
@@ -239,6 +242,7 @@ class MyWidget(QtWidgets.QWidget):
         print(sys._getframe().f_code.co_name)
         update_loop.signal.connect(self.upgrade_progress)
         update_loop.start()
+        upgrade.START_TIME = time.time()
 
     # 接收线程
     def recv_data_loop(self, recv_data2):

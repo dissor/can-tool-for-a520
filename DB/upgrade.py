@@ -3,6 +3,7 @@ FILE_FD = ""
 FILE_SZ = ""
 FILE_CNT = ""
 CRC16 = 0
+START_TIME = 0.0
 
 def crc16(addr, len):
     crc = 0
