@@ -4,6 +4,7 @@ FILE_SZ = ""
 FILE_CNT = ""
 CRC16 = 0
 START_TIME = 0.0
+BYTES = 6
 
 def crc16(addr, len):
     crc = 0

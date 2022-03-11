@@ -71,6 +71,7 @@ class test_mode_keepalive(QtCore.QThread):
 # 升级线程类
 class update_worker(QtCore.QThread):
     signal = QtCore.Signal(float)
+    err_signal = QtCore.Signal(int)
     def __init__(self):
         super().__init__()
 
@@ -86,7 +87,7 @@ class update_worker(QtCore.QThread):
 
         # 都是int型
         # print(type(upgrade.FILE_SZ), type(upgrade.FILE_CNT))
-        print(upgrade.FILE_SZ, upgrade.FILE_CNT)
+        print("升级包大小：%d"%upgrade.FILE_SZ+"\t升级总包数：%d"%upgrade.FILE_CNT)
 
         psend_data = CAN_DataFrame(nSendType=0, bRemoteFlag=0,
                                    bExternFlag=0, nDataLen=8, uID= 0x730)
@@ -162,16 +163,20 @@ class update_worker(QtCore.QThread):
                 if data_res[0] == 0:
                     print("回复成功：",progress)
                     self.signal.emit(progress)
-                    if i == upgrade.FILE_CNT-1:
+                    if index == upgrade.FILE_CNT-1:
                         self.signal.emit(100)
+                        self.err_signal.emit(0)
                 else:
                     print("回复失败：")
                     for i in data_res:
                         print(hex(i), end='\t')
-                    break
+                    self.err_signal.emit(-1)
+                    # todo: 是否考虑重试3次
+                    return
             else:
                 print("升级包发送失败")
-                break
+                self.err_signal.emit(-2)
+                return
 
         print("升级结束")
 
@@ -205,7 +210,7 @@ class MyWidget(QtWidgets.QWidget):
         self.ui.lb_binpath.setText(upgrade.FILE_NAME)
 
         upgrade.FILE_SZ = os.path.getsize(upgrade.FILE_NAME)
-        print(upgrade.FILE_SZ)
+        print("升级包大小：" + str(upgrade.FILE_SZ), end="\t")
         self.ui.lb_binsize.setText("%d" % upgrade.FILE_SZ+" bytes")
 
         # 使用open函数打开文件，打开模式选择二进制读取'rb'
@@ -213,9 +218,9 @@ class MyWidget(QtWidgets.QWidget):
 
         # CRC16校验
         upgrade.CRC16, key = 0, 0xE32A
-        print(type(upgrade.CRC16))
+        # print(type(upgrade.CRC16))
         for i in upgrade.FILE_FD.read():
-            # print(hex(i), end=",")
+            print(hex(i), end=",")
             upgrade.CRC16 ^= i
             for j in range(8):
                 if upgrade.CRC16 & 1 != 0:
@@ -223,14 +228,42 @@ class MyWidget(QtWidgets.QWidget):
                 else:
                     upgrade.CRC16 = (upgrade.CRC16 >> 1)
 
-        print("upgrade.CRC16: ", upgrade.CRC16, hex(upgrade.CRC16))
+        print("upgrade.CRC16: ", upgrade.CRC16, hex(upgrade.CRC16), end='\t')
+
+        # 补齐 CRC
+        re_len = upgrade.FILE_SZ % upgrade.BYTES
+        if re_len != 0:
+            print("最后一包长度：",re_len)
+            for i in range(upgrade.BYTES - re_len):
+                upgrade.CRC16 ^= 0xFF
+                for j in range(8):
+                    if upgrade.CRC16 & 1 != 0:
+                        upgrade.CRC16 = (upgrade.CRC16 >> 1)^key
+                    else:
+                        upgrade.CRC16 = (upgrade.CRC16 >> 1)
+        print("修正upgrade.CRC16: ", upgrade.CRC16, hex(upgrade.CRC16))
+
+
 
     def upgrade_progress(self, progress):
         # print(sys._getframe().f_code.co_name)
         self.ui.progressBar.setValue(progress)
         speed = progress/100.0*upgrade.FILE_SZ/(time.time() - upgrade.START_TIME)
         remaining = (100.0 - progress)/100.0*upgrade.FILE_SZ/speed
-        self.ui.lb_progress.setText("速度(Byte/s)："+str(speed)+'\n'+"剩余时间："+time.strftime("%H时%M分%S秒", time.gmtime(remaining)))
+        self.ui.lb_progress.setText("速度(Byte/s)："+str(speed)+'\n'+"剩余时间："+time.strftime("%H时%M分%S秒", time.gmtime(remaining))+'\n'+"消耗时间："+time.strftime("%H时%M分%S秒", time.gmtime(time.time()- upgrade.START_TIME)))
+
+    def upgrade_err_info(self, err):
+        print(sys._getframe().f_code.co_name)
+        match err:
+            case 0:
+                QtWidgets.QMessageBox.information(self,"提示", '升级成功')
+
+            case -1:
+                QtWidgets.QMessageBox.critical(self,"错误", 'MCU回复失败')
+
+            case -2:
+                QtWidgets.QMessageBox.critical(self,"错误", '升级包发送失败')
+
 
     # 中止升级
     def update_term(self):
@@ -241,6 +274,7 @@ class MyWidget(QtWidgets.QWidget):
     def startUpgrade(self):
         print(sys._getframe().f_code.co_name)
         update_loop.signal.connect(self.upgrade_progress)
+        update_loop.err_signal.connect(self.upgrade_err_info)
         update_loop.start()
         upgrade.START_TIME = time.time()
 

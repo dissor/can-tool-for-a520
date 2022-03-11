@@ -177,7 +177,7 @@ class Ui_Form(object):
         self.pb_state_2.setGeometry(QRect(50, 220, 75, 24))
         self.lb_progress = QLabel(self.tab_3)
         self.lb_progress.setObjectName(u"lb_progress")
-        self.lb_progress.setGeometry(QRect(180, 230, 311, 51))
+        self.lb_progress.setGeometry(QRect(180, 230, 301, 91))
         self.tabWidget.addTab(self.tab_3, "")
         self.tab_4 = QWidget()
         self.tab_4.setObjectName(u"tab_4")
