@@ -153,32 +153,42 @@ class update_worker(QtCore.QThread):
             # for i in psend_data.arryData:
             #     print(hex(i), end='\t')
 
-            res = pDll.CAN_ChannelSend(devHandle, 0, pointer(psend_data), 1)
-            if res != CAN_RESULT_ERROR:
-                # print("升级包发送成功")
+            # 重试8次
+            for i in range(0, 8):
+                res = pDll.CAN_ChannelSend(devHandle, 0, pointer(psend_data), 1)
+                if res != CAN_RESULT_ERROR:
+                    # print("升级包发送成功")
 
-                # 等待设备回复
-                data_res = update_queue_send_cb.get(timeout = 5)
-                progress = index/upgrade.FILE_CNT*100
-                if data_res[0] == 0:
-                    print("回复成功：",progress)
-                    self.signal.emit(progress)
-                    if index == upgrade.FILE_CNT-1:
-                        self.signal.emit(100)
-                        self.err_signal.emit(0)
+                    # 等待设备回复
+                    try:
+                        data_res = update_queue_send_cb.get(timeout = 5)
+                    except Exception as err:
+                        print("异常：%s"%err+"重试次数：%d"%i)
+                        continue
+
+                    progress = index/upgrade.FILE_CNT*100
+                    if data_res[0] == 0:
+                        print("回复成功：",progress)
+                        self.signal.emit(progress)
+                        if index == upgrade.FILE_CNT-1:
+                            self.signal.emit(100)
+                            self.err_signal.emit(0)
+                            return
+                        break
+                    else:
+                        print("回复失败：")
+                        for i in data_res:
+                            print(hex(i), end='\t')
+                        self.err_signal.emit(-1)
+                        # todo: 是否考虑重试3次
+                        return
                 else:
-                    print("回复失败：")
-                    for i in data_res:
-                        print(hex(i), end='\t')
-                    self.err_signal.emit(-1)
-                    # todo: 是否考虑重试3次
+                    print("升级包发送失败")
+                    self.err_signal.emit(-2)
                     return
-            else:
-                print("升级包发送失败")
-                self.err_signal.emit(-2)
-                return
 
-        print("升级结束")
+        f'重试8次依旧失败'
+        self.err_signal.emit(-3)
 
 
 
@@ -316,6 +326,9 @@ class MyWidget(QtWidgets.QWidget):
 
             case -2:
                 QtWidgets.QMessageBox.critical(self,"错误", '升级包发送失败')
+
+            case -3:
+                QtWidgets.QMessageBox.critical(self,"错误", '重试失败')
 
 
     # 中止升级
