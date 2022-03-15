@@ -181,11 +181,11 @@ class update_worker(QtCore.QThread):
                             print(hex(i), end='\t')
                         self.err_signal.emit(-1)
                         # todo: 是否考虑重试3次
-                        return
+                        break
                 else:
                     print("升级包发送失败")
                     self.err_signal.emit(-2)
-                    return
+                    break
 
         f'重试8次依旧失败'
         self.err_signal.emit(-3)

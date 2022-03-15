@@ -24,6 +24,7 @@ class Ui_Form(object):
         if not Form.objectName():
             Form.setObjectName(u"Form")
         Form.resize(720, 584)
+        Form.setAutoFillBackground(False)
         self.tabWidget = QTabWidget(Form)
         self.tabWidget.setObjectName(u"tabWidget")
         self.tabWidget.setGeometry(QRect(10, 10, 641, 481))
@@ -201,7 +202,7 @@ class Ui_Form(object):
         self.comboBox_bandRate_devCOM.currentTextChanged.connect(Form.select_dev_comm)
         self.pb_state_2.clicked["bool"].connect(Form.update_term)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(3)
         self.comboBox_bandRate_devCOM.setCurrentIndex(0)
         self.comboBox_bandRate.setCurrentIndex(7)
 
