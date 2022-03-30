@@ -20,13 +20,13 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>10</y>
-     <width>641</width>
-     <height>481</height>
+     <y>20</y>
+     <width>631</width>
+     <height>531</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -251,6 +251,19 @@
        <string>1000Kbps</string>
       </property>
      </item>
+    </widget>
+    <widget class="QCheckBox" name="cb_res">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>120</y>
+       <width>111</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>终端电阻</string>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_2">
@@ -569,6 +582,19 @@
       <string>空</string>
      </property>
     </widget>
+    <widget class="QLabel" name="lb_cardcnt">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>20</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>刷卡累计：0</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_3">
     <attribute name="title">
@@ -707,6 +733,70 @@
      </property>
     </widget>
    </widget>
+   <widget class="QWidget" name="tab_5">
+    <attribute name="title">
+     <string>配卡</string>
+    </attribute>
+    <widget class="QComboBox" name="comboBox">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>100</y>
+       <width>69</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>实体卡</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>模拟卡</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>100</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>配卡模式：</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>170</y>
+       <width>75</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>开始</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_5">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>170</y>
+       <width>75</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>停止</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <resources/>
@@ -750,8 +840,8 @@
    <slot>writeNumber()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>330</x>
-     <y>106</y>
+     <x>332</x>
+     <y>137</y>
     </hint>
     <hint type="destinationlabel">
      <x>626</x>
@@ -871,6 +961,70 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>cb_res</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>set_dev_res()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>283</x>
+     <y>174</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>674</x>
+     <y>177</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>peika_start()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>247</x>
+     <y>228</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>678</x>
+     <y>206</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_5</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>peika_stop()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>344</x>
+     <y>230</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>683</x>
+     <y>271</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox</sender>
+   <signal>currentTextChanged(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>peika_mode()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>336</x>
+     <y>154</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>698</x>
+     <y>145</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>select_dev_comm()</slot>
@@ -883,5 +1037,9 @@
   <slot>startUpgrade()</slot>
   <slot>writeNumber()</slot>
   <slot>update_term()</slot>
+  <slot>set_dev_res()</slot>
+  <slot>peika_start()</slot>
+  <slot>peika_stop()</slot>
+  <slot>peika_mode()</slot>
  </slots>
 </ui>

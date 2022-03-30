@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QLabel, QLineEdit,
-    QProgressBar, QPushButton, QSizePolicy, QTabWidget,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QLabel,
+    QLineEdit, QProgressBar, QPushButton, QSizePolicy,
+    QTabWidget, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -27,7 +27,7 @@ class Ui_Form(object):
         Form.setAutoFillBackground(False)
         self.tabWidget = QTabWidget(Form)
         self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setGeometry(QRect(10, 10, 641, 481))
+        self.tabWidget.setGeometry(QRect(10, 20, 631, 531))
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
         self.pushButton_devClose = QPushButton(self.tab)
@@ -76,6 +76,9 @@ class Ui_Form(object):
         self.comboBox_bandRate.setObjectName(u"comboBox_bandRate")
         self.comboBox_bandRate.setGeometry(QRect(110, 120, 69, 22))
         self.comboBox_bandRate.setEditable(False)
+        self.cb_res = QCheckBox(self.tab)
+        self.cb_res.setObjectName(u"cb_res")
+        self.cb_res.setGeometry(QRect(220, 120, 111, 21))
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")
@@ -151,6 +154,9 @@ class Ui_Form(object):
         self.lb_state = QLabel(self.tab_2)
         self.lb_state.setObjectName(u"lb_state")
         self.lb_state.setGeometry(QRect(10, 60, 541, 31))
+        self.lb_cardcnt = QLabel(self.tab_2)
+        self.lb_cardcnt.setObjectName(u"lb_cardcnt")
+        self.lb_cardcnt.setGeometry(QRect(420, 20, 151, 31))
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_3 = QWidget()
         self.tab_3.setObjectName(u"tab_3")
@@ -189,6 +195,23 @@ class Ui_Form(object):
         self.lineEdit.setObjectName(u"lineEdit")
         self.lineEdit.setGeometry(QRect(130, 70, 113, 21))
         self.tabWidget.addTab(self.tab_4, "")
+        self.tab_5 = QWidget()
+        self.tab_5.setObjectName(u"tab_5")
+        self.comboBox = QComboBox(self.tab_5)
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.setObjectName(u"comboBox")
+        self.comboBox.setGeometry(QRect(280, 100, 69, 22))
+        self.label_12 = QLabel(self.tab_5)
+        self.label_12.setObjectName(u"label_12")
+        self.label_12.setGeometry(QRect(190, 100, 81, 31))
+        self.pushButton_2 = QPushButton(self.tab_5)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.pushButton_2.setGeometry(QRect(180, 170, 75, 24))
+        self.pushButton_5 = QPushButton(self.tab_5)
+        self.pushButton_5.setObjectName(u"pushButton_5")
+        self.pushButton_5.setGeometry(QRect(280, 170, 75, 24))
+        self.tabWidget.addTab(self.tab_5, "")
 
         self.retranslateUi(Form)
         self.comboBox_bandRate.currentTextChanged.connect(Form.modify_dwBtr)
@@ -201,8 +224,12 @@ class Ui_Form(object):
         self.pushButton.clicked.connect(Form.test_start)
         self.comboBox_bandRate_devCOM.currentTextChanged.connect(Form.select_dev_comm)
         self.pb_state_2.clicked["bool"].connect(Form.update_term)
+        self.cb_res.clicked.connect(Form.set_dev_res)
+        self.pushButton_2.clicked.connect(Form.peika_start)
+        self.pushButton_5.clicked.connect(Form.peika_stop)
+        self.comboBox.currentTextChanged.connect(Form.peika_mode)
 
-        self.tabWidget.setCurrentIndex(3)
+        self.tabWidget.setCurrentIndex(0)
         self.comboBox_bandRate_devCOM.setCurrentIndex(0)
         self.comboBox_bandRate.setCurrentIndex(7)
 
@@ -246,6 +273,7 @@ class Ui_Form(object):
         self.comboBox_bandRate.setItemText(9, QCoreApplication.translate("Form", u"1000Kbps", None))
 
         self.comboBox_bandRate.setCurrentText(QCoreApplication.translate("Form", u"500Kbps", None))
+        self.cb_res.setText(QCoreApplication.translate("Form", u"\u7ec8\u7aef\u7535\u963b", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("Form", u"\u5f00\u542f\u8bbe\u5907", None))
         self.pushButton.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb", None))
         self.label_11.setText(QCoreApplication.translate("Form", u"\u6a21\u62df\u5361\uff35\uff35\uff29\uff24", None))
@@ -271,6 +299,7 @@ class Ui_Form(object):
         self.lb_vmuuid.setText(QCoreApplication.translate("Form", u"\u7a7a", None))
         self.pushButton_4.setText(QCoreApplication.translate("Form", u"\u7ed3\u675f", None))
         self.lb_state.setText(QCoreApplication.translate("Form", u"\u7a7a", None))
+        self.lb_cardcnt.setText(QCoreApplication.translate("Form", u"\u5237\u5361\u7d2f\u8ba1\uff1a0", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Form", u"\u6d4b\u8bd5", None))
         self.pb_selectbin.setText(QCoreApplication.translate("Form", u"\u9009\u62e9\u6587\u4ef6", None))
         self.pb_state.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb", None))
@@ -282,5 +311,12 @@ class Ui_Form(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("Form", u"\u5347\u7ea7", None))
         self.pushButton_3.setText(QCoreApplication.translate("Form", u"\u5199\u5165", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QCoreApplication.translate("Form", u"\u5199\u53f7", None))
+        self.comboBox.setItemText(0, QCoreApplication.translate("Form", u"\u5b9e\u4f53\u5361", None))
+        self.comboBox.setItemText(1, QCoreApplication.translate("Form", u"\u6a21\u62df\u5361", None))
+
+        self.label_12.setText(QCoreApplication.translate("Form", u"\u914d\u5361\u6a21\u5f0f\uff1a", None))
+        self.pushButton_2.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb", None))
+        self.pushButton_5.setText(QCoreApplication.translate("Form", u"\u505c\u6b62", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), QCoreApplication.translate("Form", u"\u914d\u5361", None))
     # retranslateUi
 

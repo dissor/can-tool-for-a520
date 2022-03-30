@@ -161,7 +161,7 @@ class update_worker(QtCore.QThread):
 
                     # 等待设备回复
                     try:
-                        data_res = update_queue_send_cb.get(timeout = 5)
+                        data_res = update_queue_send_cb.get(timeout = 10)
                     except Exception as err:
                         print("异常：%s"%err+"重试次数：%d"%i)
                         continue
@@ -200,6 +200,33 @@ class MyWidget(QtWidgets.QWidget):
         self.ui.setupUi(self)  # 初始化
 
         self.init_data()
+
+    def peika_mode(self, mode):
+        print(sys._getframe().f_code.co_name, mode)
+        # for i in range(len(dwBtr_table[bandRate])):
+        #     init_config.dwBtr[i] = dwBtr_table[bandRate][i]
+        #     print('0x%x' % init_config.dwBtr[i], type(init_config.dwBtr[i]))
+        pass
+
+    def peika_start(self):
+        print(sys._getframe().f_code.co_name)
+        res_text = self.ui.comboBox.currentText()
+        if res_text == "实体卡":
+            print("实体卡")
+            self.test_mode(1,1)
+        if res_text == "模拟卡":
+            print("模拟卡")
+            self.test_mode(1,2)
+
+    def peika_stop(self):
+        print(sys._getframe().f_code.co_name)
+        res_text = self.ui.comboBox.currentText()
+        if res_text == "实体卡":
+            print("实体卡")
+            self.test_mode(0,1)
+        if res_text == "模拟卡":
+            print("模拟卡")
+            self.test_mode(0,2)
 
     # 写SN号
     def writeNumber(self):
@@ -329,6 +356,7 @@ class MyWidget(QtWidgets.QWidget):
 
             case -3:
                 QtWidgets.QMessageBox.critical(self,"错误", '重试失败')
+        update_loop.terminate()
 
 
     # 中止升级
@@ -458,7 +486,9 @@ class MyWidget(QtWidgets.QWidget):
             length = recv_data2.arryData[0]
             UID = ""
             for i in range(0, length):
-                UID += chr(recv_data2.arryData[i+1])
+                UID += "%02x" % (recv_data2.arryData[i+1])
+            test.CARD_CNT += 1
+            self.ui.lb_cardcnt.setText("刷卡累计：%d"%test.CARD_CNT)
             QtWidgets.QMessageBox.information(self,"刷卡反馈", UID)
 
         elif recv_data2.uID == 0x3AE:
@@ -485,10 +515,11 @@ class MyWidget(QtWidgets.QWidget):
         recv_loop.start()
 
     # 开关测试模式
-    def test_mode(self, mode):
+    def test_mode(self, mode, mode2):
         send_data = CAN_DataFrame(
             nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=8, uID=0x700)
         send_data.arryData[0] = mode
+        send_data.arryData[1] = mode2
         res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
         if res != CAN_RESULT_ERROR:
             print("成功")
@@ -500,13 +531,13 @@ class MyWidget(QtWidgets.QWidget):
     def test_start(self):
         print("Start")
         test_mode_loop.start()
-        self.test_mode(1)
+        self.test_mode(1,0)
 
     # 关闭测试模式
     def test_end(self):
         print("End")
         test_mode_loop.terminate()
-        self.test_mode(0)
+        self.test_mode(0,0)
 
     # 选择USB端口
     def select_dev_comm(self, dwIndex):
@@ -531,6 +562,16 @@ class MyWidget(QtWidgets.QWidget):
             print("句柄:", devHandle, " USB", devCOM+1)
         else:
             print("失败")
+
+        if self.ui.cb_res.checkState() == QtCore.Qt.Checked:
+            print("检测到终端电阻 --> 开启")
+            # pDll.CAN_WriteRegister(devHandle,0,0xfe,0)
+            # pDll.CAN_WriteRegister(devHandle,0,0xfe,0x1)
+            # pDll.CAN_WriteRegister(devHandle,0,0xff,0x1)
+        elif self.ui.cb_res.checkState() == QtCore.Qt.Unchecked:
+            print("检测到终端电阻 --> 关闭")
+            # pDll.CAN_WriteRegister(devHandle,0,0xfe,0x1)
+            # pDll.CAN_WriteRegister(devHandle,0,0xff,0x0)
 
         print("开启通道:", end='\t')
         res = pDll.CAN_ChannelStart(devHandle, 0, pointer(init_config))
@@ -563,6 +604,18 @@ class MyWidget(QtWidgets.QWidget):
             self.ui.pushButton_devClose.setEnabled(False)
         else:
             print("失败")
+
+    def set_dev_res(self):
+        print("终端电阻", end='\t')
+        if self.ui.cb_res.checkState() == QtCore.Qt.Checked:
+            print("开启")
+        #     pDll.CAN_WriteRegister(devHandle,0,0xfe,0x1)
+        #     pDll.CAN_WriteRegister(devHandle,0,0xff,0x1)
+        elif self.ui.cb_res.checkState() == QtCore.Qt.Unchecked:
+            print("关闭")
+        #     pDll.CAN_WriteRegister(devHandle,0,0xfe,0x1)
+        #     pDll.CAN_WriteRegister(devHandle,0,0xff,0x0)
+
 
     # 发送测试（没有用）
     def test_sendData(self):

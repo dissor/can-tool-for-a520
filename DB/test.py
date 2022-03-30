@@ -2,6 +2,7 @@
 SN1, SN2 = "", ""
 STATE_MN, STATE_CPUN, STATE_VMN, STATE_PN = "", "", "", ""
 UUID1, UUID2 = "", ""
+CARD_CNT = 0
 OKEY = ""
 USRKEY = ""
 USRDATA = ""
