@@ -1,7 +1,7 @@
 import sys
 import time
 import os
-import crc16
+# import crc16
 from NJLikeLib.CanCmd import *
 from PySide6 import QtWidgets, QtCore
 from threading import Thread, Event, Timer
@@ -344,18 +344,18 @@ class MyWidget(QtWidgets.QWidget):
 
     def upgrade_err_info(self, err):
         print(sys._getframe().f_code.co_name)
-        match err:
-            case 0:
-                QtWidgets.QMessageBox.information(self,"提示", '升级成功')
+        # match err:
+        if err == 0:
+            QtWidgets.QMessageBox.information(self,"提示", '升级成功')
 
-            case -1:
-                QtWidgets.QMessageBox.critical(self,"错误", 'MCU回复失败')
+        if err ==  -1:
+            QtWidgets.QMessageBox.critical(self,"错误", 'MCU回复失败')
 
-            case -2:
-                QtWidgets.QMessageBox.critical(self,"错误", '升级包发送失败')
+        if err ==  -2:
+            QtWidgets.QMessageBox.critical(self,"错误", '升级包发送失败')
 
-            case -3:
-                QtWidgets.QMessageBox.critical(self,"错误", '重试失败')
+        if err ==  -3:
+            QtWidgets.QMessageBox.critical(self,"错误", '重试失败')
         update_loop.terminate()
 
 
