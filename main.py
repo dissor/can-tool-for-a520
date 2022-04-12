@@ -217,6 +217,9 @@ class MyWidget(QtWidgets.QWidget):
         if res_text == "模拟卡":
             print("模拟卡")
             self.test_mode(1,2)
+        if res_text == "解绑卡":
+            print("解绑卡")
+            self.test_mode(1,3)
 
     def peika_stop(self):
         print(sys._getframe().f_code.co_name)
@@ -483,13 +486,17 @@ class MyWidget(QtWidgets.QWidget):
 
         elif recv_data2.uID == 0x760:
             # print("0x760")
-            length = recv_data2.arryData[0]
+            length = recv_data2.arryData[0]%0x10
+            flag = (recv_data2.arryData[0]&0b00010000)>>4
             UID = ""
             for i in range(0, length):
                 UID += "%02x" % (recv_data2.arryData[i+1])
             test.CARD_CNT += 1
             self.ui.lb_cardcnt.setText("刷卡累计：%d"%test.CARD_CNT)
-            QtWidgets.QMessageBox.information(self,"刷卡反馈", UID)
+            if flag == 1:
+                QtWidgets.QMessageBox.information(self,"刷卡(已配对)", UID)
+            else:
+                QtWidgets.QMessageBox.information(self,"刷卡(未配对)", UID)
 
         elif recv_data2.uID == 0x3AE:
             # print("0x3AE")

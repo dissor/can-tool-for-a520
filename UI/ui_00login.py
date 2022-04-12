@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file '_00login.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.2.3
+## Created by: Qt User Interface Compiler version 6.2.4
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -200,6 +200,7 @@ class Ui_Form(object):
         self.comboBox = QComboBox(self.tab_5)
         self.comboBox.addItem("")
         self.comboBox.addItem("")
+        self.comboBox.addItem("")
         self.comboBox.setObjectName(u"comboBox")
         self.comboBox.setGeometry(QRect(280, 100, 69, 22))
         self.label_12 = QLabel(self.tab_5)
@@ -229,7 +230,7 @@ class Ui_Form(object):
         self.pushButton_5.clicked.connect(Form.peika_stop)
         self.comboBox.currentTextChanged.connect(Form.peika_mode)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(4)
         self.comboBox_bandRate_devCOM.setCurrentIndex(0)
         self.comboBox_bandRate.setCurrentIndex(7)
 
@@ -313,6 +314,7 @@ class Ui_Form(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QCoreApplication.translate("Form", u"\u5199\u53f7", None))
         self.comboBox.setItemText(0, QCoreApplication.translate("Form", u"\u5b9e\u4f53\u5361", None))
         self.comboBox.setItemText(1, QCoreApplication.translate("Form", u"\u6a21\u62df\u5361", None))
+        self.comboBox.setItemText(2, QCoreApplication.translate("Form", u"\u89e3\u7ed1\u5361", None))
 
         self.label_12.setText(QCoreApplication.translate("Form", u"\u914d\u5361\u6a21\u5f0f\uff1a", None))
         self.pushButton_2.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb", None))

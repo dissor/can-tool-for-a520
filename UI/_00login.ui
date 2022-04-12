@@ -26,7 +26,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -754,6 +754,11 @@
      <item>
       <property name="text">
        <string>模拟卡</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>解绑卡</string>
       </property>
      </item>
     </widget>
