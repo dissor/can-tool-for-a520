@@ -3,6 +3,7 @@ demo.py
 output/
 dist/
 build/
+Doc/
 
 test.c
 widgets_example.py
