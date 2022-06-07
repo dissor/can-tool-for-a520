@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file '_00login.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.2.4
+## Created by: Qt User Interface Compiler version 6.2.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -15,25 +15,39 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QLabel,
-    QLineEdit, QProgressBar, QPushButton, QSizePolicy,
-    QTabWidget, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QGridLayout,
+    QHBoxLayout, QLabel, QLineEdit, QProgressBar,
+    QPushButton, QSizePolicy, QTabWidget, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(720, 584)
+        Form.resize(746, 638)
         Form.setAutoFillBackground(False)
         self.tabWidget = QTabWidget(Form)
         self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setGeometry(QRect(10, 20, 631, 531))
+        self.tabWidget.setGeometry(QRect(20, 20, 701, 571))
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
-        self.pushButton_devClose = QPushButton(self.tab)
-        self.pushButton_devClose.setObjectName(u"pushButton_devClose")
-        self.pushButton_devClose.setGeometry(QRect(120, 160, 75, 24))
-        self.comboBox_bandRate_devCOM = QComboBox(self.tab)
+        self.gridLayoutWidget_4 = QWidget(self.tab)
+        self.gridLayoutWidget_4.setObjectName(u"gridLayoutWidget_4")
+        self.gridLayoutWidget_4.setGeometry(QRect(140, 100, 341, 271))
+        self.gridLayout_5 = QGridLayout(self.gridLayoutWidget_4)
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.gridLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.pushButton_devOpen = QPushButton(self.gridLayoutWidget_4)
+        self.pushButton_devOpen.setObjectName(u"pushButton_devOpen")
+
+        self.gridLayout_5.addWidget(self.pushButton_devOpen, 2, 0, 1, 1)
+
+        self.label_bandRate_2 = QLabel(self.gridLayoutWidget_4)
+        self.label_bandRate_2.setObjectName(u"label_bandRate_2")
+        self.label_bandRate_2.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_5.addWidget(self.label_bandRate_2, 0, 0, 1, 1)
+
+        self.comboBox_bandRate_devCOM = QComboBox(self.gridLayoutWidget_4)
         self.comboBox_bandRate_devCOM.addItem("")
         self.comboBox_bandRate_devCOM.addItem("")
         self.comboBox_bandRate_devCOM.addItem("")
@@ -51,18 +65,16 @@ class Ui_Form(object):
         self.comboBox_bandRate_devCOM.addItem("")
         self.comboBox_bandRate_devCOM.addItem("")
         self.comboBox_bandRate_devCOM.setObjectName(u"comboBox_bandRate_devCOM")
-        self.comboBox_bandRate_devCOM.setGeometry(QRect(110, 80, 69, 22))
         self.comboBox_bandRate_devCOM.setEditable(False)
-        self.label_bandRate = QLabel(self.tab)
-        self.label_bandRate.setObjectName(u"label_bandRate")
-        self.label_bandRate.setGeometry(QRect(40, 120, 53, 16))
-        self.label_bandRate_2 = QLabel(self.tab)
-        self.label_bandRate_2.setObjectName(u"label_bandRate_2")
-        self.label_bandRate_2.setGeometry(QRect(40, 80, 53, 16))
-        self.pushButton_devOpen = QPushButton(self.tab)
-        self.pushButton_devOpen.setObjectName(u"pushButton_devOpen")
-        self.pushButton_devOpen.setGeometry(QRect(20, 160, 75, 24))
-        self.comboBox_bandRate = QComboBox(self.tab)
+
+        self.gridLayout_5.addWidget(self.comboBox_bandRate_devCOM, 0, 1, 1, 1)
+
+        self.pushButton_devClose = QPushButton(self.gridLayoutWidget_4)
+        self.pushButton_devClose.setObjectName(u"pushButton_devClose")
+
+        self.gridLayout_5.addWidget(self.pushButton_devClose, 2, 1, 1, 1)
+
+        self.comboBox_bandRate = QComboBox(self.gridLayoutWidget_4)
         self.comboBox_bandRate.addItem("")
         self.comboBox_bandRate.addItem("")
         self.comboBox_bandRate.addItem("")
@@ -74,11 +86,21 @@ class Ui_Form(object):
         self.comboBox_bandRate.addItem("")
         self.comboBox_bandRate.addItem("")
         self.comboBox_bandRate.setObjectName(u"comboBox_bandRate")
-        self.comboBox_bandRate.setGeometry(QRect(110, 120, 69, 22))
         self.comboBox_bandRate.setEditable(False)
-        self.cb_res = QCheckBox(self.tab)
+
+        self.gridLayout_5.addWidget(self.comboBox_bandRate, 1, 1, 1, 1)
+
+        self.label_bandRate = QLabel(self.gridLayoutWidget_4)
+        self.label_bandRate.setObjectName(u"label_bandRate")
+        self.label_bandRate.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_5.addWidget(self.label_bandRate, 1, 0, 1, 1)
+
+        self.cb_res = QCheckBox(self.gridLayoutWidget_4)
         self.cb_res.setObjectName(u"cb_res")
-        self.cb_res.setGeometry(QRect(220, 120, 111, 21))
+
+        self.gridLayout_5.addWidget(self.cb_res, 1, 2, 1, 1)
+
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")
@@ -157,80 +179,202 @@ class Ui_Form(object):
         self.lb_cardcnt = QLabel(self.tab_2)
         self.lb_cardcnt.setObjectName(u"lb_cardcnt")
         self.lb_cardcnt.setGeometry(QRect(420, 20, 151, 31))
+        self.lb_temp = QLabel(self.tab_2)
+        self.lb_temp.setObjectName(u"lb_temp")
+        self.lb_temp.setGeometry(QRect(420, 50, 53, 16))
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_3 = QWidget()
         self.tab_3.setObjectName(u"tab_3")
-        self.pb_selectbin = QPushButton(self.tab_3)
-        self.pb_selectbin.setObjectName(u"pb_selectbin")
-        self.pb_selectbin.setGeometry(QRect(60, 50, 75, 24))
-        self.pb_state = QPushButton(self.tab_3)
-        self.pb_state.setObjectName(u"pb_state")
-        self.pb_state.setGeometry(QRect(50, 190, 75, 24))
-        self.progressBar = QProgressBar(self.tab_3)
-        self.progressBar.setObjectName(u"progressBar")
-        self.progressBar.setGeometry(QRect(180, 190, 118, 23))
-        self.progressBar.setValue(0)
         self.lb_updatestate = QLabel(self.tab_3)
         self.lb_updatestate.setObjectName(u"lb_updatestate")
         self.lb_updatestate.setGeometry(QRect(160, 250, 181, 41))
-        self.lb_binpath = QLabel(self.tab_3)
-        self.lb_binpath.setObjectName(u"lb_binpath")
-        self.lb_binpath.setGeometry(QRect(150, 80, 351, 41))
-        self.lb_binsize = QLabel(self.tab_3)
-        self.lb_binsize.setObjectName(u"lb_binsize")
-        self.lb_binsize.setGeometry(QRect(150, 140, 311, 16))
-        self.pb_state_2 = QPushButton(self.tab_3)
-        self.pb_state_2.setObjectName(u"pb_state_2")
-        self.pb_state_2.setGeometry(QRect(50, 220, 75, 24))
         self.lb_progress = QLabel(self.tab_3)
         self.lb_progress.setObjectName(u"lb_progress")
-        self.lb_progress.setGeometry(QRect(180, 230, 301, 91))
+        self.lb_progress.setGeometry(QRect(170, 360, 291, 141))
+        self.gridLayoutWidget_3 = QWidget(self.tab_3)
+        self.gridLayoutWidget_3.setObjectName(u"gridLayoutWidget_3")
+        self.gridLayoutWidget_3.setGeometry(QRect(50, 270, 581, 71))
+        self.gridLayout_4 = QGridLayout(self.gridLayoutWidget_3)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.gridLayout_4.setContentsMargins(0, 0, 0, 0)
+        self.progressBar = QProgressBar(self.gridLayoutWidget_3)
+        self.progressBar.setObjectName(u"progressBar")
+        self.progressBar.setValue(0)
+
+        self.gridLayout_4.addWidget(self.progressBar, 0, 2, 1, 1)
+
+        self.pb_state = QPushButton(self.gridLayoutWidget_3)
+        self.pb_state.setObjectName(u"pb_state")
+
+        self.gridLayout_4.addWidget(self.pb_state, 0, 0, 1, 1)
+
+        self.pb_state_2 = QPushButton(self.gridLayoutWidget_3)
+        self.pb_state_2.setObjectName(u"pb_state_2")
+
+        self.gridLayout_4.addWidget(self.pb_state_2, 0, 3, 1, 1)
+
+        self.pb_selectbin = QPushButton(self.tab_3)
+        self.pb_selectbin.setObjectName(u"pb_selectbin")
+        self.pb_selectbin.setGeometry(QRect(60, 150, 75, 24))
+        self.lb_binpath = QLabel(self.tab_3)
+        self.lb_binpath.setObjectName(u"lb_binpath")
+        self.lb_binpath.setGeometry(QRect(190, 150, 371, 16))
+        self.lb_binpath.setMaximumSize(QSize(371, 16))
+        self.lb_binsize = QLabel(self.tab_3)
+        self.lb_binsize.setObjectName(u"lb_binsize")
+        self.lb_binsize.setGeometry(QRect(190, 190, 171, 16))
+        self.lb_binsize.setMaximumSize(QSize(171, 16))
         self.tabWidget.addTab(self.tab_3, "")
         self.tab_4 = QWidget()
         self.tab_4.setObjectName(u"tab_4")
-        self.pushButton_3 = QPushButton(self.tab_4)
-        self.pushButton_3.setObjectName(u"pushButton_3")
-        self.pushButton_3.setGeometry(QRect(280, 70, 75, 24))
-        self.lineEdit = QLineEdit(self.tab_4)
+        self.horizontalLayoutWidget = QWidget(self.tab_4)
+        self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
+        self.horizontalLayoutWidget.setGeometry(QRect(100, 50, 411, 121))
+        self.horizontalLayout = QHBoxLayout(self.horizontalLayoutWidget)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.label_13 = QLabel(self.horizontalLayoutWidget)
+        self.label_13.setObjectName(u"label_13")
+
+        self.horizontalLayout.addWidget(self.label_13)
+
+        self.lineEdit = QLineEdit(self.horizontalLayoutWidget)
         self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setGeometry(QRect(130, 70, 113, 21))
+
+        self.horizontalLayout.addWidget(self.lineEdit)
+
+        self.pushButton_3 = QPushButton(self.horizontalLayoutWidget)
+        self.pushButton_3.setObjectName(u"pushButton_3")
+
+        self.horizontalLayout.addWidget(self.pushButton_3)
+
         self.tabWidget.addTab(self.tab_4, "")
         self.tab_5 = QWidget()
         self.tab_5.setObjectName(u"tab_5")
-        self.comboBox = QComboBox(self.tab_5)
+        self.gridLayoutWidget_2 = QWidget(self.tab_5)
+        self.gridLayoutWidget_2.setObjectName(u"gridLayoutWidget_2")
+        self.gridLayoutWidget_2.setGeometry(QRect(190, 180, 211, 111))
+        self.gridLayout_3 = QGridLayout(self.gridLayoutWidget_2)
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.label_12 = QLabel(self.gridLayoutWidget_2)
+        self.label_12.setObjectName(u"label_12")
+        self.label_12.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_3.addWidget(self.label_12, 0, 0, 1, 1)
+
+        self.comboBox = QComboBox(self.gridLayoutWidget_2)
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.setObjectName(u"comboBox")
-        self.comboBox.setGeometry(QRect(280, 100, 69, 22))
-        self.label_12 = QLabel(self.tab_5)
-        self.label_12.setObjectName(u"label_12")
-        self.label_12.setGeometry(QRect(190, 100, 81, 31))
-        self.pushButton_2 = QPushButton(self.tab_5)
+
+        self.gridLayout_3.addWidget(self.comboBox, 0, 1, 1, 1)
+
+        self.pushButton_2 = QPushButton(self.gridLayoutWidget_2)
         self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setGeometry(QRect(180, 170, 75, 24))
-        self.pushButton_5 = QPushButton(self.tab_5)
+
+        self.gridLayout_3.addWidget(self.pushButton_2, 1, 0, 1, 1)
+
+        self.pushButton_5 = QPushButton(self.gridLayoutWidget_2)
         self.pushButton_5.setObjectName(u"pushButton_5")
-        self.pushButton_5.setGeometry(QRect(280, 170, 75, 24))
+
+        self.gridLayout_3.addWidget(self.pushButton_5, 1, 1, 1, 1)
+
         self.tabWidget.addTab(self.tab_5, "")
+        self.tab_6 = QWidget()
+        self.tab_6.setObjectName(u"tab_6")
+        self.gridLayoutWidget = QWidget(self.tab_6)
+        self.gridLayoutWidget.setObjectName(u"gridLayoutWidget")
+        self.gridLayoutWidget.setGeometry(QRect(40, 280, 621, 181))
+        self.gridLayout = QGridLayout(self.gridLayoutWidget)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.pushButton_9 = QPushButton(self.gridLayoutWidget)
+        self.pushButton_9.setObjectName(u"pushButton_9")
+
+        self.gridLayout.addWidget(self.pushButton_9, 1, 2, 1, 1)
+
+        self.label_15 = QLabel(self.gridLayoutWidget)
+        self.label_15.setObjectName(u"label_15")
+
+        self.gridLayout.addWidget(self.label_15, 0, 0, 1, 1)
+
+        self.pushButton_7 = QPushButton(self.gridLayoutWidget)
+        self.pushButton_7.setObjectName(u"pushButton_7")
+
+        self.gridLayout.addWidget(self.pushButton_7, 0, 2, 1, 1)
+
+        self.lineEdit_4 = QLineEdit(self.gridLayoutWidget)
+        self.lineEdit_4.setObjectName(u"lineEdit_4")
+
+        self.gridLayout.addWidget(self.lineEdit_4, 0, 1, 1, 1)
+
+        self.horizontalLayoutWidget_2 = QWidget(self.tab_6)
+        self.horizontalLayoutWidget_2.setObjectName(u"horizontalLayoutWidget_2")
+        self.horizontalLayoutWidget_2.setGeometry(QRect(30, 60, 631, 51))
+        self.horizontalLayout_2 = QHBoxLayout(self.horizontalLayoutWidget_2)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.label_14 = QLabel(self.horizontalLayoutWidget_2)
+        self.label_14.setObjectName(u"label_14")
+
+        self.horizontalLayout_2.addWidget(self.label_14)
+
+        self.lineEdit_2 = QLineEdit(self.horizontalLayoutWidget_2)
+        self.lineEdit_2.setObjectName(u"lineEdit_2")
+
+        self.horizontalLayout_2.addWidget(self.lineEdit_2)
+
+        self.label_16 = QLabel(self.horizontalLayoutWidget_2)
+        self.label_16.setObjectName(u"label_16")
+
+        self.horizontalLayout_2.addWidget(self.label_16)
+
+        self.lineEdit_3 = QLineEdit(self.horizontalLayoutWidget_2)
+        self.lineEdit_3.setObjectName(u"lineEdit_3")
+
+        self.horizontalLayout_2.addWidget(self.lineEdit_3)
+
+        self.horizontalLayoutWidget_3 = QWidget(self.tab_6)
+        self.horizontalLayoutWidget_3.setObjectName(u"horizontalLayoutWidget_3")
+        self.horizontalLayoutWidget_3.setGeometry(QRect(250, 120, 181, 51))
+        self.horizontalLayout_3 = QHBoxLayout(self.horizontalLayoutWidget_3)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.pushButton_6 = QPushButton(self.horizontalLayoutWidget_3)
+        self.pushButton_6.setObjectName(u"pushButton_6")
+
+        self.horizontalLayout_3.addWidget(self.pushButton_6)
+
+        self.pushButton_8 = QPushButton(self.horizontalLayoutWidget_3)
+        self.pushButton_8.setObjectName(u"pushButton_8")
+
+        self.horizontalLayout_3.addWidget(self.pushButton_8)
+
+        self.tabWidget.addTab(self.tab_6, "")
 
         self.retranslateUi(Form)
         self.comboBox_bandRate.currentTextChanged.connect(Form.modify_dwBtr)
         self.pushButton_devOpen.clicked.connect(Form.devOpen)
         self.pushButton_3.clicked.connect(Form.writeNumber)
         self.pushButton_4.clicked.connect(Form.test_end)
-        self.pb_state.clicked.connect(Form.startUpgrade)
-        self.pb_selectbin.clicked.connect(Form.openBinFile)
         self.pushButton_devClose.clicked.connect(Form.devClose)
         self.pushButton.clicked.connect(Form.test_start)
         self.comboBox_bandRate_devCOM.currentTextChanged.connect(Form.select_dev_comm)
-        self.pb_state_2.clicked["bool"].connect(Form.update_term)
         self.cb_res.clicked.connect(Form.set_dev_res)
         self.pushButton_2.clicked.connect(Form.peika_start)
         self.pushButton_5.clicked.connect(Form.peika_stop)
         self.comboBox.currentTextChanged.connect(Form.peika_mode)
+        self.pushButton_8.clicked.connect(Form.write_card_id)
+        self.pushButton_6.clicked.connect(Form.read_card_id)
+        self.pushButton_7.clicked.connect(Form.write_ic_id)
+        self.pushButton_9.clicked.connect(Form.delete_all_uid)
+        self.pb_state_2.clicked["bool"].connect(Form.update_term)
+        self.pb_selectbin.clicked.connect(Form.openBinFile)
+        self.pb_state.clicked.connect(Form.startUpgrade)
 
-        self.tabWidget.setCurrentIndex(4)
+        self.tabWidget.setCurrentIndex(1)
         self.comboBox_bandRate_devCOM.setCurrentIndex(0)
         self.comboBox_bandRate.setCurrentIndex(7)
 
@@ -240,7 +384,8 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"\u6d4b\u8bd5\u5de5\u5177", None))
-        self.pushButton_devClose.setText(QCoreApplication.translate("Form", u"\u5173\u95ed", None))
+        self.pushButton_devOpen.setText(QCoreApplication.translate("Form", u"\u6253\u5f00", None))
+        self.label_bandRate_2.setText(QCoreApplication.translate("Form", u"\u7aef\u53e3", None))
         self.comboBox_bandRate_devCOM.setItemText(0, QCoreApplication.translate("Form", u"USB1", None))
         self.comboBox_bandRate_devCOM.setItemText(1, QCoreApplication.translate("Form", u"USB2", None))
         self.comboBox_bandRate_devCOM.setItemText(2, QCoreApplication.translate("Form", u"USB3", None))
@@ -259,9 +404,7 @@ class Ui_Form(object):
         self.comboBox_bandRate_devCOM.setItemText(15, QCoreApplication.translate("Form", u"USB16", None))
 
         self.comboBox_bandRate_devCOM.setCurrentText(QCoreApplication.translate("Form", u"USB1", None))
-        self.label_bandRate.setText(QCoreApplication.translate("Form", u"\u6ce2\u7279\u7387", None))
-        self.label_bandRate_2.setText(QCoreApplication.translate("Form", u"\u7aef\u53e3", None))
-        self.pushButton_devOpen.setText(QCoreApplication.translate("Form", u"\u6253\u5f00", None))
+        self.pushButton_devClose.setText(QCoreApplication.translate("Form", u"\u5173\u95ed", None))
         self.comboBox_bandRate.setItemText(0, QCoreApplication.translate("Form", u"5Kbps", None))
         self.comboBox_bandRate.setItemText(1, QCoreApplication.translate("Form", u"10Kbps", None))
         self.comboBox_bandRate.setItemText(2, QCoreApplication.translate("Form", u"20Kbps", None))
@@ -274,6 +417,7 @@ class Ui_Form(object):
         self.comboBox_bandRate.setItemText(9, QCoreApplication.translate("Form", u"1000Kbps", None))
 
         self.comboBox_bandRate.setCurrentText(QCoreApplication.translate("Form", u"500Kbps", None))
+        self.label_bandRate.setText(QCoreApplication.translate("Form", u"\u6ce2\u7279\u7387", None))
         self.cb_res.setText(QCoreApplication.translate("Form", u"\u7ec8\u7aef\u7535\u963b", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("Form", u"\u5f00\u542f\u8bbe\u5907", None))
         self.pushButton.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb", None))
@@ -301,24 +445,34 @@ class Ui_Form(object):
         self.pushButton_4.setText(QCoreApplication.translate("Form", u"\u7ed3\u675f", None))
         self.lb_state.setText(QCoreApplication.translate("Form", u"\u7a7a", None))
         self.lb_cardcnt.setText(QCoreApplication.translate("Form", u"\u5237\u5361\u7d2f\u8ba1\uff1a0", None))
+        self.lb_temp.setText(QCoreApplication.translate("Form", u"\u6e29\u5ea6\uff1a0", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Form", u"\u6d4b\u8bd5", None))
-        self.pb_selectbin.setText(QCoreApplication.translate("Form", u"\u9009\u62e9\u6587\u4ef6", None))
-        self.pb_state.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb", None))
         self.lb_updatestate.setText("")
+        self.lb_progress.setText("")
+        self.pb_state.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb", None))
+        self.pb_state_2.setText(QCoreApplication.translate("Form", u"\u4e2d\u6b62", None))
+        self.pb_selectbin.setText(QCoreApplication.translate("Form", u"\u9009\u62e9\u6587\u4ef6", None))
         self.lb_binpath.setText(QCoreApplication.translate("Form", u"\u6587\u4ef6\u8def\u5f84", None))
         self.lb_binsize.setText(QCoreApplication.translate("Form", u"\u6587\u4ef6\u5927\u5c0f", None))
-        self.pb_state_2.setText(QCoreApplication.translate("Form", u"\u4e2d\u6b62", None))
-        self.lb_progress.setText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("Form", u"\u5347\u7ea7", None))
+        self.label_13.setText(QCoreApplication.translate("Form", u"SN \u53f7", None))
         self.pushButton_3.setText(QCoreApplication.translate("Form", u"\u5199\u5165", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QCoreApplication.translate("Form", u"\u5199\u53f7", None))
+        self.label_12.setText(QCoreApplication.translate("Form", u"\u914d\u5361\u6a21\u5f0f", None))
         self.comboBox.setItemText(0, QCoreApplication.translate("Form", u"\u5b9e\u4f53\u5361", None))
         self.comboBox.setItemText(1, QCoreApplication.translate("Form", u"\u6a21\u62df\u5361", None))
         self.comboBox.setItemText(2, QCoreApplication.translate("Form", u"\u89e3\u7ed1\u5361", None))
 
-        self.label_12.setText(QCoreApplication.translate("Form", u"\u914d\u5361\u6a21\u5f0f\uff1a", None))
         self.pushButton_2.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb", None))
         self.pushButton_5.setText(QCoreApplication.translate("Form", u"\u505c\u6b62", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), QCoreApplication.translate("Form", u"\u914d\u5361", None))
+        self.pushButton_9.setText(QCoreApplication.translate("Form", u"\u5220\u9664\u6240\u6709UID", None))
+        self.label_15.setText(QCoreApplication.translate("Form", u"\u5199IC\u5bc6\u94a5", None))
+        self.pushButton_7.setText(QCoreApplication.translate("Form", u"\u5199\u5165", None))
+        self.label_14.setText(QCoreApplication.translate("Form", u"PiccKey:", None))
+        self.label_16.setText(QCoreApplication.translate("Form", u"AppKey:", None))
+        self.pushButton_6.setText(QCoreApplication.translate("Form", u"\u8bfb\u53d6", None))
+        self.pushButton_8.setText(QCoreApplication.translate("Form", u"\u5199\u5165", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6), QCoreApplication.translate("Form", u"\u5bc6\u94a5", None))
     # retranslateUi
 

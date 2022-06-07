@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>720</width>
-    <height>584</height>
+    <width>746</width>
+    <height>638</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,251 +19,227 @@
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>20</x>
      <y>20</y>
-     <width>631</width>
-     <height>531</height>
+     <width>701</width>
+     <height>571</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
      <string>开启设备</string>
     </attribute>
-    <widget class="QPushButton" name="pushButton_devClose">
+    <widget class="QWidget" name="gridLayoutWidget_4">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>160</y>
-       <width>75</width>
-       <height>24</height>
+       <x>140</x>
+       <y>100</y>
+       <width>341</width>
+       <height>271</height>
       </rect>
      </property>
-     <property name="text">
-      <string>关闭</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="comboBox_bandRate_devCOM">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>80</y>
-       <width>69</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="editable">
-      <bool>false</bool>
-     </property>
-     <property name="currentText">
-      <string>USB1</string>
-     </property>
-     <property name="currentIndex">
-      <number>0</number>
-     </property>
-     <item>
-      <property name="text">
-       <string>USB1</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>USB2</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>USB3</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>USB4</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>USB5</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>USB6</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>USB7</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>USB8</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>USB9</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>USB10</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>USB11</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>USB12</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>USB13</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>USB14</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>USB15</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>USB16</string>
-      </property>
-     </item>
-    </widget>
-    <widget class="QLabel" name="label_bandRate">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>120</y>
-       <width>53</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>波特率</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_bandRate_2">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>80</y>
-       <width>53</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>端口</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_devOpen">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>160</y>
-       <width>75</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>打开</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="comboBox_bandRate">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>120</y>
-       <width>69</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <property name="editable">
-      <bool>false</bool>
-     </property>
-     <property name="currentText">
-      <string>500Kbps</string>
-     </property>
-     <property name="currentIndex">
-      <number>7</number>
-     </property>
-     <item>
-      <property name="text">
-       <string>5Kbps</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>10Kbps</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>20Kbps</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>50Kbps</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>100Kbps</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>125Kbps</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>250Kbps</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>500Kbps</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>800Kbps</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>1000Kbps</string>
-      </property>
-     </item>
-    </widget>
-    <widget class="QCheckBox" name="cb_res">
-     <property name="geometry">
-      <rect>
-       <x>220</x>
-       <y>120</y>
-       <width>111</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>终端电阻</string>
-     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="2" column="0">
+       <widget class="QPushButton" name="pushButton_devOpen">
+        <property name="text">
+         <string>打开</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_bandRate_2">
+        <property name="text">
+         <string>端口</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="comboBox_bandRate_devCOM">
+        <property name="editable">
+         <bool>false</bool>
+        </property>
+        <property name="currentText">
+         <string>USB1</string>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>USB1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>USB2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>USB3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>USB4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>USB5</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>USB6</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>USB7</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>USB8</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>USB9</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>USB10</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>USB11</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>USB12</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>USB13</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>USB14</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>USB15</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>USB16</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="pushButton_devClose">
+        <property name="text">
+         <string>关闭</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="comboBox_bandRate">
+        <property name="editable">
+         <bool>false</bool>
+        </property>
+        <property name="currentText">
+         <string>500Kbps</string>
+        </property>
+        <property name="currentIndex">
+         <number>7</number>
+        </property>
+        <item>
+         <property name="text">
+          <string>5Kbps</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>10Kbps</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>20Kbps</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>50Kbps</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>100Kbps</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>125Kbps</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>250Kbps</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>500Kbps</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>800Kbps</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>1000Kbps</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_bandRate">
+        <property name="text">
+         <string>波特率</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QCheckBox" name="cb_res">
+        <property name="text">
+         <string>终端电阻</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_2">
@@ -595,50 +571,24 @@
       <string>刷卡累计：0</string>
      </property>
     </widget>
+    <widget class="QLabel" name="lb_temp">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>50</y>
+       <width>53</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>温度：0</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tab_3">
     <attribute name="title">
      <string>升级</string>
     </attribute>
-    <widget class="QPushButton" name="pb_selectbin">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>50</y>
-       <width>75</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>选择文件</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pb_state">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>190</y>
-       <width>75</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>开始</string>
-     </property>
-    </widget>
-    <widget class="QProgressBar" name="progressBar">
-     <property name="geometry">
-      <rect>
-       <x>180</x>
-       <y>190</y>
-       <width>118</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="value">
-      <number>0</number>
-     </property>
-    </widget>
     <widget class="QLabel" name="lb_updatestate">
      <property name="geometry">
       <rect>
@@ -652,14 +602,79 @@
       <string/>
      </property>
     </widget>
+    <widget class="QLabel" name="lb_progress">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>360</y>
+       <width>291</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>270</y>
+       <width>581</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="2">
+       <widget class="QProgressBar" name="progressBar">
+        <property name="value">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QPushButton" name="pb_state">
+        <property name="text">
+         <string>开始</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QPushButton" name="pb_state_2">
+        <property name="text">
+         <string>中止</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QPushButton" name="pb_selectbin">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>150</y>
+       <width>75</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>选择文件</string>
+     </property>
+    </widget>
     <widget class="QLabel" name="lb_binpath">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>80</y>
-       <width>351</width>
-       <height>41</height>
+       <x>190</x>
+       <y>150</y>
+       <width>371</width>
+       <height>16</height>
       </rect>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>371</width>
+       <height>16</height>
+      </size>
      </property>
      <property name="text">
       <string>文件路径</string>
@@ -668,40 +683,20 @@
     <widget class="QLabel" name="lb_binsize">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>140</y>
-       <width>311</width>
+       <x>190</x>
+       <y>190</y>
+       <width>171</width>
        <height>16</height>
       </rect>
      </property>
+     <property name="maximumSize">
+      <size>
+       <width>171</width>
+       <height>16</height>
+      </size>
+     </property>
      <property name="text">
       <string>文件大小</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pb_state_2">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>220</y>
-       <width>75</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>中止</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lb_progress">
-     <property name="geometry">
-      <rect>
-       <x>180</x>
-       <y>230</y>
-       <width>301</width>
-       <height>91</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
      </property>
     </widget>
    </widget>
@@ -709,97 +704,193 @@
     <attribute name="title">
      <string>写号</string>
     </attribute>
-    <widget class="QPushButton" name="pushButton_3">
+    <widget class="QWidget" name="horizontalLayoutWidget">
      <property name="geometry">
       <rect>
-       <x>280</x>
-       <y>70</y>
-       <width>75</width>
-       <height>24</height>
+       <x>100</x>
+       <y>50</y>
+       <width>411</width>
+       <height>121</height>
       </rect>
      </property>
-     <property name="text">
-      <string>写入</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>70</y>
-       <width>113</width>
-       <height>21</height>
-      </rect>
-     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label_13">
+        <property name="text">
+         <string>SN 号</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="text">
+         <string>写入</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_5">
     <attribute name="title">
      <string>配卡</string>
     </attribute>
-    <widget class="QComboBox" name="comboBox">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>100</y>
-       <width>69</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <item>
-      <property name="text">
-       <string>实体卡</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>模拟卡</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>解绑卡</string>
-      </property>
-     </item>
-    </widget>
-    <widget class="QLabel" name="label_12">
+    <widget class="QWidget" name="gridLayoutWidget_2">
      <property name="geometry">
       <rect>
        <x>190</x>
-       <y>100</y>
-       <width>81</width>
-       <height>31</height>
+       <y>180</y>
+       <width>211</width>
+       <height>111</height>
       </rect>
      </property>
-     <property name="text">
-      <string>配卡模式：</string>
-     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_12">
+        <property name="text">
+         <string>配卡模式</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="comboBox">
+        <item>
+         <property name="text">
+          <string>实体卡</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>模拟卡</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>解绑卡</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="text">
+         <string>开始</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="pushButton_5">
+        <property name="text">
+         <string>停止</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
-    <widget class="QPushButton" name="pushButton_2">
+   </widget>
+   <widget class="QWidget" name="tab_6">
+    <attribute name="title">
+     <string>密钥</string>
+    </attribute>
+    <widget class="QWidget" name="gridLayoutWidget">
      <property name="geometry">
       <rect>
-       <x>180</x>
-       <y>170</y>
-       <width>75</width>
-       <height>24</height>
+       <x>40</x>
+       <y>280</y>
+       <width>621</width>
+       <height>181</height>
       </rect>
      </property>
-     <property name="text">
-      <string>开始</string>
-     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="1" column="2">
+       <widget class="QPushButton" name="pushButton_9">
+        <property name="text">
+         <string>删除所有UID</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_15">
+        <property name="text">
+         <string>写IC密钥</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="pushButton_7">
+        <property name="text">
+         <string>写入</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_4"/>
+      </item>
+     </layout>
     </widget>
-    <widget class="QPushButton" name="pushButton_5">
+    <widget class="QWidget" name="horizontalLayoutWidget_2">
      <property name="geometry">
       <rect>
-       <x>280</x>
-       <y>170</y>
-       <width>75</width>
-       <height>24</height>
+       <x>30</x>
+       <y>60</y>
+       <width>631</width>
+       <height>51</height>
       </rect>
      </property>
-     <property name="text">
-      <string>停止</string>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_14">
+        <property name="text">
+         <string>PiccKey:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit_2"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_16">
+        <property name="text">
+         <string>AppKey:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit_3"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="horizontalLayoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>120</y>
+       <width>181</width>
+       <height>51</height>
+      </rect>
      </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QPushButton" name="pushButton_6">
+        <property name="text">
+         <string>读取</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_8">
+        <property name="text">
+         <string>写入</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </widget>
   </widget>
@@ -813,8 +904,8 @@
    <slot>modify_dwBtr()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>180</x>
-     <y>165</y>
+     <x>367</x>
+     <y>268</y>
     </hint>
     <hint type="destinationlabel">
      <x>511</x>
@@ -829,8 +920,8 @@
    <slot>devOpen()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>96</x>
-     <y>207</y>
+     <x>225</x>
+     <y>345</y>
     </hint>
     <hint type="destinationlabel">
      <x>91</x>
@@ -845,8 +936,8 @@
    <slot>writeNumber()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>332</x>
-     <y>137</y>
+     <x>521</x>
+     <y>145</y>
     </hint>
     <hint type="destinationlabel">
      <x>626</x>
@@ -871,46 +962,14 @@
    </hints>
   </connection>
   <connection>
-   <sender>pb_state</sender>
-   <signal>clicked()</signal>
-   <receiver>Form</receiver>
-   <slot>startUpgrade()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>112</x>
-     <y>239</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>616</x>
-     <y>217</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pb_selectbin</sender>
-   <signal>clicked()</signal>
-   <receiver>Form</receiver>
-   <slot>openBinFile()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>130</x>
-     <y>97</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>614</x>
-     <y>138</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>pushButton_devClose</sender>
    <signal>clicked()</signal>
    <receiver>Form</receiver>
    <slot>devClose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>196</x>
-     <y>207</y>
+     <x>367</x>
+     <y>345</y>
     </hint>
     <hint type="destinationlabel">
      <x>426</x>
@@ -941,28 +1000,12 @@
    <slot>select_dev_comm()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>180</x>
-     <y>125</y>
+     <x>367</x>
+     <y>193</y>
     </hint>
     <hint type="destinationlabel">
      <x>398</x>
      <y>51</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pb_state_2</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>Form</receiver>
-   <slot>update_term()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>83</x>
-     <y>266</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>691</x>
-     <y>323</y>
     </hint>
    </hints>
   </connection>
@@ -973,8 +1016,8 @@
    <slot>set_dev_res()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>283</x>
-     <y>174</y>
+     <x>482</x>
+     <y>267</y>
     </hint>
     <hint type="destinationlabel">
      <x>674</x>
@@ -989,8 +1032,8 @@
    <slot>peika_start()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>247</x>
-     <y>228</y>
+     <x>263</x>
+     <y>294</y>
     </hint>
     <hint type="destinationlabel">
      <x>678</x>
@@ -1005,8 +1048,8 @@
    <slot>peika_stop()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>344</x>
-     <y>230</y>
+     <x>410</x>
+     <y>294</y>
     </hint>
     <hint type="destinationlabel">
      <x>683</x>
@@ -1021,12 +1064,124 @@
    <slot>peika_mode()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>336</x>
-     <y>154</y>
+     <x>410</x>
+     <y>245</y>
     </hint>
     <hint type="destinationlabel">
      <x>698</x>
      <y>145</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_8</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>write_card_id()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>391</x>
+     <y>173</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>210</x>
+     <y>592</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_6</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>read_card_id()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>308</x>
+     <y>177</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>468</x>
+     <y>597</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_7</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>write_ic_id()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>611</x>
+     <y>364</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>285</x>
+     <y>580</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_9</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>delete_all_uid()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>651</x>
+     <y>433</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>316</x>
+     <y>605</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pb_state_2</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>Form</receiver>
+   <slot>update_term()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>511</x>
+     <y>363</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>691</x>
+     <y>323</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pb_selectbin</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>openBinFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>203</x>
+     <y>188</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>614</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pb_state</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>startUpgrade()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>201</x>
+     <y>363</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>616</x>
+     <y>217</y>
     </hint>
    </hints>
   </connection>
@@ -1046,5 +1201,9 @@
   <slot>peika_start()</slot>
   <slot>peika_stop()</slot>
   <slot>peika_mode()</slot>
+  <slot>write_card_id()</slot>
+  <slot>read_card_id()</slot>
+  <slot>write_ic_id()</slot>
+  <slot>delete_all_uid()</slot>
  </slots>
 </ui>

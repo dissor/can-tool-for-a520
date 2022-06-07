@@ -15,9 +15,12 @@ update_queue_start_cb = Queue()
 update_queue_send_cb = Queue()
 
 # 接收线程类
+
+
 class recv_worker(QtCore.QThread):
     global recv_data
     signal = QtCore.Signal(type(recv_data))
+
     def __init__(self):
         super().__init__()
 
@@ -54,7 +57,7 @@ class test_mode_keepalive(QtCore.QThread):
     def run(self):
         while True:
             psend_data = CAN_DataFrame(nSendType=0, bRemoteFlag=0,
-                                   bExternFlag=0, nDataLen=8, uID= 0x750)
+                                       bExternFlag=0, nDataLen=8, uID=0x750)
 
             for i in range(0, 8):
                 psend_data.arryData[i] = 0x00
@@ -72,6 +75,7 @@ class test_mode_keepalive(QtCore.QThread):
 class update_worker(QtCore.QThread):
     signal = QtCore.Signal(float)
     err_signal = QtCore.Signal(int)
+
     def __init__(self):
         super().__init__()
 
@@ -87,10 +91,10 @@ class update_worker(QtCore.QThread):
 
         # 都是int型
         # print(type(upgrade.FILE_SZ), type(upgrade.FILE_CNT))
-        print("升级包大小：%d"%upgrade.FILE_SZ+"\t升级总包数：%d"%upgrade.FILE_CNT)
+        print("升级包大小：%d" % upgrade.FILE_SZ+"\t升级总包数：%d" % upgrade.FILE_CNT)
 
         psend_data = CAN_DataFrame(nSendType=0, bRemoteFlag=0,
-                                   bExternFlag=0, nDataLen=8, uID= 0x730)
+                                   bExternFlag=0, nDataLen=8, uID=0x730)
 
         # 固件大小
         for i in range(0, 4):
@@ -102,7 +106,7 @@ class update_worker(QtCore.QThread):
 
         # CRC16校验
         for i in range(0, 2):
-            psend_data.arryData[i+6] = (upgrade.CRC16>> (8*i)) & 0xFF
+            psend_data.arryData[i+6] = (upgrade.CRC16 >> (8*i)) & 0xFF
 
         # 打印报文
         # for i in range(0, 8):
@@ -127,7 +131,7 @@ class update_worker(QtCore.QThread):
         else:
             print("禁止升级")
 
-        psend_data.uID= 0x732
+        psend_data.uID = 0x732
 
         for index in range(upgrade.FILE_CNT):
             upgrade.FILE_FD.seek(bytes*index)
@@ -155,20 +159,21 @@ class update_worker(QtCore.QThread):
 
             # 重试8次
             for i in range(0, 8):
-                res = pDll.CAN_ChannelSend(devHandle, 0, pointer(psend_data), 1)
+                res = pDll.CAN_ChannelSend(
+                    devHandle, 0, pointer(psend_data), 1)
                 if res != CAN_RESULT_ERROR:
                     # print("升级包发送成功")
 
                     # 等待设备回复
                     try:
-                        data_res = update_queue_send_cb.get(timeout = 10)
+                        data_res = update_queue_send_cb.get(timeout=10)
                     except Exception as err:
-                        print("异常：%s"%err+"重试次数：%d"%i)
+                        print("异常：%s" % err+"重试次数：%d" % i)
                         continue
 
                     progress = index/upgrade.FILE_CNT*100
                     if data_res[0] == 0:
-                        print("回复成功：",progress)
+                        print("回复成功：", progress)
                         self.signal.emit(progress)
                         if index == upgrade.FILE_CNT-1:
                             self.signal.emit(100)
@@ -189,7 +194,6 @@ class update_worker(QtCore.QThread):
 
         f'重试8次依旧失败'
         self.err_signal.emit(-3)
-
 
 
 class MyWidget(QtWidgets.QWidget):
@@ -213,23 +217,23 @@ class MyWidget(QtWidgets.QWidget):
         res_text = self.ui.comboBox.currentText()
         if res_text == "实体卡":
             print("实体卡")
-            self.test_mode(1,1)
+            self.test_mode(1, 1)
         if res_text == "模拟卡":
             print("模拟卡")
-            self.test_mode(1,2)
+            self.test_mode(1, 2)
         if res_text == "解绑卡":
             print("解绑卡")
-            self.test_mode(1,3)
+            self.test_mode(1, 3)
 
     def peika_stop(self):
         print(sys._getframe().f_code.co_name)
         res_text = self.ui.comboBox.currentText()
         if res_text == "实体卡":
             print("实体卡")
-            self.test_mode(0,1)
+            self.test_mode(0, 1)
         if res_text == "模拟卡":
             print("模拟卡")
-            self.test_mode(0,2)
+            self.test_mode(0, 2)
 
     # 写SN号
     def writeNumber(self):
@@ -238,7 +242,7 @@ class MyWidget(QtWidgets.QWidget):
 
         msend_data = CAN_DataFrame(
             nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=8)
-        msend_data.uID=0x740
+        msend_data.uID = 0x740
 
         print("第一组")
         # for i in m_str[0:8]:
@@ -259,7 +263,6 @@ class MyWidget(QtWidgets.QWidget):
         # for i in m_str[8:16]:
         #     print(type(i), i, end='\t')
         print("结束")
-
 
         # m_bytes = str.encode(m_str)
         # for i in m_bytes:
@@ -289,6 +292,7 @@ class MyWidget(QtWidgets.QWidget):
         #     get_error_code(devHandle)
 
     # 测试接口
+
     def ceshi_api(self):
         print(sys._getframe().f_code.co_name)
         # self.ui.lb_sn.setText(recv_data.arryData[0])
@@ -317,7 +321,7 @@ class MyWidget(QtWidgets.QWidget):
             upgrade.CRC16 ^= i
             for j in range(8):
                 if upgrade.CRC16 & 1 != 0:
-                    upgrade.CRC16 = (upgrade.CRC16 >> 1)^key
+                    upgrade.CRC16 = (upgrade.CRC16 >> 1) ^ key
                 else:
                     upgrade.CRC16 = (upgrade.CRC16 >> 1)
 
@@ -326,43 +330,43 @@ class MyWidget(QtWidgets.QWidget):
         # 补齐 CRC
         re_len = upgrade.FILE_SZ % upgrade.BYTES
         if re_len != 0:
-            print("最后一包长度：",re_len)
+            print("最后一包长度：", re_len)
             for i in range(upgrade.BYTES - re_len):
                 upgrade.CRC16 ^= 0xFF
                 for j in range(8):
                     if upgrade.CRC16 & 1 != 0:
-                        upgrade.CRC16 = (upgrade.CRC16 >> 1)^key
+                        upgrade.CRC16 = (upgrade.CRC16 >> 1) ^ key
                     else:
                         upgrade.CRC16 = (upgrade.CRC16 >> 1)
         print("修正upgrade.CRC16: ", upgrade.CRC16, hex(upgrade.CRC16))
 
-
-
     def upgrade_progress(self, progress):
         # print(sys._getframe().f_code.co_name)
         self.ui.progressBar.setValue(progress)
-        speed = progress/100.0*upgrade.FILE_SZ/(time.time() - upgrade.START_TIME)
+        speed = progress/100.0*upgrade.FILE_SZ / \
+            (time.time() - upgrade.START_TIME)
         remaining = (100.0 - progress)/100.0*upgrade.FILE_SZ/speed
-        self.ui.lb_progress.setText("速度(Byte/s)："+str(speed)+'\n'+"剩余时间："+time.strftime("%H时%M分%S秒", time.gmtime(remaining))+'\n'+"消耗时间："+time.strftime("%H时%M分%S秒", time.gmtime(time.time()- upgrade.START_TIME)))
+        self.ui.lb_progress.setText("速度(Byte/s)："+str(speed)+'\n'+"剩余时间："+time.strftime("%H时%M分%S秒", time.gmtime(
+            remaining))+'\n'+"消耗时间："+time.strftime("%H时%M分%S秒", time.gmtime(time.time() - upgrade.START_TIME)))
 
     def upgrade_err_info(self, err):
         print(sys._getframe().f_code.co_name)
         # match err:
         if err == 0:
-            QtWidgets.QMessageBox.information(self,"提示", '升级成功')
+            QtWidgets.QMessageBox.information(self, "提示", '升级成功')
 
-        if err ==  -1:
-            QtWidgets.QMessageBox.critical(self,"错误", 'MCU回复失败')
+        if err == -1:
+            QtWidgets.QMessageBox.critical(self, "错误", 'MCU回复失败')
 
-        if err ==  -2:
-            QtWidgets.QMessageBox.critical(self,"错误", '升级包发送失败')
+        if err == -2:
+            QtWidgets.QMessageBox.critical(self, "错误", '升级包发送失败')
 
-        if err ==  -3:
-            QtWidgets.QMessageBox.critical(self,"错误", '重试失败')
+        if err == -3:
+            QtWidgets.QMessageBox.critical(self, "错误", '重试失败')
         update_loop.terminate()
 
-
     # 中止升级
+
     def update_term(self):
         print(sys._getframe().f_code.co_name)
         update_loop.terminate()
@@ -397,13 +401,14 @@ class MyWidget(QtWidgets.QWidget):
 
         elif recv_data2.uID == 0x704:
             # print("0x704")
-            test.STATE_MN = recv_data2.arryData[0]&0xF0 >> 4
-            test.STATE_CPUN= recv_data2.arryData[0]&0x0F
-            test.STATE_VMN= recv_data2.arryData[1]&0xF0 >> 4
-            test.STATE_PN = recv_data2.arryData[1]&0x0F
+            test.STATE_MN = recv_data2.arryData[0] & 0xF0 >> 4
+            test.STATE_CPUN = recv_data2.arryData[0] & 0x0F
+            test.STATE_VMN = recv_data2.arryData[1] & 0xF0 >> 4
+            test.STATE_PN = recv_data2.arryData[1] & 0x0F
             test.VERSION = recv_data2.arryData[2]
 
-            self.ui.lb_state.setText("M卡数量："+str(test.STATE_MN)+'\t'+"CPU卡数量："+str(test.STATE_CPUN)+'\t'+"虚拟卡数量："+str(test.STATE_VMN)+'\t'+"唤醒引脚："+str(test.STATE_PN)+'\t'+"软件版本："+str(test.VERSION))
+            self.ui.lb_state.setText("M卡数量："+str(test.STATE_MN)+'\t'+"CPU卡数量："+str(test.STATE_CPUN)+'\t'+"虚拟卡数量："+str(
+                test.STATE_VMN)+'\t'+"唤醒引脚："+str(test.STATE_PN)+'\t'+"软件版本："+str(test.VERSION))
             # print(test.STATE_MN, test.STATE_CPUN, test.STATE_VMN, test.STATE_PN)
 
         elif recv_data2.uID == 0x705:
@@ -422,7 +427,6 @@ class MyWidget(QtWidgets.QWidget):
             for i in range(0, length):
                 test.cpu_list[index].uuid1 += chr(recv_data2.arryData[i+2])
             # print(test.cpu_list[index].uuid1)
-
 
         elif recv_data2.uID == 0x706:
             print("0x706")
@@ -475,6 +479,9 @@ class MyWidget(QtWidgets.QWidget):
         elif recv_data2.uID == 0x716:
             print("0x716")
 
+        elif recv_data2.uID == 0x718:
+            print("0x718")
+            self.ui.lb_state.setText("温度：%d"%recv_data2.arryData[0])
 
         elif recv_data2.uID == 0x731:
             print("0x731")
@@ -486,31 +493,37 @@ class MyWidget(QtWidgets.QWidget):
 
         elif recv_data2.uID == 0x760:
             # print("0x760")
-            length = recv_data2.arryData[0]%0x10
-            flag = (recv_data2.arryData[0]&0b00010000)>>4
+            length = recv_data2.arryData[0] % 0x10
+            flag = (recv_data2.arryData[0] & 0b00010000) >> 4
             UID = ""
             for i in range(0, length):
                 UID += "%02x" % (recv_data2.arryData[i+1])
             test.CARD_CNT += 1
-            self.ui.lb_cardcnt.setText("刷卡累计：%d"%test.CARD_CNT)
+            self.ui.lb_cardcnt.setText("刷卡累计：%d" % test.CARD_CNT)
             if flag == 1:
-                QtWidgets.QMessageBox.information(self,"刷卡(已配对)", UID)
+                QtWidgets.QMessageBox.information(self, "刷卡(已配对)", UID)
             else:
-                QtWidgets.QMessageBox.information(self,"刷卡(未配对)", UID)
+                QtWidgets.QMessageBox.information(self, "刷卡(未配对)", UID)
 
         elif recv_data2.uID == 0x3AE:
             # print("0x3AE")
             self.setWindowTitle("测试工具")
 
-
-
     # 初始化开启界面
+
     def init_data(self):
         for i in range(len(dwBtr_table['500Kbps'])):
             init_config.dwBtr[i] = dwBtr_table['500Kbps'][i]
             print('0x%x' % init_config.dwBtr[i], type(
                 init_config.dwBtr[i]), end='\t')
 
+        # 初始化密钥限制16进制
+        self.ui.lineEdit_2.setInputMask(
+            'HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH;#')
+        self.ui.lineEdit_3.setInputMask(
+            'HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH;#')
+        self.ui.lineEdit_4.setInputMask(
+            'HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH;#')
         print("-->\t500Kbps")
         self.ui.pushButton_devClose.setEnabled(False)
 
@@ -538,13 +551,13 @@ class MyWidget(QtWidgets.QWidget):
     def test_start(self):
         print("Start")
         test_mode_loop.start()
-        self.test_mode(1,0)
+        self.test_mode(1, 0)
 
     # 关闭测试模式
     def test_end(self):
         print("End")
         test_mode_loop.terminate()
-        self.test_mode(0,0)
+        self.test_mode(0, 0)
 
     # 选择USB端口
     def select_dev_comm(self, dwIndex):
@@ -623,13 +636,237 @@ class MyWidget(QtWidgets.QWidget):
         #     pDll.CAN_WriteRegister(devHandle,0,0xfe,0x1)
         #     pDll.CAN_WriteRegister(devHandle,0,0xff,0x0)
 
-
     # 发送测试（没有用）
+
     def test_sendData(self):
         print("你点击了test_sendData")
         print("发送数据:", end='\t')
         send_data = CAN_DataFrame(
             nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=8, uID=0x1800070E)
+        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        if res != CAN_RESULT_ERROR:
+            print("成功")
+        else:
+            print("失败")
+            get_error_code(devHandle)
+
+    # 写卡密钥
+    def write_card_id(self):
+        crc = 0
+        send_data = CAN_DataFrame(
+            nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=8, uID=0x60)
+
+        m_str2 = self.ui.lineEdit_2.text()
+        m_str3 = self.ui.lineEdit_3.text()
+        if len(m_str2) != 47:
+            print("format error2:", len(m_str2))
+            return
+        if len(m_str3) != 47:
+            print("format error3:", len(m_str3))
+            return
+        print(m_str2, len(m_str2))
+        print(m_str3, len(m_str3))
+        x2 = m_str2.split(" ")
+        x3 = m_str3.split(" ")
+
+        # PiccKey 5
+        send_data.arryData[0] = 0xFF
+        send_data.arryData[1] = 0x24
+        send_data.arryData[2] = 0xF1
+        for ii in range(3, 8):
+            send_data.arryData[ii] = int.from_bytes(
+                bytes.fromhex(x2[ii-3]), byteorder='little')
+            print(send_data.arryData[ii])
+            crc -= send_data.arryData[ii]
+
+        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        if res != CAN_RESULT_ERROR:
+            print("成功")
+        else:
+            print("失败")
+            get_error_code(devHandle)
+
+        # PiccKey 5+8
+        for ii in range(0, 8):
+            send_data.arryData[ii] = int.from_bytes(
+                bytes.fromhex(x2[ii+5]), byteorder='little')
+            print(send_data.arryData[ii])
+            crc -= send_data.arryData[ii]
+
+        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        if res != CAN_RESULT_ERROR:
+            print("成功")
+        else:
+            print("失败")
+            get_error_code(devHandle)
+
+        # PiccKey 5+8+3  AppKey 5
+        for ii in range(0, 3):
+            send_data.arryData[ii] = int.from_bytes(
+                bytes.fromhex(x2[ii+5+8]), byteorder='little')
+            print(send_data.arryData[ii])
+            crc -= send_data.arryData[ii]
+        for ii in range(3, 8):
+            send_data.arryData[ii] = int.from_bytes(
+                bytes.fromhex(x3[ii-3]), byteorder='little')
+            print(send_data.arryData[ii])
+            crc -= send_data.arryData[ii]
+
+        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        if res != CAN_RESULT_ERROR:
+            print("成功")
+        else:
+            print("失败")
+            get_error_code(devHandle)
+
+        # AppKey 5+8
+        for ii in range(0, 8):
+            send_data.arryData[ii] = int.from_bytes(
+                bytes.fromhex(x3[ii+5]), byteorder='little')
+            print(send_data.arryData[ii])
+            crc -= send_data.arryData[ii]
+
+        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        if res != CAN_RESULT_ERROR:
+            print("成功")
+        else:
+            print("失败")
+            get_error_code(devHandle)
+
+        # AppKey 5+8+3
+        for ii in range(0, 3):
+            send_data.arryData[ii] = int.from_bytes(
+                bytes.fromhex(x3[ii+5+8]), byteorder='little')
+            print(send_data.arryData[ii])
+            crc -= send_data.arryData[ii]
+        send_data.arryData[3] = crc % 0x100
+
+        send_data.nDataLen = 4
+
+        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        if res != CAN_RESULT_ERROR:
+            print("成功")
+        else:
+            print("失败")
+            get_error_code(devHandle)
+
+    # 读卡密钥
+
+    def read_card_id(self):
+        send_data = CAN_DataFrame(
+            nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=4, uID=0x60)
+
+        send_data.arryData[0] = 0xFF
+        send_data.arryData[1] = 0x04
+        send_data.arryData[2] = 0xF3
+        send_data.arryData[3] = 0x00
+
+        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        if res != CAN_RESULT_ERROR:
+            print("成功")
+        else:
+            print("失败")
+            get_error_code(devHandle)
+
+    # 写IC密钥
+    def write_ic_id(self):
+        crc = 0
+        send_data = CAN_DataFrame(
+            nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=8, uID=0x60)
+
+        m_str4 = self.ui.lineEdit_4.text()
+        if len(m_str4) != 47:
+            print("format error4:", len(m_str4))
+            return
+        print(m_str4, len(m_str4))
+        x4 = m_str4.split(" ")
+
+        # icid 5
+        send_data.arryData[0] = 0xFF
+        send_data.arryData[1] = 0x24
+        send_data.arryData[2] = 0xF2
+        for ii in range(3, 8):
+            send_data.arryData[ii] = int.from_bytes(
+                bytes.fromhex(x4[ii-3]), byteorder='little')
+            print(send_data.arryData[ii])
+            crc -= send_data.arryData[ii]
+
+        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        if res != CAN_RESULT_ERROR:
+            print("成功")
+        else:
+            print("失败")
+            get_error_code(devHandle)
+
+        # icid 5+8
+        for ii in range(0, 8):
+            send_data.arryData[ii] = int.from_bytes(
+                bytes.fromhex(x4[ii+5]), byteorder='little')
+            print(send_data.arryData[ii])
+            crc -= send_data.arryData[ii]
+
+        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        if res != CAN_RESULT_ERROR:
+            print("成功")
+        else:
+            print("失败")
+            get_error_code(devHandle)
+
+        # icid 5+8+8
+        for ii in range(0, 8):
+            send_data.arryData[ii] = int.from_bytes(
+                bytes.fromhex(x4[ii+5+8]), byteorder='little')
+            print(send_data.arryData[ii])
+            crc -= send_data.arryData[ii]
+
+        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        if res != CAN_RESULT_ERROR:
+            print("成功")
+        else:
+            print("失败")
+            get_error_code(devHandle)
+
+        # icid 5+8+8+8
+        for ii in range(0, 8):
+            send_data.arryData[ii] = int.from_bytes(
+                bytes.fromhex(x4[ii+5+8+8]), byteorder='little')
+            print(send_data.arryData[ii])
+            crc -= send_data.arryData[ii]
+
+        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        if res != CAN_RESULT_ERROR:
+            print("成功")
+        else:
+            print("失败")
+            get_error_code(devHandle)
+
+        # icid 5+8+8+8+3
+        for ii in range(0, 3):
+            send_data.arryData[ii] = int.from_bytes(
+                bytes.fromhex(x4[ii+5+8]), byteorder='little')
+            print(send_data.arryData[ii])
+            crc -= send_data.arryData[ii]
+        send_data.arryData[3] = crc % 0x100
+
+        send_data.nDataLen = 4
+
+        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        if res != CAN_RESULT_ERROR:
+            print("成功")
+        else:
+            print("失败")
+            get_error_code(devHandle)
+
+    # 删除所有UID
+    def delete_all_uid(self):
+        send_data = CAN_DataFrame(
+            nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=4, uID=0x60)
+
+        send_data.arryData[0] = 0xFF
+        send_data.arryData[1] = 0x04
+        send_data.arryData[2] = 0xF4
+        send_data.arryData[3] = 0x00
+
         res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
         if res != CAN_RESULT_ERROR:
             print("成功")
@@ -646,4 +883,3 @@ if __name__ == "__main__":
     widget = MyWidget()
     widget.show()
     sys.exit(app.exec())
-
