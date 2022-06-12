@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'main.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.2.3
+## Created by: Qt User Interface Compiler version 6.3.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -55,7 +55,7 @@ class Ui_MainWindow(object):
         self.logo.setMinimumSize(QSize(0, 50))
         self.logo.setMaximumSize(QSize(16777215, 50))
         self.logo.setStyleSheet(u"image: url(:/images/images/images/128.png);")
-        self.logo.setFrameShape(QFrame.StyledPanel)
+        self.logo.setFrameShape(QFrame.NoFrame)
         self.logo.setFrameShadow(QFrame.Raised)
 
         self.verticalLayout_2.addWidget(self.logo)
@@ -85,10 +85,10 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.btn_toggle.sizePolicy().hasHeightForWidth())
         self.btn_toggle.setSizePolicy(sizePolicy)
-        self.btn_toggle.setMinimumSize(QSize(50, 45))
+        self.btn_toggle.setMinimumSize(QSize(0, 45))
         self.btn_toggle.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_toggle.setMouseTracking(True)
-        self.btn_toggle.setStyleSheet(u"")
+        self.btn_toggle.setStyleSheet(u"background-image: url(:/icons/images/icons/icon_menu.png);")
 
         self.verticalLayout_4.addWidget(self.btn_toggle)
 
@@ -99,7 +99,7 @@ class Ui_MainWindow(object):
         self.menu_top.setObjectName(u"menu_top")
         self.menu_top.setEnabled(True)
         self.menu_top.setMaximumSize(QSize(16777215, 16777215))
-        self.menu_top.setCursor(QCursor(Qt.SizeHorCursor))
+        self.menu_top.setCursor(QCursor(Qt.ArrowCursor))
         self.menu_top.setFrameShape(QFrame.NoFrame)
         self.menu_top.setFrameShadow(QFrame.Raised)
         self.verticalLayout_5 = QVBoxLayout(self.menu_top)
@@ -113,6 +113,7 @@ class Ui_MainWindow(object):
         self.btn_test.setMinimumSize(QSize(0, 45))
         self.btn_test.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_test.setMouseTracking(True)
+        self.btn_test.setStyleSheet(u"")
 
         self.verticalLayout_5.addWidget(self.btn_test)
 
@@ -123,6 +124,7 @@ class Ui_MainWindow(object):
         self.btn_upgrade.setMinimumSize(QSize(0, 45))
         self.btn_upgrade.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_upgrade.setMouseTracking(True)
+        self.btn_upgrade.setStyleSheet(u"")
 
         self.verticalLayout_5.addWidget(self.btn_upgrade)
 
@@ -157,28 +159,28 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.addWidget(self.btn_secret)
 
 
-        self.verticalLayout_3.addWidget(self.menu_top)
+        self.verticalLayout_3.addWidget(self.menu_top, 0, Qt.AlignTop)
 
         self.menu_botton = QFrame(self.menu)
         self.menu_botton.setObjectName(u"menu_botton")
         self.menu_botton.setMaximumSize(QSize(16777215, 16777215))
-        self.menu_botton.setFrameShape(QFrame.StyledPanel)
+        self.menu_botton.setFrameShape(QFrame.NoFrame)
         self.menu_botton.setFrameShadow(QFrame.Raised)
         self.verticalLayout_8 = QVBoxLayout(self.menu_botton)
         self.verticalLayout_8.setSpacing(0)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
-        self.btn_setting3 = QPushButton(self.menu_botton)
-        self.btn_setting3.setObjectName(u"btn_setting3")
-        sizePolicy.setHeightForWidth(self.btn_setting3.sizePolicy().hasHeightForWidth())
-        self.btn_setting3.setSizePolicy(sizePolicy)
-        self.btn_setting3.setMinimumSize(QSize(0, 45))
-        self.btn_setting3.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_setting = QPushButton(self.menu_botton)
+        self.btn_setting.setObjectName(u"btn_setting")
+        sizePolicy.setHeightForWidth(self.btn_setting.sizePolicy().hasHeightForWidth())
+        self.btn_setting.setSizePolicy(sizePolicy)
+        self.btn_setting.setMinimumSize(QSize(0, 45))
+        self.btn_setting.setCursor(QCursor(Qt.PointingHandCursor))
 
-        self.verticalLayout_8.addWidget(self.btn_setting3)
+        self.verticalLayout_8.addWidget(self.btn_setting, 0, Qt.AlignBottom)
 
 
-        self.verticalLayout_3.addWidget(self.menu_botton)
+        self.verticalLayout_3.addWidget(self.menu_botton, 0, Qt.AlignBottom)
 
 
         self.verticalLayout_2.addWidget(self.menu)
@@ -207,17 +209,118 @@ class Ui_MainWindow(object):
 
         self.bkgd_content = QFrame(self.bkgd_app)
         self.bkgd_content.setObjectName(u"bkgd_content")
-        self.bkgd_content.setStyleSheet(u"image: url(:/images/images/images/512.png);")
+        self.bkgd_content.setStyleSheet(u"")
         self.bkgd_content.setFrameShape(QFrame.NoFrame)
         self.bkgd_content.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_7 = QVBoxLayout(self.bkgd_content)
-        self.verticalLayout_7.setSpacing(0)
-        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
-        self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
-        self.label = QLabel(self.bkgd_content)
-        self.label.setObjectName(u"label")
+        self.verticalLayout_6 = QVBoxLayout(self.bkgd_content)
+        self.verticalLayout_6.setSpacing(0)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.content_top = QFrame(self.bkgd_content)
+        self.content_top.setObjectName(u"content_top")
+        self.content_top.setMinimumSize(QSize(0, 50))
+        self.content_top.setMaximumSize(QSize(16777215, 50))
+        self.content_top.setFrameShape(QFrame.NoFrame)
+        self.content_top.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_2 = QHBoxLayout(self.content_top)
+        self.horizontalLayout_2.setSpacing(0)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.box_left = QFrame(self.content_top)
+        self.box_left.setObjectName(u"box_left")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.box_left.sizePolicy().hasHeightForWidth())
+        self.box_left.setSizePolicy(sizePolicy1)
+        self.box_left.setFrameShape(QFrame.NoFrame)
+        self.box_left.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_3 = QHBoxLayout(self.box_left)
+        self.horizontalLayout_3.setSpacing(0)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.title_info = QLabel(self.box_left)
+        self.title_info.setObjectName(u"title_info")
+        self.title_info.setMaximumSize(QSize(16777215, 45))
 
-        self.verticalLayout_7.addWidget(self.label)
+        self.horizontalLayout_3.addWidget(self.title_info)
+
+
+        self.horizontalLayout_2.addWidget(self.box_left)
+
+        self.box_right = QFrame(self.content_top)
+        self.box_right.setObjectName(u"box_right")
+        self.box_right.setMinimumSize(QSize(0, 28))
+        self.box_right.setFrameShape(QFrame.NoFrame)
+        self.box_right.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_4 = QHBoxLayout(self.box_right)
+        self.horizontalLayout_4.setSpacing(0)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(0, 0, 10, 0)
+        self.btn_top_setting = QPushButton(self.box_right)
+        self.btn_top_setting.setObjectName(u"btn_top_setting")
+        self.btn_top_setting.setMinimumSize(QSize(28, 28))
+        self.btn_top_setting.setMaximumSize(QSize(28, 28))
+        self.btn_top_setting.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_top_setting.setMouseTracking(True)
+        icon = QIcon()
+        icon.addFile(u":/icons/images/icons/icon_settings.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_top_setting.setIcon(icon)
+        self.btn_top_setting.setIconSize(QSize(20, 20))
+
+        self.horizontalLayout_4.addWidget(self.btn_top_setting)
+
+        self.btn_min = QPushButton(self.box_right)
+        self.btn_min.setObjectName(u"btn_min")
+        self.btn_min.setMinimumSize(QSize(28, 28))
+        self.btn_min.setMaximumSize(QSize(28, 28))
+        self.btn_min.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_min.setMouseTracking(True)
+        icon1 = QIcon()
+        icon1.addFile(u":/icons/images/icons/icon_minimize.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_min.setIcon(icon1)
+        self.btn_min.setIconSize(QSize(20, 20))
+
+        self.horizontalLayout_4.addWidget(self.btn_min)
+
+        self.btn_max = QPushButton(self.box_right)
+        self.btn_max.setObjectName(u"btn_max")
+        self.btn_max.setMinimumSize(QSize(28, 28))
+        self.btn_max.setMaximumSize(QSize(28, 27))
+        self.btn_max.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_max.setMouseTracking(True)
+        icon2 = QIcon()
+        icon2.addFile(u":/icons/images/icons/icon_maximize.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_max.setIcon(icon2)
+        self.btn_max.setIconSize(QSize(20, 20))
+
+        self.horizontalLayout_4.addWidget(self.btn_max)
+
+        self.btn_close = QPushButton(self.box_right)
+        self.btn_close.setObjectName(u"btn_close")
+        self.btn_close.setMinimumSize(QSize(28, 28))
+        self.btn_close.setMaximumSize(QSize(28, 28))
+        self.btn_close.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_close.setMouseTracking(True)
+        icon3 = QIcon()
+        icon3.addFile(u":/icons/images/icons/icon_close.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_close.setIcon(icon3)
+        self.btn_close.setIconSize(QSize(20, 20))
+
+        self.horizontalLayout_4.addWidget(self.btn_close)
+
+
+        self.horizontalLayout_2.addWidget(self.box_right, 0, Qt.AlignRight)
+
+
+        self.verticalLayout_6.addWidget(self.content_top)
+
+        self.content_bottom = QFrame(self.bkgd_content)
+        self.content_bottom.setObjectName(u"content_bottom")
+        self.content_bottom.setFrameShape(QFrame.StyledPanel)
+        self.content_bottom.setFrameShadow(QFrame.Raised)
+
+        self.verticalLayout_6.addWidget(self.content_bottom)
 
 
         self.horizontalLayout.addWidget(self.bkgd_content)
@@ -240,7 +343,11 @@ class Ui_MainWindow(object):
         self.btn_number.setText(QCoreApplication.translate("MainWindow", u"\u5199\u53f7", None))
         self.btn_card.setText(QCoreApplication.translate("MainWindow", u"\u5237\u5361", None))
         self.btn_secret.setText(QCoreApplication.translate("MainWindow", u"\u5bc6\u94a5", None))
-        self.btn_setting3.setText(QCoreApplication.translate("MainWindow", u"\u8bbe\u7f6e", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"\u5360\u4f4d", None))
+        self.btn_setting.setText(QCoreApplication.translate("MainWindow", u"\u8bbe\u7f6e", None))
+        self.title_info.setText(QCoreApplication.translate("MainWindow", u"\u90ed\u5efa\u6587\u7684\u6d4b\u8bd5\u5de5\u5177", None))
+        self.btn_top_setting.setText("")
+        self.btn_min.setText("")
+        self.btn_max.setText("")
+        self.btn_close.setText("")
     # retranslateUi
 
