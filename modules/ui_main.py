@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QMainWindow, QPushButton, QSizePolicy, QStackedWidget,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
+    QLabel, QMainWindow, QPushButton, QSizePolicy,
+    QStackedWidget, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_MainWindow(object):
@@ -234,19 +234,66 @@ class Ui_MainWindow(object):
 
         self.bkgd_extra = QFrame(self.bkgd_app)
         self.bkgd_extra.setObjectName(u"bkgd_extra")
+        self.bkgd_extra.setMinimumSize(QSize(0, 0))
         self.bkgd_extra.setMaximumSize(QSize(0, 16777215))
         self.bkgd_extra.setFrameShape(QFrame.NoFrame)
         self.bkgd_extra.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_9 = QVBoxLayout(self.bkgd_extra)
-        self.verticalLayout_9.setSpacing(0)
+        self.verticalLayout = QVBoxLayout(self.bkgd_extra)
+        self.verticalLayout.setSpacing(0)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.extra_top = QFrame(self.bkgd_extra)
+        self.extra_top.setObjectName(u"extra_top")
+        self.extra_top.setMinimumSize(QSize(0, 50))
+        self.extra_top.setMaximumSize(QSize(16777215, 50))
+        self.extra_top.setFrameShape(QFrame.NoFrame)
+        self.extra_top.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_9 = QVBoxLayout(self.extra_top)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
-        self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
-        self.frame = QFrame(self.bkgd_extra)
-        self.frame.setObjectName(u"frame")
-        self.frame.setFrameShape(QFrame.StyledPanel)
-        self.frame.setFrameShadow(QFrame.Raised)
+        self.extra_top_grid = QGridLayout()
+        self.extra_top_grid.setObjectName(u"extra_top_grid")
+        self.extra_top_grid.setHorizontalSpacing(10)
+        self.extra_top_grid.setVerticalSpacing(0)
+        self.extra_top_grid.setContentsMargins(10, -1, 10, -1)
+        self.btn_extral_close = QPushButton(self.extra_top)
+        self.btn_extral_close.setObjectName(u"btn_extral_close")
+        self.btn_extral_close.setMinimumSize(QSize(28, 28))
+        self.btn_extral_close.setMaximumSize(QSize(28, 28))
+        icon = QIcon()
+        icon.addFile(u":/icons/images/icons/icon_close.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_extral_close.setIcon(icon)
+        self.btn_extral_close.setIconSize(QSize(20, 16))
 
-        self.verticalLayout_9.addWidget(self.frame)
+        self.extra_top_grid.addWidget(self.btn_extral_close, 0, 2, 1, 1)
+
+        self.lb_extra = QLabel(self.extra_top)
+        self.lb_extra.setObjectName(u"lb_extra")
+        self.lb_extra.setMinimumSize(QSize(150, 0))
+
+        self.extra_top_grid.addWidget(self.lb_extra, 0, 1, 1, 1)
+
+        self.extra_icon = QFrame(self.extra_top)
+        self.extra_icon.setObjectName(u"extra_icon")
+        self.extra_icon.setMinimumSize(QSize(20, 0))
+        self.extra_icon.setMaximumSize(QSize(20, 20))
+        self.extra_icon.setStyleSheet(u"image: url(:/icons/images/icons/icon_settings.png);")
+        self.extra_icon.setFrameShape(QFrame.NoFrame)
+        self.extra_icon.setFrameShadow(QFrame.Raised)
+
+        self.extra_top_grid.addWidget(self.extra_icon, 0, 0, 1, 1)
+
+
+        self.verticalLayout_9.addLayout(self.extra_top_grid)
+
+
+        self.verticalLayout.addWidget(self.extra_top)
+
+        self.extra_content = QFrame(self.bkgd_extra)
+        self.extra_content.setObjectName(u"extra_content")
+        self.extra_content.setFrameShape(QFrame.StyledPanel)
+        self.extra_content.setFrameShadow(QFrame.Raised)
+
+        self.verticalLayout.addWidget(self.extra_content)
 
 
         self.horizontalLayout.addWidget(self.bkgd_extra)
@@ -307,9 +354,9 @@ class Ui_MainWindow(object):
         self.btn_top_setting.setMaximumSize(QSize(28, 28))
         self.btn_top_setting.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_top_setting.setMouseTracking(True)
-        icon = QIcon()
-        icon.addFile(u":/icons/images/icons/icon_settings.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_top_setting.setIcon(icon)
+        icon1 = QIcon()
+        icon1.addFile(u":/icons/images/icons/icon_settings.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_top_setting.setIcon(icon1)
         self.btn_top_setting.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_4.addWidget(self.btn_top_setting)
@@ -320,9 +367,9 @@ class Ui_MainWindow(object):
         self.btn_min.setMaximumSize(QSize(28, 28))
         self.btn_min.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_min.setMouseTracking(True)
-        icon1 = QIcon()
-        icon1.addFile(u":/icons/images/icons/icon_minimize.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_min.setIcon(icon1)
+        icon2 = QIcon()
+        icon2.addFile(u":/icons/images/icons/icon_minimize.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_min.setIcon(icon2)
         self.btn_min.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_4.addWidget(self.btn_min)
@@ -333,9 +380,9 @@ class Ui_MainWindow(object):
         self.btn_max.setMaximumSize(QSize(28, 27))
         self.btn_max.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_max.setMouseTracking(True)
-        icon2 = QIcon()
-        icon2.addFile(u":/icons/images/icons/icon_maximize.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_max.setIcon(icon2)
+        icon3 = QIcon()
+        icon3.addFile(u":/icons/images/icons/icon_maximize.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_max.setIcon(icon3)
         self.btn_max.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_4.addWidget(self.btn_max)
@@ -346,9 +393,7 @@ class Ui_MainWindow(object):
         self.btn_close.setMaximumSize(QSize(28, 28))
         self.btn_close.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_close.setMouseTracking(True)
-        icon3 = QIcon()
-        icon3.addFile(u":/icons/images/icons/icon_close.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_close.setIcon(icon3)
+        self.btn_close.setIcon(icon)
         self.btn_close.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_4.addWidget(self.btn_close)
@@ -544,6 +589,8 @@ class Ui_MainWindow(object):
         self.btn_card.setText(QCoreApplication.translate("MainWindow", u"\u5237\u5361", None))
         self.btn_secret.setText(QCoreApplication.translate("MainWindow", u"\u5bc6\u94a5", None))
         self.btn_setting.setText(QCoreApplication.translate("MainWindow", u"\u8bbe\u7f6e", None))
+        self.btn_extral_close.setText("")
+        self.lb_extra.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
         self.title_info.setText(QCoreApplication.translate("MainWindow", u"\u90ed\u5efa\u6587\u7684\u6d4b\u8bd5\u5de5\u5177", None))
         self.btn_top_setting.setText("")
         self.btn_min.setText("")

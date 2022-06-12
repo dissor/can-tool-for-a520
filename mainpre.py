@@ -65,11 +65,11 @@ class MainWindow(QMainWindow):
         widgets.btn_number.clicked.connect(self.buttonClick)
         widgets.btn_secret.clicked.connect(self.buttonClick)
 
-    #     # EXTRA LEFT BOX
-    #     def openCloseLeftBox():
-    #         UIFunctions.toggleLeftBox(self, True)
-    #     widgets.toggleLeftBox.clicked.connect(openCloseLeftBox)
-    #     widgets.extraCloseColumnBtn.clicked.connect(openCloseLeftBox)
+        # EXTRA LEFT BOX
+        def openCloseLeftBox():
+            UIFunctions.toggleLeftBox(self, True)
+        widgets.btn_setting.clicked.connect(openCloseLeftBox)
+        widgets.btn_top_setting.clicked.connect(openCloseLeftBox)
 
     #     # EXTRA RIGHT BOX
     #     def openCloseRightBox():
