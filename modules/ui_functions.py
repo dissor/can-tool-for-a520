@@ -61,7 +61,7 @@ class UIFunctions(MainWindow):
     def toggleMenu(self, enable):
         if enable:
             # GET WIDTH
-            width = self.ui.leftMenuBg.width()
+            width = self.ui.bkgd_menu.width()
             maxExtend = Settings.MENU_WIDTH
             standard = 60
 
@@ -72,7 +72,7 @@ class UIFunctions(MainWindow):
                 widthExtended = standard
 
             # ANIMATION
-            self.animation = QPropertyAnimation(self.ui.leftMenuBg, b"minimumWidth")
+            self.animation = QPropertyAnimation(self.ui.bkgd_menu, b"minimumWidth")
             self.animation.setDuration(Settings.TIME_ANIMATION)
             self.animation.setStartValue(width)
             self.animation.setEndValue(widthExtended)

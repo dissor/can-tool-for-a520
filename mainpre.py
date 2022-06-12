@@ -43,9 +43,9 @@ class MainWindow(QMainWindow):
         self.setWindowTitle(title)
         widgets.title_info.setText(description)
 
-    #     # TOGGLE MENU
-    #     # ///////////////////////////////////////////////////////////////
-    #     widgets.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
+        # TOGGLE MENU
+        # ///////////////////////////////////////////////////////////////
+        widgets.btn_toggle.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
 
     #     # SET UI DEFINITIONS
     #     # ///////////////////////////////////////////////////////////////
