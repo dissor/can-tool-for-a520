@@ -31,17 +31,17 @@ class MainWindow(QMainWindow):
         global widgets
         widgets = self.ui
 
-        # # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
-        # # ///////////////////////////////////////////////////////////////
-        # Settings.ENABLE_CUSTOM_TITLE_BAR = True
+        # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
+        # ///////////////////////////////////////////////////////////////
+        Settings.ENABLE_CUSTOM_TITLE_BAR = True
 
-    #     # APP NAME
-    #     # ///////////////////////////////////////////////////////////////
-    #     title = "PyDracula - Modern GUI"
-    #     description = "PyDracula APP - Theme with colors based on Dracula for Python."
-    #     # APPLY TEXTS
-    #     self.setWindowTitle(title)
-    #     widgets.titleRightInfo.setText(description)
+        # APP NAME
+        # ///////////////////////////////////////////////////////////////
+        title = "怎么隐藏这个标题栏"
+        description = "描述：这是郭建文的工具箱"
+        # APPLY TEXTS
+        self.setWindowTitle(title)
+        widgets.title_info.setText(description)
 
     #     # TOGGLE MENU
     #     # ///////////////////////////////////////////////////////////////
@@ -153,4 +153,4 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon("icon.ico"))
     window = MainWindow()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
