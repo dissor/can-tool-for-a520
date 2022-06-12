@@ -32,10 +32,10 @@ class Ui_MainWindow(object):
 "	font: 10pt \"Segoe UI\";\n"
 "}\n"
 "")
-        self.verticalLayout = QVBoxLayout(self.style_sheet)
-        self.verticalLayout.setSpacing(0)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(10, 10, 10, 10)
+        self.app_margins = QVBoxLayout(self.style_sheet)
+        self.app_margins.setSpacing(0)
+        self.app_margins.setObjectName(u"app_margins")
+        self.app_margins.setContentsMargins(10, 10, 10, 10)
         self.bkgd_app = QFrame(self.style_sheet)
         self.bkgd_app.setObjectName(u"bkgd_app")
         self.bkgd_app.setStyleSheet(u"background-color: rgb(40, 44, 52);\n"
@@ -521,7 +521,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.bkgd_content)
 
 
-        self.verticalLayout.addWidget(self.bkgd_app)
+        self.app_margins.addWidget(self.bkgd_app)
 
         MainWindow.setCentralWidget(self.style_sheet)
 

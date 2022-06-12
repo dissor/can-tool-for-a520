@@ -47,9 +47,9 @@ class MainWindow(QMainWindow):
         # ///////////////////////////////////////////////////////////////
         widgets.btn_toggle.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
 
-    #     # SET UI DEFINITIONS
-    #     # ///////////////////////////////////////////////////////////////
-    #     UIFunctions.uiDefinitions(self)
+        # SET UI DEFINITIONS
+        # ///////////////////////////////////////////////////////////////
+        UIFunctions.uiDefinitions(self)
 
     #     # QTableWidget PARAMETERS
     #     # ///////////////////////////////////////////////////////////////
