@@ -19,20 +19,6 @@
 	color: rgb(221, 221, 221);
 	font: 10pt &quot;Segoe UI&quot;;
 }
-
-QToolTip {
-	color: #ffffff;
-	background-color: rgba(33, 37, 43, 180);
-	border: 1px solid rgb(44, 49, 58);
-	background-image: none;
-	background-position: left center;
-    background-repeat: no-repeat;
-	border: none;
-	border-left: 2px solid rgb(255, 121, 198);
-	text-align: left;
-	padding-left: 8px;
-	margin: 0px;
-}
 </string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -146,8 +132,14 @@ QToolTip {
           <item>
            <widget class="QFrame" name="menu">
             <property name="styleSheet">
-             <string notr="true">background-position: center center;
-background-repeat: no-repeat;
+             <string notr="true">QPushButton {
+  background-position: center left;
+  background-repeat: no-repeat;
+  border-left: 22px solid red;
+  text-align: left;
+  padding-left: 44px;
+}
+
 </string>
             </property>
             <property name="frameShape">
@@ -253,6 +245,10 @@ background-repeat: no-repeat;
                </property>
                <property name="cursor">
                 <cursorShape>ArrowCursor</cursorShape>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">
+</string>
                </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
@@ -449,7 +445,7 @@ background-repeat: no-repeat;
                 <property name="bottomMargin">
                  <number>0</number>
                 </property>
-                <item alignment="Qt::AlignBottom">
+                <item>
                  <widget class="QPushButton" name="btn_setting">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -889,7 +885,7 @@ background-repeat: no-repeat;
                       <string notr="true"/>
                      </property>
                      <property name="currentIndex">
-                      <number>2</number>
+                      <number>1</number>
                      </property>
                      <widget class="QWidget" name="page">
                       <widget class="QLabel" name="label_2">
