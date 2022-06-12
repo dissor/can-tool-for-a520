@@ -137,17 +137,17 @@ class MainWindow(QMainWindow):
     #     # Update Size Grips
     #     UIFunctions.resize_grips(self)
 
-    # # MOUSE CLICK EVENTS
-    # # ///////////////////////////////////////////////////////////////
-    # def mousePressEvent(self, event):
-    #     # SET DRAG POS WINDOW
-    #     self.dragPos = event.globalPos()
+    # MOUSE CLICK EVENTS
+    # ///////////////////////////////////////////////////////////////
+    def mousePressEvent(self, event):
+        # SET DRAG POS WINDOW
+        self.dragPos = event.globalPos()
 
-    #     # PRINT MOUSE EVENTS
-    #     if event.buttons() == Qt.LeftButton:
-    #         print('Mouse click: LEFT CLICK')
-    #     if event.buttons() == Qt.RightButton:
-    #         print('Mouse click: RIGHT CLICK')
+        # PRINT MOUSE EVENTS
+        if event.buttons() == Qt.LeftButton:
+            print('Mouse click: LEFT CLICK')
+        if event.buttons() == Qt.RightButton:
+            print('Mouse click: RIGHT CLICK')
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
