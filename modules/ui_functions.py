@@ -186,13 +186,13 @@ class UIFunctions(MainWindow):
 
     # START SELECTION
     def selectStandardMenu(self, widget):
-        for w in self.ui.topMenu.findChildren(QPushButton):
+        for w in self.ui.menu_top.findChildren(QPushButton):
             if w.objectName() == widget:
                 w.setStyleSheet(UIFunctions.selectMenu(w.styleSheet()))
 
     # RESET SELECTION
     def resetStyle(self, widget):
-        for w in self.ui.topMenu.findChildren(QPushButton):
+        for w in self.ui.menu_top.findChildren(QPushButton):
             if w.objectName() != widget:
                 w.setStyleSheet(UIFunctions.deselectMenu(w.styleSheet()))
 

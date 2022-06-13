@@ -80,23 +80,23 @@ class MainWindow(QMainWindow):
         # ///////////////////////////////////////////////////////////////
         self.show()
 
-        # # SET CUSTOM THEME
-        # # ///////////////////////////////////////////////////////////////
-        # useCustomTheme = False
-        # themeFile = "themes\light.qss"
+        # SET CUSTOM THEME
+        # ///////////////////////////////////////////////////////////////
+        useCustomTheme = False
+        themeFile = "themes\light.qss"
 
-        # # SET THEME AND HACKS
-        # if useCustomTheme:
-        #     # LOAD AND APPLY STYLE
-        #     UIFunctions.theme(self, themeFile, True)
+        # SET THEME AND HACKS
+        if useCustomTheme:
+            # LOAD AND APPLY STYLE
+            UIFunctions.theme(self, themeFile, True)
 
-        #     # SET HACKS
-        #     AppFunctions.setThemeHack(self)
+            # SET HACKS
+            AppFunctions.setThemeHack(self)
 
-    #     # SET HOME PAGE AND SELECT MENU
-    #     # ///////////////////////////////////////////////////////////////
-    #     widgets.stackedWidget.setCurrentWidget(widgets.home)
-    #     widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
+        # SET HOME PAGE AND SELECT MENU
+        # ///////////////////////////////////////////////////////////////
+        widgets.stackedWidget.setCurrentWidget(widgets.page)
+        widgets.btn_test.setStyleSheet(UIFunctions.selectMenu(widgets.btn_test.styleSheet()))
 
 
     # BUTTONS CLICK
@@ -109,11 +109,15 @@ class MainWindow(QMainWindow):
 
         # SHOW HOME PAGE
         if btnName == "btn_card":
-            pass
+            widgets.stackedWidget.setCurrentWidget(widgets.page) # SET PAGE
+            UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
+            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
 
         # SHOW WIDGETS PAGE
         if btnName == "btn_test":
-            pass
+            widgets.stackedWidget.setCurrentWidget(widgets.page) # SET PAGE
+            UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
+            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
 
         # SHOW NEW PAGE
         if btnName == "btn_upgrade":
@@ -122,20 +126,24 @@ class MainWindow(QMainWindow):
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
 
         if btnName == "btn_number":
-            pass
+            widgets.stackedWidget.setCurrentWidget(widgets.page) # SET PAGE
+            UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
+            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
 
         if btnName == "btn_secret":
-            pass
+            widgets.stackedWidget.setCurrentWidget(widgets.page) # SET PAGE
+            UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
+            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
 
         # PRINT BTN NAME
         print(f'Button "{btnName}" pressed!')
 
 
-    # # RESIZE EVENTS
-    # # ///////////////////////////////////////////////////////////////
-    # def resizeEvent(self, event):
-    #     # Update Size Grips
-    #     UIFunctions.resize_grips(self)
+    # RESIZE EVENTS
+    # ///////////////////////////////////////////////////////////////
+    def resizeEvent(self, event):
+        # Update Size Grips
+        UIFunctions.resize_grips(self)
 
     # MOUSE CLICK EVENTS
     # ///////////////////////////////////////////////////////////////
