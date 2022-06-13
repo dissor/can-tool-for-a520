@@ -113,7 +113,7 @@ class UIFunctions(MainWindow):
     def toggleRightBox(self, enable):
         if enable:
             # GET WIDTH
-            width = self.ui.extra_top.width()
+            width = self.ui.box_extra_right.width()
             widthLeftBox = self.ui.bkgd_extra.width()
             maxExtend = Settings.RIGHT_BOX_WIDTH
             color = Settings.BTN_RIGHT_BOX_COLOR
@@ -160,7 +160,7 @@ class UIFunctions(MainWindow):
         self.left_box.setEasingCurve(QEasingCurve.InOutQuart)
 
         # ANIMATION RIGHT BOX
-        self.right_box = QPropertyAnimation(self.ui.extra_top, b"minimumWidth")
+        self.right_box = QPropertyAnimation(self.ui.box_extra_right, b"minimumWidth")
         self.right_box.setDuration(Settings.TIME_ANIMATION)
         self.right_box.setStartValue(right_box_width)
         self.right_box.setEndValue(right_width)

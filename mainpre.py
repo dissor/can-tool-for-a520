@@ -37,7 +37,7 @@ class MainWindow(QMainWindow):
 
         # APP NAME
         # ///////////////////////////////////////////////////////////////
-        title = "怎么隐藏这个标题栏"
+        title = "怎么隐藏这个标题栏，将 ENABLE_CUSTOM_TITLE_BAR 改为 True"
         description = "描述：这是郭建文的工具箱"
         # APPLY TEXTS
         self.setWindowTitle(title)
@@ -69,12 +69,12 @@ class MainWindow(QMainWindow):
         def openCloseLeftBox():
             UIFunctions.toggleLeftBox(self, True)
         widgets.btn_setting.clicked.connect(openCloseLeftBox)
-        widgets.btn_top_setting.clicked.connect(openCloseLeftBox)
+        widgets.btn_extral_close.clicked.connect(openCloseLeftBox)
 
-    #     # EXTRA RIGHT BOX
-    #     def openCloseRightBox():
-    #         UIFunctions.toggleRightBox(self, True)
-    #     widgets.settingsTopBtn.clicked.connect(openCloseRightBox)
+        # EXTRA RIGHT BOX
+        def openCloseRightBox():
+            UIFunctions.toggleRightBox(self, True)
+        widgets.btn_top_setting.clicked.connect(openCloseRightBox)
 
         # SHOW APP
         # ///////////////////////////////////////////////////////////////
