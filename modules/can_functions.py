@@ -2,7 +2,6 @@ from . CanCmd import *
 from . can_recv_loop import *
 from mainpre import *
 
-recv = can_recv_worker()
 class CANFunctions(MainWindow):
     # 打开设备
     def open(self):
@@ -41,14 +40,17 @@ class CANFunctions(MainWindow):
             print("失败")
             return
 
-        global recv
-        recv.start()
+        recv_task.start()
 
         self.ui.btn_set_open.setEnabled(False)
         self.ui.btn_set_close.setEnabled(True)
 
     # 关闭设备
     def close(self):
+
+        # 关闭接收线程
+        recv_task.terminate()
+
         print("关闭通道: 0", end='\t')
         res = CAN_DEV.PDLL.CAN_ChannelStop(CAN_DEV.HANDLE, 0)
         if res != CAN_RESULT_ERROR:

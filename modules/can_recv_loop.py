@@ -21,5 +21,7 @@ class can_recv_worker(QThread):
                 print("接收错误")
 
     def cb_can_receive(self, data):
-      print(data)
+        print(data)
         # self.signal.emit(CAN_DEV.RECV1)
+
+recv_task = can_recv_worker()
