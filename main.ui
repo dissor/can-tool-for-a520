@@ -1068,9 +1068,9 @@
                       <string notr="true"/>
                      </property>
                      <property name="currentIndex">
-                      <number>1</number>
+                      <number>4</number>
                      </property>
-                     <widget class="QWidget" name="page">
+                     <widget class="QWidget" name="page_test">
                       <widget class="QLabel" name="label_2">
                        <property name="geometry">
                         <rect>
@@ -1085,7 +1085,7 @@
                        </property>
                       </widget>
                      </widget>
-                     <widget class="QWidget" name="page_2">
+                     <widget class="QWidget" name="page_update">
                       <widget class="QLabel" name="label_3">
                        <property name="geometry">
                         <rect>
@@ -1100,7 +1100,7 @@
                        </property>
                       </widget>
                      </widget>
-                     <widget class="QWidget" name="page_3">
+                     <widget class="QWidget" name="page_number">
                       <widget class="QLabel" name="label">
                        <property name="geometry">
                         <rect>
@@ -1115,6 +1115,8 @@
                        </property>
                       </widget>
                      </widget>
+                     <widget class="QWidget" name="page_secret"/>
+                     <widget class="QWidget" name="page_card"/>
                     </widget>
                    </item>
                   </layout>

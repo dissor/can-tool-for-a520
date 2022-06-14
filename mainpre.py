@@ -95,7 +95,7 @@ class MainWindow(QMainWindow):
 
         # SET HOME PAGE AND SELECT MENU
         # ///////////////////////////////////////////////////////////////
-        widgets.stackedWidget.setCurrentWidget(widgets.page)
+        widgets.stackedWidget.setCurrentWidget(widgets.page_test)
         widgets.btn_test.setStyleSheet(UIFunctions.selectMenu(widgets.btn_test.styleSheet()))
 
 
@@ -109,29 +109,29 @@ class MainWindow(QMainWindow):
 
         # SHOW HOME PAGE
         if btnName == "btn_card":
-            widgets.stackedWidget.setCurrentWidget(widgets.page) # SET PAGE
+            widgets.stackedWidget.setCurrentWidget(widgets.page_card) # SET PAGE
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
 
         # SHOW WIDGETS PAGE
         if btnName == "btn_test":
-            widgets.stackedWidget.setCurrentWidget(widgets.page) # SET PAGE
+            widgets.stackedWidget.setCurrentWidget(widgets.page_test) # SET PAGE
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
 
         # SHOW NEW PAGE
         if btnName == "btn_upgrade":
-            widgets.stackedWidget.setCurrentWidget(widgets.page) # SET PAGE
+            widgets.stackedWidget.setCurrentWidget(widgets.page_update) # SET PAGE
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
 
         if btnName == "btn_number":
-            widgets.stackedWidget.setCurrentWidget(widgets.page) # SET PAGE
+            widgets.stackedWidget.setCurrentWidget(widgets.page_number) # SET PAGE
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
 
         if btnName == "btn_secret":
-            widgets.stackedWidget.setCurrentWidget(widgets.page) # SET PAGE
+            widgets.stackedWidget.setCurrentWidget(widgets.page_secret) # SET PAGE
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
 
