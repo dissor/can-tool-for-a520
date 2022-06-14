@@ -72,8 +72,12 @@ class MainWindow(QMainWindow):
         widgets.btn_extral_close.clicked.connect(openCloseLeftBox)
 
         # EXTRA LEFT SETTINGS
-        widgets.bb_set.accepted.connect(CANFunctions.open)
-        widgets.bb_set.rejected.connect(CANFunctions.close)
+        def openDev():
+          CANFunctions.open(self)
+        widgets.bb_set.accepted.connect(openDev)
+        def closeDev():
+          CANFunctions.close(self)
+        widgets.bb_set.rejected.connect(closeDev)
 
         # EXTRA RIGHT BOX
         def openCloseRightBox():

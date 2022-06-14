@@ -1,9 +1,30 @@
 from . CanCmd import *
+from mainpre import *
 
-class CANFunctions():
+    # # 选择USB端口
+    # def select_dev_comm(self, dwIndex):
+    #     print("dwIndex: ", dwIndex, type(dwIndex), end='\t')
+    #     global devCOM
+    #     devCOM = dwIndex_table[dwIndex]
+    #     print("devCOM: ", dwIndex_table[dwIndex])
+
+    # # 选择波特率
+    # def modify_dwBtr(self, bandRate):
+    #     print("modify_dwBtr: ", bandRate, type(bandRate))
+    #     for i in range(len(dwBtr_table[bandRate])):
+    #         init_config.dwBtr[i] = dwBtr_table[bandRate][i]
+    #         print('0x%x' % init_config.dwBtr[i], type(init_config.dwBtr[i]))
+
+class CANFunctions(MainWindow):
     # 打开设备
-    def open():
+    def open(self):
         print("设备号:", USBCAN_1CH, end='\t')
+
+        print(self.ui.cb_set_usb.currentText())
+        # print("dwIndex: ", dwIndex, type(dwIndex), end='\t')
+        # devCOM = dwIndex_table[dwIndex]
+        # print("devCOM: ", dwIndex_table[dwIndex])
+
         CAN_DEV.HANDLE = CAN_DEV.PDLL.CAN_DeviceOpen(USBCAN_1CH, CAN_DEV.COM)
         if CAN_DEV.HANDLE != CAN_RESULT_ERROR:
             print("句柄:", CAN_DEV.HANDLE, " USB", CAN_DEV.COM+1)
