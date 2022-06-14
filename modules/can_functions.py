@@ -1,22 +1,9 @@
 from . CanCmd import *
+from . can_recv_loop import *
 from mainpre import *
 
-    # # 选择USB端口
-    # def select_dev_comm(self, dwIndex):
-    #     print("dwIndex: ", dwIndex, type(dwIndex), end='\t')
-    #     global devCOM
-    #     devCOM = dwIndex_table[dwIndex]
-    #     print("devCOM: ", dwIndex_table[dwIndex])
-
-    # # 选择波特率
-    # def modify_dwBtr(self, bandRate):
-    #     print("modify_dwBtr: ", bandRate, type(bandRate))
-    #     for i in range(len(dwBtr_table[bandRate])):
-    #         init_config.dwBtr[i] = dwBtr_table[bandRate][i]
-    #         print('0x%x' % init_config.dwBtr[i], type(init_config.dwBtr[i]))
-
+recv = can_recv_worker()
 class CANFunctions(MainWindow):
-
     # 打开设备
     def open(self):
         print("打开设备:", USBCAN_1CH, end='\t')
@@ -53,6 +40,9 @@ class CANFunctions(MainWindow):
         else:
             print("失败")
             return
+
+        global recv
+        recv.start()
 
         self.ui.btn_set_open.setEnabled(False)
         self.ui.btn_set_close.setEnabled(True)
