@@ -1,4 +1,4 @@
-from mainpre import *
+from ctypes import *
 
 # 接口卡类型定义
 USBCAN_1CH = 13
@@ -87,26 +87,12 @@ dwBtr_table = {
     '1000Kbps': [0x00, 0x14],
 }
 
-# 加载动态库
-pDll = CDLL("./NJLikeLib/CanCmd.dll")
-
-devHandle = 0  # device handle
-devInfo = CAN_DeviceInformation()
-devCOM = 0  # device comm
-init_config = CAN_InitConfig(bMode=0, nBtrType=1)
-err_info = CAN_ErrorInformation()
-send_data = CAN_DataFrame(nSendType=0, bRemoteFlag=0,
-                          bExternFlag=0, nDataLen=8)
-recv_data = CAN_DataFrame()
-
-def get_error_code(devHandle):
-    print("获取错误信息:")
-    err_info = CAN_ErrorInformation()
-    p_err_info = pointer(err_info)
-    res = pDll.CAN_GetErrorInfo(devHandle, 0, p_err_info)
-    if res != CAN_RESULT_ERROR:
-        print(err_info.uErrorCode)
-        print(err_info.PassiveErrData)
-        print(err_info.ArLostErrData)
-    else:
-        print("失败")
+class CAN_DEV:
+  PDLL = CDLL("./NJLikeLib/CanCmd.dll")
+  HANDLE = 0  # device handle
+  COM = 0     # device comm
+  DEV = CAN_DeviceInformation()
+  ERR = CAN_ErrorInformation()
+  INIT = CAN_InitConfig(bMode=0, nBtrType=1) # 正常模式，
+  RECV = CAN_DataFrame()
+  SEND = CAN_DataFrame()

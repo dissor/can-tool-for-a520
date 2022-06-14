@@ -71,6 +71,10 @@ class MainWindow(QMainWindow):
         widgets.btn_setting.clicked.connect(openCloseLeftBox)
         widgets.btn_extral_close.clicked.connect(openCloseLeftBox)
 
+        # EXTRA LEFT SETTINGS
+        widgets.bb_set.accepted.connect(CANFunctions.open)
+        widgets.bb_set.rejected.connect(CANFunctions.close)
+
         # EXTRA RIGHT BOX
         def openCloseRightBox():
             UIFunctions.toggleRightBox(self, True)
