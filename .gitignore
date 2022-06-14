@@ -7,3 +7,4 @@ Doc/
 
 test.c
 widgets_example.py
+.svn/*
