@@ -15,10 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractButton, QApplication, QComboBox, QDialogButtonBox,
-    QFrame, QGridLayout, QHBoxLayout, QLabel,
-    QMainWindow, QPushButton, QSizePolicy, QStackedWidget,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
+    QHBoxLayout, QLabel, QMainWindow, QPushButton,
+    QSizePolicy, QStackedWidget, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_MainWindow(object):
@@ -323,11 +322,20 @@ class Ui_MainWindow(object):
         self.cb_set_bps.addItem("")
         self.cb_set_bps.setObjectName(u"cb_set_bps")
         self.cb_set_bps.setGeometry(QRect(110, 160, 101, 21))
-        self.bb_set = QDialogButtonBox(self.extra_content)
-        self.bb_set.setObjectName(u"bb_set")
-        self.bb_set.setGeometry(QRect(40, 210, 156, 24))
-        self.bb_set.setOrientation(Qt.Horizontal)
-        self.bb_set.setStandardButtons(QDialogButtonBox.Close|QDialogButtonBox.Open)
+        self.btn_set_open = QPushButton(self.extra_content)
+        self.btn_set_open.setObjectName(u"btn_set_open")
+        self.btn_set_open.setGeometry(QRect(40, 200, 75, 24))
+        icon1 = QIcon()
+        icon1.addFile(u":/icons/images/icons/cil-link-alt.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_set_open.setIcon(icon1)
+        self.btn_set_close = QPushButton(self.extra_content)
+        self.btn_set_close.setObjectName(u"btn_set_close")
+        self.btn_set_close.setEnabled(False)
+        self.btn_set_close.setGeometry(QRect(130, 200, 75, 24))
+        self.btn_set_close.setIcon(icon)
+        self.btn_set_close.setCheckable(False)
+        self.btn_set_close.setAutoDefault(False)
+        self.btn_set_close.setFlat(False)
 
         self.verticalLayout.addWidget(self.extra_content)
 
@@ -390,9 +398,9 @@ class Ui_MainWindow(object):
         self.btn_top_setting.setMaximumSize(QSize(28, 28))
         self.btn_top_setting.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_top_setting.setMouseTracking(True)
-        icon1 = QIcon()
-        icon1.addFile(u":/icons/images/icons/icon_settings.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_top_setting.setIcon(icon1)
+        icon2 = QIcon()
+        icon2.addFile(u":/icons/images/icons/icon_settings.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_top_setting.setIcon(icon2)
         self.btn_top_setting.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_4.addWidget(self.btn_top_setting)
@@ -403,9 +411,9 @@ class Ui_MainWindow(object):
         self.btn_min.setMaximumSize(QSize(28, 28))
         self.btn_min.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_min.setMouseTracking(True)
-        icon2 = QIcon()
-        icon2.addFile(u":/icons/images/icons/icon_minimize.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_min.setIcon(icon2)
+        icon3 = QIcon()
+        icon3.addFile(u":/icons/images/icons/icon_minimize.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_min.setIcon(icon3)
         self.btn_min.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_4.addWidget(self.btn_min)
@@ -416,9 +424,9 @@ class Ui_MainWindow(object):
         self.btn_max.setMaximumSize(QSize(28, 27))
         self.btn_max.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_max.setMouseTracking(True)
-        icon3 = QIcon()
-        icon3.addFile(u":/icons/images/icons/icon_maximize.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_max.setIcon(icon3)
+        icon4 = QIcon()
+        icon4.addFile(u":/icons/images/icons/icon_maximize.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_max.setIcon(icon4)
         self.btn_max.setIconSize(QSize(20, 20))
 
         self.horizontalLayout_4.addWidget(self.btn_max)
@@ -614,6 +622,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
+        self.btn_set_close.setDefault(False)
         self.stackedWidget.setCurrentIndex(4)
 
 
@@ -655,6 +664,8 @@ class Ui_MainWindow(object):
         self.cb_set_bps.setItemText(8, QCoreApplication.translate("MainWindow", u"800Kbps", None))
         self.cb_set_bps.setItemText(9, QCoreApplication.translate("MainWindow", u"1000Kbps", None))
 
+        self.btn_set_open.setText(QCoreApplication.translate("MainWindow", u"\u8fde\u63a5", None))
+        self.btn_set_close.setText(QCoreApplication.translate("MainWindow", u"\u5173\u95ed", None))
         self.title_info.setText(QCoreApplication.translate("MainWindow", u"\u90ed\u5efa\u6587\u7684\u6d4b\u8bd5\u5de5\u5177", None))
         self.btn_top_setting.setText("")
         self.btn_min.setText("")

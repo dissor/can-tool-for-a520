@@ -72,12 +72,8 @@ class MainWindow(QMainWindow):
         widgets.btn_extral_close.clicked.connect(openCloseLeftBox)
 
         # EXTRA LEFT SETTINGS
-        def openDev():
-          CANFunctions.open(self)
-        widgets.bb_set.accepted.connect(openDev)
-        def closeDev():
-          CANFunctions.close(self)
-        widgets.bb_set.rejected.connect(closeDev)
+        widgets.btn_set_open.clicked.connect(self.buttonClick)
+        widgets.btn_set_close.clicked.connect(self.buttonClick)
 
         # EXTRA RIGHT BOX
         def openCloseRightBox():
@@ -142,6 +138,11 @@ class MainWindow(QMainWindow):
             widgets.stackedWidget.setCurrentWidget(widgets.page_secret) # SET PAGE
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+
+        if btnName == "btn_set_open":
+          CANFunctions.open(self)
+        if btnName == "btn_set_close":
+          CANFunctions.close(self)
 
         # PRINT BTN NAME
         print(f'Button "{btnName}" pressed!')
