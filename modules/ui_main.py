@@ -15,9 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
-    QLabel, QMainWindow, QPushButton, QSizePolicy,
-    QStackedWidget, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractButton, QApplication, QComboBox, QDialogButtonBox,
+    QFrame, QGridLayout, QHBoxLayout, QLabel,
+    QMainWindow, QPushButton, QSizePolicy, QStackedWidget,
+    QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_MainWindow(object):
@@ -292,6 +293,41 @@ class Ui_MainWindow(object):
         self.extra_content.setObjectName(u"extra_content")
         self.extra_content.setFrameShape(QFrame.StyledPanel)
         self.extra_content.setFrameShadow(QFrame.Raised)
+        self.label_4 = QLabel(self.extra_content)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setGeometry(QRect(40, 120, 53, 16))
+        self.cb_set_usb = QComboBox(self.extra_content)
+        self.cb_set_usb.addItem("")
+        self.cb_set_usb.addItem("")
+        self.cb_set_usb.addItem("")
+        self.cb_set_usb.addItem("")
+        self.cb_set_usb.addItem("")
+        self.cb_set_usb.addItem("")
+        self.cb_set_usb.addItem("")
+        self.cb_set_usb.addItem("")
+        self.cb_set_usb.setObjectName(u"cb_set_usb")
+        self.cb_set_usb.setGeometry(QRect(110, 120, 101, 21))
+        self.label_5 = QLabel(self.extra_content)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setGeometry(QRect(40, 160, 53, 16))
+        self.cb_set_bps = QComboBox(self.extra_content)
+        self.cb_set_bps.addItem("")
+        self.cb_set_bps.addItem("")
+        self.cb_set_bps.addItem("")
+        self.cb_set_bps.addItem("")
+        self.cb_set_bps.addItem("")
+        self.cb_set_bps.addItem("")
+        self.cb_set_bps.addItem("")
+        self.cb_set_bps.addItem("")
+        self.cb_set_bps.addItem("")
+        self.cb_set_bps.addItem("")
+        self.cb_set_bps.setObjectName(u"cb_set_bps")
+        self.cb_set_bps.setGeometry(QRect(110, 160, 101, 21))
+        self.bb_set = QDialogButtonBox(self.extra_content)
+        self.bb_set.setObjectName(u"bb_set")
+        self.bb_set.setGeometry(QRect(40, 210, 156, 24))
+        self.bb_set.setOrientation(Qt.Horizontal)
+        self.bb_set.setStandardButtons(QDialogButtonBox.Close|QDialogButtonBox.Open)
 
         self.verticalLayout.addWidget(self.extra_content)
 
@@ -597,6 +633,28 @@ class Ui_MainWindow(object):
         self.btn_setting.setText(QCoreApplication.translate("MainWindow", u"\u8bbe\u7f6e", None))
         self.btn_extral_close.setText("")
         self.lb_extra.setText(QCoreApplication.translate("MainWindow", u"Settings", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u7aef\u53e3", None))
+        self.cb_set_usb.setItemText(0, QCoreApplication.translate("MainWindow", u"USB1", None))
+        self.cb_set_usb.setItemText(1, QCoreApplication.translate("MainWindow", u"USB2", None))
+        self.cb_set_usb.setItemText(2, QCoreApplication.translate("MainWindow", u"USB3", None))
+        self.cb_set_usb.setItemText(3, QCoreApplication.translate("MainWindow", u"USB4", None))
+        self.cb_set_usb.setItemText(4, QCoreApplication.translate("MainWindow", u"USB5", None))
+        self.cb_set_usb.setItemText(5, QCoreApplication.translate("MainWindow", u"USB6", None))
+        self.cb_set_usb.setItemText(6, QCoreApplication.translate("MainWindow", u"USB7", None))
+        self.cb_set_usb.setItemText(7, QCoreApplication.translate("MainWindow", u"USB8", None))
+
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"\u6ce2\u7279\u7387", None))
+        self.cb_set_bps.setItemText(0, QCoreApplication.translate("MainWindow", u"5Kbps", None))
+        self.cb_set_bps.setItemText(1, QCoreApplication.translate("MainWindow", u"10Kbps", None))
+        self.cb_set_bps.setItemText(2, QCoreApplication.translate("MainWindow", u"20Kbps", None))
+        self.cb_set_bps.setItemText(3, QCoreApplication.translate("MainWindow", u"50Kbps", None))
+        self.cb_set_bps.setItemText(4, QCoreApplication.translate("MainWindow", u"100Kbps", None))
+        self.cb_set_bps.setItemText(5, QCoreApplication.translate("MainWindow", u"125Kbps", None))
+        self.cb_set_bps.setItemText(6, QCoreApplication.translate("MainWindow", u"250Kbps", None))
+        self.cb_set_bps.setItemText(7, QCoreApplication.translate("MainWindow", u"500Kbps", None))
+        self.cb_set_bps.setItemText(8, QCoreApplication.translate("MainWindow", u"800Kbps", None))
+        self.cb_set_bps.setItemText(9, QCoreApplication.translate("MainWindow", u"1000Kbps", None))
+
         self.title_info.setText(QCoreApplication.translate("MainWindow", u"\u90ed\u5efa\u6587\u7684\u6d4b\u8bd5\u5de5\u5177", None))
         self.btn_top_setting.setText("")
         self.btn_min.setText("")
