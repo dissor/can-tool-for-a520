@@ -12,7 +12,7 @@ class can_recv_worker(QThread):
         while True:
             # 阻塞接收
             res = CAN_DEV.PDLL.CAN_ChannelReceive(
-                CAN_DEV.HANDLE, 0, pointer(CAN_DEV.RECV), 1, 0xFFFFFFFF)
+                CAN_DEV.HANDLE, 0, pointer(CAN_DEV.RECV), 1, 0xFFFF)
             # print("get date", res, len)
             if res != CAN_RESULT_ERROR:
                 self.cb_can_receive(CAN_DEV.RECV)
