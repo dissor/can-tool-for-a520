@@ -97,5 +97,4 @@ class CAN_DEV:
   RECV = CAN_DataFrame()
   SEND = CAN_DataFrame()
 
-class CAN_STATUS(MainWindow):
-
+can_dev = CAN_DEV()

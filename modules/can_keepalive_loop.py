@@ -1,4 +1,8 @@
-class test_mode_keepalive(QtCore.QThread):
+from mainpre import *
+from . CanCmd import *
+import time
+
+class test_mode_keepalive(QThread):
     def __init__(self):
         super().__init__()
 
@@ -10,10 +14,9 @@ class test_mode_keepalive(QtCore.QThread):
             for i in range(0, 8):
                 psend_data.arryData[i] = 0x00
 
-            res = pDll.CAN_ChannelSend(devHandle, 0, pointer(psend_data), 1)
-            if res != CAN_RESULT_ERROR:
-                # print("心跳发送成功")
-                pass
-            else:
+            if can_dev.PDLL.CAN_ChannelSend(can_dev.HANDLE, 0, pointer(psend_data), 1) == CAN_RESULT_ERROR:
                 print("心跳发送失败")
+
             time.sleep(1)
+
+alive_task = test_mode_keepalive()
