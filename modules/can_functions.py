@@ -42,6 +42,8 @@ class CANFunctions(MainWindow):
 
         recv_task.start()
 
+        self.ui.lb_credits.setText(
+            Settings.CREDIT + '\t'+ Settings.HEARTBEAT+"开\t" + Settings.CONNECT+"成功")
         self.ui.btn_set_open.setEnabled(False)
         self.ui.btn_set_close.setEnabled(True)
 
@@ -66,6 +68,8 @@ class CANFunctions(MainWindow):
             print("失败")
             return
 
+        self.ui.lb_credits.setText(
+            Settings.CREDIT +'\t'+ Settings.HEARTBEAT+"关\t" + Settings.CONNECT+"断开")
         self.ui.btn_set_open.setEnabled(True)
         self.ui.btn_set_close.setEnabled(False)
 

@@ -88,11 +88,14 @@ dwBtr_table = {
 }
 
 class CAN_DEV:
-  PDLL = CDLL("./NJLikeLib/CanCmd.dll")
+  PDLL = CDLL("./CanCmd.dll")
   HANDLE = 0  # device handle
   COM = 0     # device comm
   DEV = CAN_DeviceInformation()
   ERR = CAN_ErrorInformation()
-  INIT = CAN_InitConfig(bMode=0, nBtrType=1) # 正常模式，
+  INIT = CAN_InitConfig(bMode=0, nBtrType=1) # 正常模式
   RECV = CAN_DataFrame()
   SEND = CAN_DataFrame()
+
+class CAN_STATUS(MainWindow):
+
