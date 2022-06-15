@@ -79,15 +79,39 @@ class CANFunctions(MainWindow):
         self.ui.btn_set_open.setEnabled(True)
         self.ui.btn_set_close.setEnabled(False)
 
-    # def get_error_code(can_dev.HANDLE):
-    #     print("获取错误信息:")
-    #     err_info = CAN_ErrorInformation()
-    #     p_err_info = pointer(err_info)
-    #     res = can_dev.can_dev.PDLL.CAN_GetErrorInfo(
-    #         can_dev.HANDLE, 0, p_err_info)
-    #     if res != CAN_RESULT_ERROR:
-    #         print(err_info.uErrorCode)
-    #         print(err_info.PassiveErrData)
-    #         print(err_info.ArLostErrData)
-    #     else:
-    #         print("失败")
+    def buttonClick(self, btnName):
+
+        # 正常发送，数据帧，标准帧，8字节长度，id700
+        send_data = CAN_DataFrame(
+            nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=8, uID=0x700)
+
+        if btnName == "btn_test_start":
+            send_data.arryData[0] = 1
+            send_data.arryData[1] = 0
+
+
+
+        if btnName == "btn_test_stop":
+            send_data.arryData[0] = 0
+            send_data.arryData[1] = 0
+
+
+        res = can_dev.PDLL.CAN_ChannelSend(can_dev.HANDLE, 0, pointer(send_data), 1)
+        if res != CAN_RESULT_ERROR:
+            print("成功")
+        else:
+            print("失败")
+            self.get_error_code()
+
+    def get_error_code(self):
+        print("获取错误信息:")
+        err_info = CAN_ErrorInformation()
+        p_err_info = pointer(err_info)
+        res = can_dev.PDLL.CAN_GetErrorInfo(
+            can_dev.HANDLE, 0, p_err_info)
+        if res != CAN_RESULT_ERROR:
+            print(err_info.uErrorCode)
+            print(err_info.PassiveErrData)
+            print(err_info.ArLostErrData)
+        else:
+            print("失败")

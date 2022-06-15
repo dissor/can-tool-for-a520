@@ -1253,35 +1253,283 @@
                       <string notr="true"/>
                      </property>
                      <property name="currentIndex">
-                      <number>4</number>
+                      <number>3</number>
                      </property>
                      <widget class="QWidget" name="page_test">
-                      <widget class="QLabel" name="label_2">
+                      <widget class="QPushButton" name="btn_test_start">
                        <property name="geometry">
                         <rect>
-                         <x>240</x>
-                         <y>190</y>
-                         <width>81</width>
-                         <height>81</height>
+                         <x>50</x>
+                         <y>40</y>
+                         <width>75</width>
+                         <height>24</height>
                         </rect>
                        </property>
                        <property name="text">
-                        <string>TextLabel 1</string>
+                        <string>开启测试</string>
                        </property>
+                      </widget>
+                      <widget class="QPushButton" name="btn_test_stop">
+                       <property name="geometry">
+                        <rect>
+                         <x>150</x>
+                         <y>40</y>
+                         <width>75</width>
+                         <height>24</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>结束测试</string>
+                       </property>
+                      </widget>
+                      <widget class="QTableWidget" name="tw_test_item">
+                       <property name="geometry">
+                        <rect>
+                         <x>140</x>
+                         <y>150</y>
+                         <width>531</width>
+                         <height>281</height>
+                        </rect>
+                       </property>
+                       <property name="editTriggers">
+                        <set>QAbstractItemView::NoEditTriggers</set>
+                       </property>
+                       <attribute name="horizontalHeaderVisible">
+                        <bool>false</bool>
+                       </attribute>
+                       <attribute name="horizontalHeaderCascadingSectionResizes">
+                        <bool>true</bool>
+                       </attribute>
+                       <attribute name="horizontalHeaderStretchLastSection">
+                        <bool>true</bool>
+                       </attribute>
+                       <attribute name="verticalHeaderVisible">
+                        <bool>false</bool>
+                       </attribute>
+                       <attribute name="verticalHeaderHighlightSections">
+                        <bool>false</bool>
+                       </attribute>
+                       <attribute name="verticalHeaderStretchLastSection">
+                        <bool>true</bool>
+                       </attribute>
+                       <row>
+                        <property name="text">
+                         <string>新建行</string>
+                        </property>
+                       </row>
+                       <row>
+                        <property name="text">
+                         <string>新建行</string>
+                        </property>
+                       </row>
+                       <row>
+                        <property name="text">
+                         <string>新建行</string>
+                        </property>
+                       </row>
+                       <row>
+                        <property name="text">
+                         <string>新建行</string>
+                        </property>
+                       </row>
+                       <row>
+                        <property name="text">
+                         <string>新建行</string>
+                        </property>
+                       </row>
+                       <row>
+                        <property name="text">
+                         <string>新建行</string>
+                        </property>
+                       </row>
+                       <row>
+                        <property name="text">
+                         <string>新建行</string>
+                        </property>
+                       </row>
+                       <row>
+                        <property name="text">
+                         <string>新建行</string>
+                        </property>
+                       </row>
+                       <row>
+                        <property name="text">
+                         <string>新建行</string>
+                        </property>
+                       </row>
+                       <column>
+                        <property name="text">
+                         <string>新建列</string>
+                        </property>
+                       </column>
+                       <column>
+                        <property name="text">
+                         <string>新建列</string>
+                        </property>
+                       </column>
+                       <item row="0" column="0">
+                        <property name="text">
+                         <string>SN</string>
+                        </property>
+                       </item>
+                       <item row="1" column="0">
+                        <property name="text">
+                         <string>温度</string>
+                        </property>
+                       </item>
+                       <item row="2" column="0">
+                        <property name="text">
+                         <string>刷卡累计</string>
+                        </property>
+                       </item>
+                       <item row="3" column="0">
+                        <property name="text">
+                         <string>M卡数量</string>
+                        </property>
+                       </item>
+                       <item row="4" column="0">
+                        <property name="text">
+                         <string>CPU卡数量</string>
+                        </property>
+                       </item>
+                       <item row="5" column="0">
+                        <property name="text">
+                         <string>模拟卡数量</string>
+                        </property>
+                       </item>
+                       <item row="6" column="0">
+                        <property name="text">
+                         <string>唤醒引脚</string>
+                        </property>
+                       </item>
+                       <item row="7" column="0">
+                        <property name="text">
+                         <string>软件版本号</string>
+                        </property>
+                       </item>
                       </widget>
                      </widget>
                      <widget class="QWidget" name="page_update">
-                      <widget class="QLabel" name="label_3">
+                      <widget class="QPushButton" name="btn_update_open">
                        <property name="geometry">
                         <rect>
-                         <x>320</x>
-                         <y>180</y>
-                         <width>111</width>
-                         <height>61</height>
+                         <x>620</x>
+                         <y>110</y>
+                         <width>75</width>
+                         <height>24</height>
                         </rect>
                        </property>
                        <property name="text">
-                        <string>TextLabel 2</string>
+                        <string>打开</string>
+                       </property>
+                      </widget>
+                      <widget class="QLineEdit" name="le_update_edit">
+                       <property name="geometry">
+                        <rect>
+                         <x>210</x>
+                         <y>100</y>
+                         <width>391</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                      </widget>
+                      <widget class="QTableWidget" name="tw_update_item">
+                       <property name="geometry">
+                        <rect>
+                         <x>260</x>
+                         <y>290</y>
+                         <width>311</width>
+                         <height>131</height>
+                        </rect>
+                       </property>
+                       <attribute name="horizontalHeaderVisible">
+                        <bool>false</bool>
+                       </attribute>
+                       <attribute name="verticalHeaderVisible">
+                        <bool>false</bool>
+                       </attribute>
+                       <row>
+                        <property name="text">
+                         <string>新建行</string>
+                        </property>
+                       </row>
+                       <row>
+                        <property name="text">
+                         <string>新建行</string>
+                        </property>
+                       </row>
+                       <row>
+                        <property name="text">
+                         <string>新建行</string>
+                        </property>
+                       </row>
+                       <row>
+                        <property name="text">
+                         <string>新建行</string>
+                        </property>
+                       </row>
+                       <column>
+                        <property name="text">
+                         <string>新建列</string>
+                        </property>
+                       </column>
+                       <column>
+                        <property name="text">
+                         <string>新建列</string>
+                        </property>
+                       </column>
+                       <column>
+                        <property name="text">
+                         <string>新建列</string>
+                        </property>
+                       </column>
+                       <item row="0" column="0">
+                        <property name="text">
+                         <string>文件大小</string>
+                        </property>
+                       </item>
+                       <item row="0" column="2">
+                        <property name="text">
+                         <string>字节</string>
+                        </property>
+                       </item>
+                       <item row="1" column="0">
+                        <property name="text">
+                         <string>传输速度</string>
+                        </property>
+                       </item>
+                       <item row="1" column="2">
+                        <property name="text">
+                         <string>字节/秒</string>
+                        </property>
+                       </item>
+                       <item row="2" column="0">
+                        <property name="text">
+                         <string>剩余时间</string>
+                        </property>
+                       </item>
+                       <item row="2" column="2">
+                        <property name="text">
+                         <string/>
+                        </property>
+                       </item>
+                       <item row="3" column="0">
+                        <property name="text">
+                         <string>消耗时间</string>
+                        </property>
+                       </item>
+                      </widget>
+                      <widget class="QProgressBar" name="pb_update_bar">
+                       <property name="geometry">
+                        <rect>
+                         <x>270</x>
+                         <y>250</y>
+                         <width>331</width>
+                         <height>21</height>
+                        </rect>
+                       </property>
+                       <property name="value">
+                        <number>24</number>
                        </property>
                       </widget>
                      </widget>
@@ -1289,19 +1537,180 @@
                       <widget class="QLabel" name="label">
                        <property name="geometry">
                         <rect>
-                         <x>330</x>
-                         <y>150</y>
-                         <width>101</width>
-                         <height>71</height>
+                         <x>160</x>
+                         <y>120</y>
+                         <width>53</width>
+                         <height>16</height>
                         </rect>
                        </property>
                        <property name="text">
-                        <string>TextLabel 3</string>
+                        <string>SN</string>
+                       </property>
+                      </widget>
+                      <widget class="QLineEdit" name="le_number_edit">
+                       <property name="geometry">
+                        <rect>
+                         <x>160</x>
+                         <y>150</y>
+                         <width>321</width>
+                         <height>16</height>
+                        </rect>
+                       </property>
+                      </widget>
+                      <widget class="QPushButton" name="btn_number_write">
+                       <property name="geometry">
+                        <rect>
+                         <x>510</x>
+                         <y>150</y>
+                         <width>75</width>
+                         <height>24</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>写入</string>
                        </property>
                       </widget>
                      </widget>
-                     <widget class="QWidget" name="page_secret"/>
-                     <widget class="QWidget" name="page_card"/>
+                     <widget class="QWidget" name="page_secret">
+                      <widget class="QTableWidget" name="tw_secret_card">
+                       <property name="geometry">
+                        <rect>
+                         <x>200</x>
+                         <y>80</y>
+                         <width>441</width>
+                         <height>81</height>
+                        </rect>
+                       </property>
+                       <attribute name="horizontalHeaderVisible">
+                        <bool>false</bool>
+                       </attribute>
+                       <attribute name="verticalHeaderVisible">
+                        <bool>false</bool>
+                       </attribute>
+                       <row>
+                        <property name="text">
+                         <string>新建行</string>
+                        </property>
+                       </row>
+                       <row>
+                        <property name="text">
+                         <string>新建行</string>
+                        </property>
+                       </row>
+                       <column>
+                        <property name="text">
+                         <string>新建列</string>
+                        </property>
+                       </column>
+                       <column>
+                        <property name="text">
+                         <string>新建列</string>
+                        </property>
+                       </column>
+                       <item row="0" column="0">
+                        <property name="text">
+                         <string>PiccKey</string>
+                        </property>
+                       </item>
+                       <item row="1" column="0">
+                        <property name="text">
+                         <string>AppKey</string>
+                        </property>
+                       </item>
+                      </widget>
+                      <widget class="QPushButton" name="btn_secret_card_read">
+                       <property name="geometry">
+                        <rect>
+                         <x>280</x>
+                         <y>180</y>
+                         <width>75</width>
+                         <height>24</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>读取</string>
+                       </property>
+                      </widget>
+                      <widget class="QPushButton" name="btn_secret_card_write">
+                       <property name="geometry">
+                        <rect>
+                         <x>450</x>
+                         <y>180</y>
+                         <width>75</width>
+                         <height>24</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>写入</string>
+                       </property>
+                      </widget>
+                     </widget>
+                     <widget class="QWidget" name="page_card">
+                      <widget class="QComboBox" name="cb_card_box">
+                       <property name="geometry">
+                        <rect>
+                         <x>200</x>
+                         <y>180</y>
+                         <width>231</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>实体卡</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>模拟卡</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>CPU卡</string>
+                        </property>
+                       </item>
+                      </widget>
+                      <widget class="QLabel" name="label_2">
+                       <property name="geometry">
+                        <rect>
+                         <x>200</x>
+                         <y>140</y>
+                         <width>53</width>
+                         <height>16</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>配卡模式</string>
+                       </property>
+                      </widget>
+                      <widget class="QPushButton" name="btn_card_start">
+                       <property name="geometry">
+                        <rect>
+                         <x>200</x>
+                         <y>240</y>
+                         <width>75</width>
+                         <height>24</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>开始配卡</string>
+                       </property>
+                      </widget>
+                      <widget class="QPushButton" name="btn_card_stop">
+                       <property name="geometry">
+                        <rect>
+                         <x>340</x>
+                         <y>240</y>
+                         <width>75</width>
+                         <height>24</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>终止配卡</string>
+                       </property>
+                      </widget>
+                     </widget>
                     </widget>
                    </item>
                   </layout>

@@ -15,9 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
-    QHBoxLayout, QLabel, QMainWindow, QPushButton,
-    QSizePolicy, QStackedWidget, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QComboBox, QFrame,
+    QGridLayout, QHBoxLayout, QHeaderView, QLabel,
+    QLineEdit, QMainWindow, QProgressBar, QPushButton,
+    QSizePolicy, QStackedWidget, QTableWidget, QTableWidgetItem,
+    QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_MainWindow(object):
@@ -477,27 +479,174 @@ class Ui_MainWindow(object):
         self.stackedWidget.setStyleSheet(u"")
         self.page_test = QWidget()
         self.page_test.setObjectName(u"page_test")
-        self.label_2 = QLabel(self.page_test)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setGeometry(QRect(240, 190, 81, 81))
+        self.btn_test_start = QPushButton(self.page_test)
+        self.btn_test_start.setObjectName(u"btn_test_start")
+        self.btn_test_start.setGeometry(QRect(50, 40, 75, 24))
+        self.btn_test_stop = QPushButton(self.page_test)
+        self.btn_test_stop.setObjectName(u"btn_test_stop")
+        self.btn_test_stop.setGeometry(QRect(150, 40, 75, 24))
+        self.tw_test_item = QTableWidget(self.page_test)
+        if (self.tw_test_item.columnCount() < 2):
+            self.tw_test_item.setColumnCount(2)
+        __qtablewidgetitem = QTableWidgetItem()
+        self.tw_test_item.setHorizontalHeaderItem(0, __qtablewidgetitem)
+        __qtablewidgetitem1 = QTableWidgetItem()
+        self.tw_test_item.setHorizontalHeaderItem(1, __qtablewidgetitem1)
+        if (self.tw_test_item.rowCount() < 9):
+            self.tw_test_item.setRowCount(9)
+        __qtablewidgetitem2 = QTableWidgetItem()
+        self.tw_test_item.setVerticalHeaderItem(0, __qtablewidgetitem2)
+        __qtablewidgetitem3 = QTableWidgetItem()
+        self.tw_test_item.setVerticalHeaderItem(1, __qtablewidgetitem3)
+        __qtablewidgetitem4 = QTableWidgetItem()
+        self.tw_test_item.setVerticalHeaderItem(2, __qtablewidgetitem4)
+        __qtablewidgetitem5 = QTableWidgetItem()
+        self.tw_test_item.setVerticalHeaderItem(3, __qtablewidgetitem5)
+        __qtablewidgetitem6 = QTableWidgetItem()
+        self.tw_test_item.setVerticalHeaderItem(4, __qtablewidgetitem6)
+        __qtablewidgetitem7 = QTableWidgetItem()
+        self.tw_test_item.setVerticalHeaderItem(5, __qtablewidgetitem7)
+        __qtablewidgetitem8 = QTableWidgetItem()
+        self.tw_test_item.setVerticalHeaderItem(6, __qtablewidgetitem8)
+        __qtablewidgetitem9 = QTableWidgetItem()
+        self.tw_test_item.setVerticalHeaderItem(7, __qtablewidgetitem9)
+        __qtablewidgetitem10 = QTableWidgetItem()
+        self.tw_test_item.setVerticalHeaderItem(8, __qtablewidgetitem10)
+        __qtablewidgetitem11 = QTableWidgetItem()
+        self.tw_test_item.setItem(0, 0, __qtablewidgetitem11)
+        __qtablewidgetitem12 = QTableWidgetItem()
+        self.tw_test_item.setItem(1, 0, __qtablewidgetitem12)
+        __qtablewidgetitem13 = QTableWidgetItem()
+        self.tw_test_item.setItem(2, 0, __qtablewidgetitem13)
+        __qtablewidgetitem14 = QTableWidgetItem()
+        self.tw_test_item.setItem(3, 0, __qtablewidgetitem14)
+        __qtablewidgetitem15 = QTableWidgetItem()
+        self.tw_test_item.setItem(4, 0, __qtablewidgetitem15)
+        __qtablewidgetitem16 = QTableWidgetItem()
+        self.tw_test_item.setItem(5, 0, __qtablewidgetitem16)
+        __qtablewidgetitem17 = QTableWidgetItem()
+        self.tw_test_item.setItem(6, 0, __qtablewidgetitem17)
+        __qtablewidgetitem18 = QTableWidgetItem()
+        self.tw_test_item.setItem(7, 0, __qtablewidgetitem18)
+        self.tw_test_item.setObjectName(u"tw_test_item")
+        self.tw_test_item.setGeometry(QRect(140, 150, 531, 281))
+        self.tw_test_item.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tw_test_item.horizontalHeader().setVisible(False)
+        self.tw_test_item.horizontalHeader().setCascadingSectionResizes(True)
+        self.tw_test_item.horizontalHeader().setStretchLastSection(True)
+        self.tw_test_item.verticalHeader().setVisible(False)
+        self.tw_test_item.verticalHeader().setHighlightSections(False)
+        self.tw_test_item.verticalHeader().setStretchLastSection(True)
         self.stackedWidget.addWidget(self.page_test)
         self.page_update = QWidget()
         self.page_update.setObjectName(u"page_update")
-        self.label_3 = QLabel(self.page_update)
-        self.label_3.setObjectName(u"label_3")
-        self.label_3.setGeometry(QRect(320, 180, 111, 61))
+        self.btn_update_open = QPushButton(self.page_update)
+        self.btn_update_open.setObjectName(u"btn_update_open")
+        self.btn_update_open.setGeometry(QRect(620, 110, 75, 24))
+        self.le_update_edit = QLineEdit(self.page_update)
+        self.le_update_edit.setObjectName(u"le_update_edit")
+        self.le_update_edit.setGeometry(QRect(210, 100, 391, 31))
+        self.tw_update_item = QTableWidget(self.page_update)
+        if (self.tw_update_item.columnCount() < 3):
+            self.tw_update_item.setColumnCount(3)
+        __qtablewidgetitem19 = QTableWidgetItem()
+        self.tw_update_item.setHorizontalHeaderItem(0, __qtablewidgetitem19)
+        __qtablewidgetitem20 = QTableWidgetItem()
+        self.tw_update_item.setHorizontalHeaderItem(1, __qtablewidgetitem20)
+        __qtablewidgetitem21 = QTableWidgetItem()
+        self.tw_update_item.setHorizontalHeaderItem(2, __qtablewidgetitem21)
+        if (self.tw_update_item.rowCount() < 4):
+            self.tw_update_item.setRowCount(4)
+        __qtablewidgetitem22 = QTableWidgetItem()
+        self.tw_update_item.setVerticalHeaderItem(0, __qtablewidgetitem22)
+        __qtablewidgetitem23 = QTableWidgetItem()
+        self.tw_update_item.setVerticalHeaderItem(1, __qtablewidgetitem23)
+        __qtablewidgetitem24 = QTableWidgetItem()
+        self.tw_update_item.setVerticalHeaderItem(2, __qtablewidgetitem24)
+        __qtablewidgetitem25 = QTableWidgetItem()
+        self.tw_update_item.setVerticalHeaderItem(3, __qtablewidgetitem25)
+        __qtablewidgetitem26 = QTableWidgetItem()
+        self.tw_update_item.setItem(0, 0, __qtablewidgetitem26)
+        __qtablewidgetitem27 = QTableWidgetItem()
+        self.tw_update_item.setItem(0, 2, __qtablewidgetitem27)
+        __qtablewidgetitem28 = QTableWidgetItem()
+        self.tw_update_item.setItem(1, 0, __qtablewidgetitem28)
+        __qtablewidgetitem29 = QTableWidgetItem()
+        self.tw_update_item.setItem(1, 2, __qtablewidgetitem29)
+        __qtablewidgetitem30 = QTableWidgetItem()
+        self.tw_update_item.setItem(2, 0, __qtablewidgetitem30)
+        __qtablewidgetitem31 = QTableWidgetItem()
+        self.tw_update_item.setItem(2, 2, __qtablewidgetitem31)
+        __qtablewidgetitem32 = QTableWidgetItem()
+        self.tw_update_item.setItem(3, 0, __qtablewidgetitem32)
+        self.tw_update_item.setObjectName(u"tw_update_item")
+        self.tw_update_item.setGeometry(QRect(260, 290, 311, 131))
+        self.tw_update_item.horizontalHeader().setVisible(False)
+        self.tw_update_item.verticalHeader().setVisible(False)
+        self.pb_update_bar = QProgressBar(self.page_update)
+        self.pb_update_bar.setObjectName(u"pb_update_bar")
+        self.pb_update_bar.setGeometry(QRect(270, 250, 331, 21))
+        self.pb_update_bar.setValue(24)
         self.stackedWidget.addWidget(self.page_update)
         self.page_number = QWidget()
         self.page_number.setObjectName(u"page_number")
         self.label = QLabel(self.page_number)
         self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(330, 150, 101, 71))
+        self.label.setGeometry(QRect(160, 120, 53, 16))
+        self.le_number_edit = QLineEdit(self.page_number)
+        self.le_number_edit.setObjectName(u"le_number_edit")
+        self.le_number_edit.setGeometry(QRect(160, 150, 321, 16))
+        self.btn_number_write = QPushButton(self.page_number)
+        self.btn_number_write.setObjectName(u"btn_number_write")
+        self.btn_number_write.setGeometry(QRect(510, 150, 75, 24))
         self.stackedWidget.addWidget(self.page_number)
         self.page_secret = QWidget()
         self.page_secret.setObjectName(u"page_secret")
+        self.tw_secret_card = QTableWidget(self.page_secret)
+        if (self.tw_secret_card.columnCount() < 2):
+            self.tw_secret_card.setColumnCount(2)
+        __qtablewidgetitem33 = QTableWidgetItem()
+        self.tw_secret_card.setHorizontalHeaderItem(0, __qtablewidgetitem33)
+        __qtablewidgetitem34 = QTableWidgetItem()
+        self.tw_secret_card.setHorizontalHeaderItem(1, __qtablewidgetitem34)
+        if (self.tw_secret_card.rowCount() < 2):
+            self.tw_secret_card.setRowCount(2)
+        __qtablewidgetitem35 = QTableWidgetItem()
+        self.tw_secret_card.setVerticalHeaderItem(0, __qtablewidgetitem35)
+        __qtablewidgetitem36 = QTableWidgetItem()
+        self.tw_secret_card.setVerticalHeaderItem(1, __qtablewidgetitem36)
+        __qtablewidgetitem37 = QTableWidgetItem()
+        self.tw_secret_card.setItem(0, 0, __qtablewidgetitem37)
+        __qtablewidgetitem38 = QTableWidgetItem()
+        self.tw_secret_card.setItem(1, 0, __qtablewidgetitem38)
+        self.tw_secret_card.setObjectName(u"tw_secret_card")
+        self.tw_secret_card.setGeometry(QRect(200, 80, 441, 81))
+        self.tw_secret_card.horizontalHeader().setVisible(False)
+        self.tw_secret_card.verticalHeader().setVisible(False)
+        self.btn_secret_card_read = QPushButton(self.page_secret)
+        self.btn_secret_card_read.setObjectName(u"btn_secret_card_read")
+        self.btn_secret_card_read.setGeometry(QRect(280, 180, 75, 24))
+        self.btn_secret_card_write = QPushButton(self.page_secret)
+        self.btn_secret_card_write.setObjectName(u"btn_secret_card_write")
+        self.btn_secret_card_write.setGeometry(QRect(450, 180, 75, 24))
         self.stackedWidget.addWidget(self.page_secret)
         self.page_card = QWidget()
         self.page_card.setObjectName(u"page_card")
+        self.cb_card_box = QComboBox(self.page_card)
+        self.cb_card_box.addItem("")
+        self.cb_card_box.addItem("")
+        self.cb_card_box.addItem("")
+        self.cb_card_box.setObjectName(u"cb_card_box")
+        self.cb_card_box.setGeometry(QRect(200, 180, 231, 31))
+        self.label_2 = QLabel(self.page_card)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setGeometry(QRect(200, 140, 53, 16))
+        self.btn_card_start = QPushButton(self.page_card)
+        self.btn_card_start.setObjectName(u"btn_card_start")
+        self.btn_card_start.setGeometry(QRect(200, 240, 75, 24))
+        self.btn_card_stop = QPushButton(self.page_card)
+        self.btn_card_stop.setObjectName(u"btn_card_stop")
+        self.btn_card_stop.setGeometry(QRect(340, 240, 75, 24))
         self.stackedWidget.addWidget(self.page_card)
 
         self.verticalLayout_12.addWidget(self.stackedWidget)
@@ -623,7 +772,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.btn_set_close.setDefault(False)
-        self.stackedWidget.setCurrentIndex(4)
+        self.stackedWidget.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -671,9 +820,111 @@ class Ui_MainWindow(object):
         self.btn_min.setText("")
         self.btn_max.setText("")
         self.btn_close.setText("")
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"TextLabel 1", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"TextLabel 2", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"TextLabel 3", None))
+        self.btn_test_start.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u542f\u6d4b\u8bd5", None))
+        self.btn_test_stop.setText(QCoreApplication.translate("MainWindow", u"\u7ed3\u675f\u6d4b\u8bd5", None))
+        ___qtablewidgetitem = self.tw_test_item.horizontalHeaderItem(0)
+        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u5217", None));
+        ___qtablewidgetitem1 = self.tw_test_item.horizontalHeaderItem(1)
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u5217", None));
+        ___qtablewidgetitem2 = self.tw_test_item.verticalHeaderItem(0)
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem3 = self.tw_test_item.verticalHeaderItem(1)
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem4 = self.tw_test_item.verticalHeaderItem(2)
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem5 = self.tw_test_item.verticalHeaderItem(3)
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem6 = self.tw_test_item.verticalHeaderItem(4)
+        ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem7 = self.tw_test_item.verticalHeaderItem(5)
+        ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem8 = self.tw_test_item.verticalHeaderItem(6)
+        ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem9 = self.tw_test_item.verticalHeaderItem(7)
+        ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem10 = self.tw_test_item.verticalHeaderItem(8)
+        ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+
+        __sortingEnabled = self.tw_test_item.isSortingEnabled()
+        self.tw_test_item.setSortingEnabled(False)
+        ___qtablewidgetitem11 = self.tw_test_item.item(0, 0)
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"SN", None));
+        ___qtablewidgetitem12 = self.tw_test_item.item(1, 0)
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindow", u"\u6e29\u5ea6", None));
+        ___qtablewidgetitem13 = self.tw_test_item.item(2, 0)
+        ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindow", u"\u5237\u5361\u7d2f\u8ba1", None));
+        ___qtablewidgetitem14 = self.tw_test_item.item(3, 0)
+        ___qtablewidgetitem14.setText(QCoreApplication.translate("MainWindow", u"M\u5361\u6570\u91cf", None));
+        ___qtablewidgetitem15 = self.tw_test_item.item(4, 0)
+        ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"CPU\u5361\u6570\u91cf", None));
+        ___qtablewidgetitem16 = self.tw_test_item.item(5, 0)
+        ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"\u6a21\u62df\u5361\u6570\u91cf", None));
+        ___qtablewidgetitem17 = self.tw_test_item.item(6, 0)
+        ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"\u5524\u9192\u5f15\u811a", None));
+        ___qtablewidgetitem18 = self.tw_test_item.item(7, 0)
+        ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindow", u"\u8f6f\u4ef6\u7248\u672c\u53f7", None));
+        self.tw_test_item.setSortingEnabled(__sortingEnabled)
+
+        self.btn_update_open.setText(QCoreApplication.translate("MainWindow", u"\u6253\u5f00", None))
+        ___qtablewidgetitem19 = self.tw_update_item.horizontalHeaderItem(0)
+        ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u5217", None));
+        ___qtablewidgetitem20 = self.tw_update_item.horizontalHeaderItem(1)
+        ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u5217", None));
+        ___qtablewidgetitem21 = self.tw_update_item.horizontalHeaderItem(2)
+        ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u5217", None));
+        ___qtablewidgetitem22 = self.tw_update_item.verticalHeaderItem(0)
+        ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem23 = self.tw_update_item.verticalHeaderItem(1)
+        ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem24 = self.tw_update_item.verticalHeaderItem(2)
+        ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem25 = self.tw_update_item.verticalHeaderItem(3)
+        ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+
+        __sortingEnabled1 = self.tw_update_item.isSortingEnabled()
+        self.tw_update_item.setSortingEnabled(False)
+        ___qtablewidgetitem26 = self.tw_update_item.item(0, 0)
+        ___qtablewidgetitem26.setText(QCoreApplication.translate("MainWindow", u"\u6587\u4ef6\u5927\u5c0f", None));
+        ___qtablewidgetitem27 = self.tw_update_item.item(0, 2)
+        ___qtablewidgetitem27.setText(QCoreApplication.translate("MainWindow", u"\u5b57\u8282", None));
+        ___qtablewidgetitem28 = self.tw_update_item.item(1, 0)
+        ___qtablewidgetitem28.setText(QCoreApplication.translate("MainWindow", u"\u4f20\u8f93\u901f\u5ea6", None));
+        ___qtablewidgetitem29 = self.tw_update_item.item(1, 2)
+        ___qtablewidgetitem29.setText(QCoreApplication.translate("MainWindow", u"\u5b57\u8282/\u79d2", None));
+        ___qtablewidgetitem30 = self.tw_update_item.item(2, 0)
+        ___qtablewidgetitem30.setText(QCoreApplication.translate("MainWindow", u"\u5269\u4f59\u65f6\u95f4", None));
+        ___qtablewidgetitem31 = self.tw_update_item.item(3, 0)
+        ___qtablewidgetitem31.setText(QCoreApplication.translate("MainWindow", u"\u6d88\u8017\u65f6\u95f4", None));
+        self.tw_update_item.setSortingEnabled(__sortingEnabled1)
+
+        self.label.setText(QCoreApplication.translate("MainWindow", u"SN", None))
+        self.btn_number_write.setText(QCoreApplication.translate("MainWindow", u"\u5199\u5165", None))
+        ___qtablewidgetitem32 = self.tw_secret_card.horizontalHeaderItem(0)
+        ___qtablewidgetitem32.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u5217", None));
+        ___qtablewidgetitem33 = self.tw_secret_card.horizontalHeaderItem(1)
+        ___qtablewidgetitem33.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u5217", None));
+        ___qtablewidgetitem34 = self.tw_secret_card.verticalHeaderItem(0)
+        ___qtablewidgetitem34.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+        ___qtablewidgetitem35 = self.tw_secret_card.verticalHeaderItem(1)
+        ___qtablewidgetitem35.setText(QCoreApplication.translate("MainWindow", u"\u65b0\u5efa\u884c", None));
+
+        __sortingEnabled2 = self.tw_secret_card.isSortingEnabled()
+        self.tw_secret_card.setSortingEnabled(False)
+        ___qtablewidgetitem36 = self.tw_secret_card.item(0, 0)
+        ___qtablewidgetitem36.setText(QCoreApplication.translate("MainWindow", u"PiccKey", None));
+        ___qtablewidgetitem37 = self.tw_secret_card.item(1, 0)
+        ___qtablewidgetitem37.setText(QCoreApplication.translate("MainWindow", u"AppKey", None));
+        self.tw_secret_card.setSortingEnabled(__sortingEnabled2)
+
+        self.btn_secret_card_read.setText(QCoreApplication.translate("MainWindow", u"\u8bfb\u53d6", None))
+        self.btn_secret_card_write.setText(QCoreApplication.translate("MainWindow", u"\u5199\u5165", None))
+        self.cb_card_box.setItemText(0, QCoreApplication.translate("MainWindow", u"\u5b9e\u4f53\u5361", None))
+        self.cb_card_box.setItemText(1, QCoreApplication.translate("MainWindow", u"\u6a21\u62df\u5361", None))
+        self.cb_card_box.setItemText(2, QCoreApplication.translate("MainWindow", u"CPU\u5361", None))
+
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"\u914d\u5361\u6a21\u5f0f", None))
+        self.btn_card_start.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb\u914d\u5361", None))
+        self.btn_card_stop.setText(QCoreApplication.translate("MainWindow", u"\u7ec8\u6b62\u914d\u5361", None))
         self.btn_msg.setText(QCoreApplication.translate("MainWindow", u"Message", None))
         self.btn_print.setText(QCoreApplication.translate("MainWindow", u"Print", None))
         self.btn_logout.setText(QCoreApplication.translate("MainWindow", u"Logout", None))

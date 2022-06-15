@@ -75,6 +75,11 @@ class MainWindow(QMainWindow):
         widgets.btn_set_open.clicked.connect(self.buttonClick)
         widgets.btn_set_close.clicked.connect(self.buttonClick)
 
+        # TEST PAGE
+
+        widgets.btn_test_start.clicked.connect(self.buttonClick)
+        widgets.btn_test_stop.clicked.connect(self.buttonClick)
+
         # EXTRA RIGHT BOX
         def openCloseRightBox():
             UIFunctions.toggleRightBox(self, True)
@@ -104,7 +109,6 @@ class MainWindow(QMainWindow):
 
 
     # BUTTONS CLICK
-    # Post here your functions for clicked buttons
     # ///////////////////////////////////////////////////////////////
     def buttonClick(self):
         # GET BUTTON CLICKED
@@ -140,9 +144,14 @@ class MainWindow(QMainWindow):
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
 
         if btnName == "btn_set_open":
-          CANFunctions.open(self)
+            CANFunctions.open(self)
         if btnName == "btn_set_close":
-          CANFunctions.close(self)
+            CANFunctions.close(self)
+
+        if btnName == "btn_test_start":
+            CANFunctions.buttonClick(self, btnName)
+        if btnName == "btn_test_stop":
+            CANFunctions.buttonClick(self, btnName)
 
         # PRINT BTN NAME
         print(f'Button "{btnName}" pressed!')
