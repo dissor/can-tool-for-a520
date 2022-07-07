@@ -115,3 +115,48 @@ class CANFunctions(MainWindow):
             print(err_info.ArLostErrData)
         else:
             print("失败")
+
+    def openUpdateFile(self):
+        print(sys._getframe().f_code.co_name)
+        fd_name = ""
+        # 参数 _ 用于分割第二个返回值，防止 fd 生成数组
+        fd_path, _ = QFileDialog.getOpenFileName(
+            self, "选择文件", "", "BIN(*.bin);;All Files(*)")
+        self.ui.le_update_edit.setText(fd_path)
+
+        fd_size = os.path.getsize(fd_path)
+        print("升级包大小：" + str(fd_size), end="\t")
+        item01 = QTableWidgetItem()
+        item01.setText("%d" % fd_size)
+        self.ui.tw_update_item.setItem(0, 1, item01)
+
+        # 使用open函数打开文件，打开模式选择二进制读取'rb'
+        fd = open(fd_path, 'rb')
+
+        # CRC16校验
+        crc16, key = 0, 0xE32A
+        # print(type(crc16))
+        for i in fd.read():
+            # print(hex(i), end=",")
+            crc16 ^= i
+            for j in range(8):
+                if crc16 & 1 != 0:
+                    crc16 = (crc16 >> 1) ^ key
+                else:
+                    crc16 = (crc16 >> 1)
+
+        print("crc16: ", crc16, hex(crc16), end='\t')
+
+        # 补齐 CRC
+        date_bytes = 6
+        re_len = fd_size % date_bytes
+        if re_len != 0:
+            print("最后一包长度：", re_len)
+            for i in range(date_bytes - re_len):
+                crc16 ^= 0xFF
+                for j in range(8):
+                    if crc16 & 1 != 0:
+                        crc16 = (crc16 >> 1) ^ key
+                    else:
+                        crc16 = (crc16 >> 1)
+        print("修正crc16: ", crc16, hex(crc16))

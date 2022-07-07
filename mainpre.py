@@ -85,6 +85,9 @@ class MainWindow(QMainWindow):
             UIFunctions.toggleRightBox(self, True)
         widgets.btn_top_setting.clicked.connect(openCloseRightBox)
 
+        # UPDATED SETTINGS
+        widgets.btn_update_open.clicked.connect(self.buttonClick)
+
         # SHOW APP
         # ///////////////////////////////////////////////////////////////
         self.show()
@@ -152,6 +155,9 @@ class MainWindow(QMainWindow):
             CANFunctions.buttonClick(self, btnName)
         if btnName == "btn_test_stop":
             CANFunctions.buttonClick(self, btnName)
+
+        if btnName == "btn_update_open":
+            CANFunctions.openUpdateFile(self)
 
         # PRINT BTN NAME
         print(f'Button "{btnName}" pressed!')
