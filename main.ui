@@ -1253,7 +1253,7 @@
                       <string notr="true"/>
                      </property>
                      <property name="currentIndex">
-                      <number>3</number>
+                      <number>1</number>
                      </property>
                      <widget class="QWidget" name="page_test">
                       <widget class="QPushButton" name="btn_test_start">
@@ -1530,6 +1530,45 @@
                        </property>
                        <property name="value">
                         <number>24</number>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_3">
+                       <property name="geometry">
+                        <rect>
+                         <x>130</x>
+                         <y>100</y>
+                         <width>71</width>
+                         <height>21</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>选择升级包</string>
+                       </property>
+                      </widget>
+                      <widget class="QPushButton" name="btn_update_start">
+                       <property name="geometry">
+                        <rect>
+                         <x>640</x>
+                         <y>250</y>
+                         <width>75</width>
+                         <height>24</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>开始</string>
+                       </property>
+                      </widget>
+                      <widget class="QPushButton" name="btn_update_stop">
+                       <property name="geometry">
+                        <rect>
+                         <x>640</x>
+                         <y>290</y>
+                         <width>75</width>
+                         <height>24</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>停止</string>
                        </property>
                       </widget>
                      </widget>

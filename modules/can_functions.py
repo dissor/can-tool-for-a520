@@ -160,3 +160,9 @@ class CANFunctions(MainWindow):
                     else:
                         crc16 = (crc16 >> 1)
         print("修正crc16: ", crc16, hex(crc16))
+
+    def startUpdate(self):
+        pass
+
+    def stopUpdate(self):
+        pass

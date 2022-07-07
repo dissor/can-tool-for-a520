@@ -587,6 +587,15 @@ class Ui_MainWindow(object):
         self.pb_update_bar.setObjectName(u"pb_update_bar")
         self.pb_update_bar.setGeometry(QRect(270, 250, 331, 21))
         self.pb_update_bar.setValue(24)
+        self.label_3 = QLabel(self.page_update)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setGeometry(QRect(130, 100, 71, 21))
+        self.btn_update_start = QPushButton(self.page_update)
+        self.btn_update_start.setObjectName(u"btn_update_start")
+        self.btn_update_start.setGeometry(QRect(640, 250, 75, 24))
+        self.btn_update_stop = QPushButton(self.page_update)
+        self.btn_update_stop.setObjectName(u"btn_update_stop")
+        self.btn_update_stop.setGeometry(QRect(640, 290, 75, 24))
         self.stackedWidget.addWidget(self.page_update)
         self.page_number = QWidget()
         self.page_number.setObjectName(u"page_number")
@@ -772,7 +781,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.btn_set_close.setDefault(False)
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -897,6 +906,9 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem31.setText(QCoreApplication.translate("MainWindow", u"\u6d88\u8017\u65f6\u95f4", None));
         self.tw_update_item.setSortingEnabled(__sortingEnabled1)
 
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u9009\u62e9\u5347\u7ea7\u5305", None))
+        self.btn_update_start.setText(QCoreApplication.translate("MainWindow", u"\u5f00\u59cb", None))
+        self.btn_update_stop.setText(QCoreApplication.translate("MainWindow", u"\u505c\u6b62", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"SN", None))
         self.btn_number_write.setText(QCoreApplication.translate("MainWindow", u"\u5199\u5165", None))
         ___qtablewidgetitem32 = self.tw_secret_card.horizontalHeaderItem(0)

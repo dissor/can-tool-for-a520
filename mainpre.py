@@ -87,6 +87,8 @@ class MainWindow(QMainWindow):
 
         # UPDATED SETTINGS
         widgets.btn_update_open.clicked.connect(self.buttonClick)
+        widgets.btn_update_start.clicked.connect(self.buttonClick)
+        widgets.btn_update_stop.clicked.connect(self.buttonClick)
 
         # SHOW APP
         # ///////////////////////////////////////////////////////////////
@@ -158,6 +160,10 @@ class MainWindow(QMainWindow):
 
         if btnName == "btn_update_open":
             CANFunctions.openUpdateFile(self)
+        if btnName == "btn_update_start":
+            CANFunctions.startUpdate(self)
+        if btnName == "btn_update_stop":
+            CANFunctions.stopUpdate(self)
 
         # PRINT BTN NAME
         print(f'Button "{btnName}" pressed!')
