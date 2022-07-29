@@ -859,13 +859,14 @@ class MyWidget(QtWidgets.QWidget):
 
     # 删除所有UID
     def delete_all_uid(self):
+        print("删除所有UID")
         send_data = CAN_DataFrame(
-            nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=4, uID=0x60)
+            nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=4, uID=0x65)
 
-        send_data.arryData[0] = 0xFF
+        send_data.arryData[0] = 0xFE
         send_data.arryData[1] = 0x04
         send_data.arryData[2] = 0xF4
-        send_data.arryData[3] = 0x00
+        send_data.arryData[3] = self.uuidCrc(send_data.arryData)
 
         res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
         if res != CAN_RESULT_ERROR:
@@ -873,6 +874,12 @@ class MyWidget(QtWidgets.QWidget):
         else:
             print("失败")
             get_error_code(devHandle)
+
+    def uuidCrc(self, data):
+        zeroD = 0
+        for i in data:
+            zeroD -= i
+        return zeroD & 0xFF
 
 
 if __name__ == "__main__":
