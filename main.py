@@ -548,13 +548,35 @@ class MyWidget(QtWidgets.QWidget):
                 init_config.dwBtr[i]), end='\t')
 
         # 初始化密钥限制16进制
-        self.ui.lineEdit_2.setInputMask(
-            'HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH;#')
-        self.ui.lineEdit_3.setInputMask(
-            'HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH;#')
-        self.ui.lineEdit_4.setInputMask(
-            'HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH;#')
-        print("-->\t500Kbps")
+        str1, str2 = "", ""
+        for i in range(16):
+            str1 += 'HH '
+        for i in range(15):
+            str2 += 'HH '
+        str2 += 'HH;#'
+
+        if(self.ui.cb_p16.isChecked()):
+            self.ui.lineEdit_2.setInputMask(str2)
+        else:
+            self.ui.lineEdit_2.setInputMask(str1 + str2)
+
+        if(self.ui.cb_a16.isChecked()):
+            self.ui.lineEdit_3.setInputMask(str2)
+        else:
+            self.ui.lineEdit_3.setInputMask(str1 + str2)
+
+        if(self.ui.cb_k16.isChecked()):
+            self.ui.lineEdit_4.setInputMask(str2)
+        else:
+            self.ui.lineEdit_4.setInputMask(str1 + str2)
+
+        # self.ui.lineEdit_2.setInputMask(
+        #     'HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH;#')
+        # self.ui.lineEdit_3.setInputMask(
+        #     'HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH;#')
+        # self.ui.lineEdit_4.setInputMask(
+        #     'HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH;#')
+        # print("-->\t500Kbps")
         self.ui.pushButton_devClose.setEnabled(False)
 
         # FIXME: This
@@ -903,6 +925,7 @@ class MyWidget(QtWidgets.QWidget):
         res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
         if res != CAN_RESULT_ERROR:
             print("成功")
+            self.ui.textBrowser.setText('')
         else:
             print("失败")
             get_error_code(devHandle)
@@ -930,6 +953,50 @@ class MyWidget(QtWidgets.QWidget):
         for i in data:
             zeroD -= i
         return zeroD & 0xFF
+
+    # TODO: implement
+    def select_picc_16(self):
+        status = self.ui.cb_p16.isChecked()
+        print("select_picc_16", status)
+        str1, str2 = "", ""
+        for i in range(16):
+            str1 += 'HH '
+        for i in range(15):
+            str2 += 'HH '
+        str2 += 'HH;#'
+        if(self.ui.cb_p16.isChecked()):
+            self.ui.lineEdit_2.setInputMask(str2)
+        else:
+            self.ui.lineEdit_2.setInputMask(str1 + str2)
+
+    def select_app_16(self):
+        status = self.ui.cb_a16.isChecked()
+        print("select_app_16", status)
+        str1, str2 = "", ""
+        for i in range(16):
+            str1 += 'HH '
+        for i in range(15):
+            str2 += 'HH '
+        str2 += 'HH;#'
+
+        if(self.ui.cb_a16.isChecked()):
+            self.ui.lineEdit_3.setInputMask(str2)
+        else:
+            self.ui.lineEdit_3.setInputMask(str1 + str2)
+
+    def select_ic_16(self):
+        status = self.ui.cb_k16.isChecked()
+        print("select_ic_16", status)
+        str1, str2 = "", ""
+        for i in range(16):
+            str1 += 'HH '
+        for i in range(15):
+            str2 += 'HH '
+        str2 += 'HH;#'
+        if(self.ui.cb_k16.isChecked()):
+            self.ui.lineEdit_4.setInputMask(str2)
+        else:
+            self.ui.lineEdit_4.setInputMask(str1 + str2)
 
 
 if __name__ == "__main__":
