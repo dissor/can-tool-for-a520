@@ -829,90 +829,124 @@ class MyWidget(QtWidgets.QWidget):
     def write_ic_id(self):
         crc = 0
         send_data = CAN_DataFrame(
-            nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=8, uID=0x60)
+            nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=8, uID=0x65)
 
         m_str4 = self.ui.lineEdit_4.text()
-        if len(m_str4) != 47:
-            print("format error4:", len(m_str4))
-            return
+
+        if self.ui.cb_k16.isChecked():
+            if len(m_str4) != 16*2 + 16 - 1:
+                print("format error40:", len(m_str4))
+                return
+        else:
+            if len(m_str4) != 32*2 + 32 - 1:
+                print("format error41:", len(m_str4))
+                return
+
         print(m_str4, len(m_str4))
-        x4 = m_str4.split(" ")
+        key_str = m_str4.split(" ")
 
-        # icid 5
-        send_data.arryData[0] = 0xFF
-        send_data.arryData[1] = 0x24
-        send_data.arryData[2] = 0xF2
-        for ii in range(3, 8):
-            send_data.arryData[ii] = int.from_bytes(
-                bytes.fromhex(x4[ii-3]), byteorder='little')
-            print(send_data.arryData[ii])
-            crc -= send_data.arryData[ii]
 
-        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
-        if res != CAN_RESULT_ERROR:
-            print("成功")
-        else:
-            print("失败")
-            get_error_code(devHandle)
+        keyQue = Queue(maxsize= 1024)
 
-        # icid 5+8
-        for ii in range(0, 8):
-            send_data.arryData[ii] = int.from_bytes(
-                bytes.fromhex(x4[ii+5]), byteorder='little')
-            print(send_data.arryData[ii])
-            crc -= send_data.arryData[ii]
+        for i in range(len(key_str)):
+            ai = int.from_bytes(bytes.fromhex(key_str[i]), byteorder='little')
+            print(ai, type(ai))
+            keyQue.put(ai)
 
-        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
-        if res != CAN_RESULT_ERROR:
-            print("成功")
-        else:
-            print("失败")
-            get_error_code(devHandle)
+        # PiccKey 5
+        send_data.arryData[0] = 0xF2
 
-        # icid 5+8+8
-        for ii in range(0, 8):
-            send_data.arryData[ii] = int.from_bytes(
-                bytes.fromhex(x4[ii+5+8]), byteorder='little')
-            print(send_data.arryData[ii])
-            crc -= send_data.arryData[ii]
+        for i in range(int(len(key_str)/4)):
+            send_data.arryData[1] = i
+            send_data.arryData[2] = int(len(key_str)/4) - (i + 1)
+            for ii in range(4):
+                send_data.arryData[ii+3] = keyQue.get()
+            send_data.arryData[7] = 0x00
+            send_data.arryData[7] = self.uuidCrc(send_data.arryData)
+            for j in range(8):
+                print(send_data.arryData[j], end=' ')
+            res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+            if res != CAN_RESULT_ERROR:
+                print("成功")
+            else:
+                print("失败")
+                get_error_code(devHandle)
 
-        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
-        if res != CAN_RESULT_ERROR:
-            print("成功")
-        else:
-            print("失败")
-            get_error_code(devHandle)
+        # # icid 5
+        # send_data.arryData[0] = 0xFF
+        # send_data.arryData[1] = 0x24
+        # send_data.arryData[2] = 0xF2
+        # for ii in range(3, 8):
+        #     send_data.arryData[ii] = int.from_bytes(
+        #         bytes.fromhex(x4[ii-3]), byteorder='little')
+        #     print(send_data.arryData[ii])
+        #     crc -= send_data.arryData[ii]
 
-        # icid 5+8+8+8
-        for ii in range(0, 8):
-            send_data.arryData[ii] = int.from_bytes(
-                bytes.fromhex(x4[ii+5+8+8]), byteorder='little')
-            print(send_data.arryData[ii])
-            crc -= send_data.arryData[ii]
+        # res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        # if res != CAN_RESULT_ERROR:
+        #     print("成功")
+        # else:
+        #     print("失败")
+        #     get_error_code(devHandle)
 
-        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
-        if res != CAN_RESULT_ERROR:
-            print("成功")
-        else:
-            print("失败")
-            get_error_code(devHandle)
+        # # icid 5+8
+        # for ii in range(0, 8):
+        #     send_data.arryData[ii] = int.from_bytes(
+        #         bytes.fromhex(x4[ii+5]), byteorder='little')
+        #     print(send_data.arryData[ii])
+        #     crc -= send_data.arryData[ii]
 
-        # icid 5+8+8+8+3
-        for ii in range(0, 3):
-            send_data.arryData[ii] = int.from_bytes(
-                bytes.fromhex(x4[ii+5+8]), byteorder='little')
-            print(send_data.arryData[ii])
-            crc -= send_data.arryData[ii]
-        send_data.arryData[3] = crc % 0x100
+        # res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        # if res != CAN_RESULT_ERROR:
+        #     print("成功")
+        # else:
+        #     print("失败")
+        #     get_error_code(devHandle)
 
-        send_data.nDataLen = 4
+        # # icid 5+8+8
+        # for ii in range(0, 8):
+        #     send_data.arryData[ii] = int.from_bytes(
+        #         bytes.fromhex(x4[ii+5+8]), byteorder='little')
+        #     print(send_data.arryData[ii])
+        #     crc -= send_data.arryData[ii]
 
-        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
-        if res != CAN_RESULT_ERROR:
-            print("成功")
-        else:
-            print("失败")
-            get_error_code(devHandle)
+        # res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        # if res != CAN_RESULT_ERROR:
+        #     print("成功")
+        # else:
+        #     print("失败")
+        #     get_error_code(devHandle)
+
+        # # icid 5+8+8+8
+        # for ii in range(0, 8):
+        #     send_data.arryData[ii] = int.from_bytes(
+        #         bytes.fromhex(x4[ii+5+8+8]), byteorder='little')
+        #     print(send_data.arryData[ii])
+        #     crc -= send_data.arryData[ii]
+
+        # res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        # if res != CAN_RESULT_ERROR:
+        #     print("成功")
+        # else:
+        #     print("失败")
+        #     get_error_code(devHandle)
+
+        # # icid 5+8+8+8+3
+        # for ii in range(0, 3):
+        #     send_data.arryData[ii] = int.from_bytes(
+        #         bytes.fromhex(x4[ii+5+8]), byteorder='little')
+        #     print(send_data.arryData[ii])
+        #     crc -= send_data.arryData[ii]
+        # send_data.arryData[3] = crc % 0x100
+
+        # send_data.nDataLen = 4
+
+        # res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        # if res != CAN_RESULT_ERROR:
+        #     print("成功")
+        # else:
+        #     print("失败")
+        #     get_error_code(devHandle)
 
     # 删除所有UID
     def delete_all_uid(self):
