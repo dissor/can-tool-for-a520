@@ -509,6 +509,36 @@ class MyWidget(QtWidgets.QWidget):
             # print("0x3AE")
             self.setWindowTitle("测试工具")
 
+        elif recv_data2.uID == 0x65:
+            #TODO: 添加小辉要求
+            data_len = recv_data2.nDataLen
+
+            # 显示所有UID
+            if recv_data2.arryData[0] == 0xF8:
+                global uuidQueue
+                uuidQueue = Queue(maxsize = 1024)
+
+                for i in range(3, data_len - 1):
+                    uuidQueue.put(recv_data2.arryData[i])
+
+                if recv_data2.arryData[2] == 0:
+                    uidLen = uuidQueue.qsize()
+                    uidStr = ""
+                    for i in range(uidLen):
+                        if i%8 == 0 and i != 0:
+                            uidStr += '\r\n'
+                        elif i != 0:
+                            uidStr += ' - '
+                        hexd = uuidQueue.get()
+                        if hexd <= 0xf:
+                            uidStr += '0'
+                        uidStr += hex(hexd)[2:]
+
+                    self.ui.textBrowser.setText(uidStr)
+
+
+
+
     # 初始化开启界面
 
     def init_data(self):
@@ -526,6 +556,8 @@ class MyWidget(QtWidgets.QWidget):
             'HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH;#')
         print("-->\t500Kbps")
         self.ui.pushButton_devClose.setEnabled(False)
+
+        # FIXME: This
 
     # 设备开启回调，启动接收线程
     def cb_dev_open(self):
@@ -866,6 +898,24 @@ class MyWidget(QtWidgets.QWidget):
         send_data.arryData[0] = 0xFE
         send_data.arryData[1] = 0x04
         send_data.arryData[2] = 0xF4
+        send_data.arryData[3] = self.uuidCrc(send_data.arryData)
+
+        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        if res != CAN_RESULT_ERROR:
+            print("成功")
+        else:
+            print("失败")
+            get_error_code(devHandle)
+
+    # 读取所有UID
+    def read_all_uid(self):
+        print("读取所有UID")
+        send_data = CAN_DataFrame(
+            nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=4, uID=0x65)
+
+        send_data.arryData[0] = 0xFE
+        send_data.arryData[1] = 0x04
+        send_data.arryData[2] = 0xF7
         send_data.arryData[3] = self.uuidCrc(send_data.arryData)
 
         res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)

@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file '_00login.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.2.3
+## Created by: Qt User Interface Compiler version 6.3.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -17,7 +17,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QGridLayout,
     QHBoxLayout, QLabel, QLineEdit, QProgressBar,
-    QPushButton, QSizePolicy, QTabWidget, QWidget)
+    QPushButton, QSizePolicy, QTabWidget, QTextBrowser,
+    QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -25,9 +26,10 @@ class Ui_Form(object):
             Form.setObjectName(u"Form")
         Form.resize(746, 638)
         Form.setAutoFillBackground(False)
+        self.horizontalLayout_2 = QHBoxLayout(Form)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.tabWidget = QTabWidget(Form)
         self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setGeometry(QRect(20, 20, 701, 571))
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
         self.gridLayoutWidget_4 = QWidget(self.tab)
@@ -284,75 +286,58 @@ class Ui_Form(object):
         self.tabWidget.addTab(self.tab_5, "")
         self.tab_6 = QWidget()
         self.tab_6.setObjectName(u"tab_6")
-        self.gridLayoutWidget = QWidget(self.tab_6)
-        self.gridLayoutWidget.setObjectName(u"gridLayoutWidget")
-        self.gridLayoutWidget.setGeometry(QRect(40, 280, 621, 181))
-        self.gridLayout = QGridLayout(self.gridLayoutWidget)
-        self.gridLayout.setObjectName(u"gridLayout")
-        self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.pushButton_9 = QPushButton(self.gridLayoutWidget)
+        self.pushButton_10 = QPushButton(self.tab_6)
+        self.pushButton_10.setObjectName(u"pushButton_10")
+        self.pushButton_10.setGeometry(QRect(490, 130, 100, 24))
+        self.pushButton_10.setMinimumSize(QSize(100, 0))
+        self.textBrowser = QTextBrowser(self.tab_6)
+        self.textBrowser.setObjectName(u"textBrowser")
+        self.textBrowser.setGeometry(QRect(80, 120, 401, 171))
+        self.label_17 = QLabel(self.tab_6)
+        self.label_17.setObjectName(u"label_17")
+        self.label_17.setGeometry(QRect(30, 120, 31, 31))
+        self.pushButton_9 = QPushButton(self.tab_6)
         self.pushButton_9.setObjectName(u"pushButton_9")
-
-        self.gridLayout.addWidget(self.pushButton_9, 1, 2, 1, 1)
-
-        self.label_15 = QLabel(self.gridLayoutWidget)
-        self.label_15.setObjectName(u"label_15")
-
-        self.gridLayout.addWidget(self.label_15, 0, 0, 1, 1)
-
-        self.pushButton_7 = QPushButton(self.gridLayoutWidget)
-        self.pushButton_7.setObjectName(u"pushButton_7")
-
-        self.gridLayout.addWidget(self.pushButton_7, 0, 2, 1, 1)
-
-        self.lineEdit_4 = QLineEdit(self.gridLayoutWidget)
+        self.pushButton_9.setGeometry(QRect(490, 160, 100, 24))
+        self.pushButton_9.setMinimumSize(QSize(100, 0))
+        self.lineEdit_4 = QLineEdit(self.tab_6)
         self.lineEdit_4.setObjectName(u"lineEdit_4")
-
-        self.gridLayout.addWidget(self.lineEdit_4, 0, 1, 1, 1)
-
-        self.horizontalLayoutWidget_2 = QWidget(self.tab_6)
-        self.horizontalLayoutWidget_2.setObjectName(u"horizontalLayoutWidget_2")
-        self.horizontalLayoutWidget_2.setGeometry(QRect(30, 60, 631, 51))
-        self.horizontalLayout_2 = QHBoxLayout(self.horizontalLayoutWidget_2)
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.label_14 = QLabel(self.horizontalLayoutWidget_2)
-        self.label_14.setObjectName(u"label_14")
-
-        self.horizontalLayout_2.addWidget(self.label_14)
-
-        self.lineEdit_2 = QLineEdit(self.horizontalLayoutWidget_2)
-        self.lineEdit_2.setObjectName(u"lineEdit_2")
-
-        self.horizontalLayout_2.addWidget(self.lineEdit_2)
-
-        self.label_16 = QLabel(self.horizontalLayoutWidget_2)
-        self.label_16.setObjectName(u"label_16")
-
-        self.horizontalLayout_2.addWidget(self.label_16)
-
-        self.lineEdit_3 = QLineEdit(self.horizontalLayoutWidget_2)
-        self.lineEdit_3.setObjectName(u"lineEdit_3")
-
-        self.horizontalLayout_2.addWidget(self.lineEdit_3)
-
-        self.horizontalLayoutWidget_3 = QWidget(self.tab_6)
-        self.horizontalLayoutWidget_3.setObjectName(u"horizontalLayoutWidget_3")
-        self.horizontalLayoutWidget_3.setGeometry(QRect(250, 120, 181, 51))
-        self.horizontalLayout_3 = QHBoxLayout(self.horizontalLayoutWidget_3)
-        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.pushButton_6 = QPushButton(self.horizontalLayoutWidget_3)
+        self.lineEdit_4.setGeometry(QRect(80, 90, 400, 21))
+        self.lineEdit_4.setMinimumSize(QSize(400, 0))
+        self.label_15 = QLabel(self.tab_6)
+        self.label_15.setObjectName(u"label_15")
+        self.label_15.setGeometry(QRect(20, 90, 48, 16))
+        self.pushButton_7 = QPushButton(self.tab_6)
+        self.pushButton_7.setObjectName(u"pushButton_7")
+        self.pushButton_7.setGeometry(QRect(490, 90, 75, 24))
+        self.pushButton_6 = QPushButton(self.tab_6)
         self.pushButton_6.setObjectName(u"pushButton_6")
-
-        self.horizontalLayout_3.addWidget(self.pushButton_6)
-
-        self.pushButton_8 = QPushButton(self.horizontalLayoutWidget_3)
+        self.pushButton_6.setGeometry(QRect(490, 20, 71, 50))
+        self.pushButton_6.setMinimumSize(QSize(0, 50))
+        self.pushButton_6.setMaximumSize(QSize(16777215, 50))
+        self.pushButton_8 = QPushButton(self.tab_6)
         self.pushButton_8.setObjectName(u"pushButton_8")
-
-        self.horizontalLayout_3.addWidget(self.pushButton_8)
-
+        self.pushButton_8.setGeometry(QRect(560, 20, 75, 50))
+        self.pushButton_8.setMinimumSize(QSize(0, 50))
+        self.pushButton_8.setMaximumSize(QSize(16777215, 50))
+        self.lineEdit_3 = QLineEdit(self.tab_6)
+        self.lineEdit_3.setObjectName(u"lineEdit_3")
+        self.lineEdit_3.setGeometry(QRect(80, 50, 400, 21))
+        self.lineEdit_3.setMinimumSize(QSize(400, 0))
+        self.lineEdit_2 = QLineEdit(self.tab_6)
+        self.lineEdit_2.setObjectName(u"lineEdit_2")
+        self.lineEdit_2.setGeometry(QRect(80, 20, 400, 21))
+        self.lineEdit_2.setMinimumSize(QSize(400, 0))
+        self.label_16 = QLabel(self.tab_6)
+        self.label_16.setObjectName(u"label_16")
+        self.label_16.setGeometry(QRect(20, 50, 48, 16))
+        self.label_14 = QLabel(self.tab_6)
+        self.label_14.setObjectName(u"label_14")
+        self.label_14.setGeometry(QRect(20, 20, 46, 16))
         self.tabWidget.addTab(self.tab_6, "")
+
+        self.horizontalLayout_2.addWidget(self.tabWidget)
+
 
         self.retranslateUi(Form)
         self.comboBox_bandRate.currentTextChanged.connect(Form.modify_dwBtr)
@@ -373,8 +358,9 @@ class Ui_Form(object):
         self.pb_state_2.clicked["bool"].connect(Form.update_term)
         self.pb_selectbin.clicked.connect(Form.openBinFile)
         self.pb_state.clicked.connect(Form.startUpgrade)
+        self.pushButton_10.clicked.connect(Form.read_all_uid)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(5)
         self.comboBox_bandRate_devCOM.setCurrentIndex(0)
         self.comboBox_bandRate.setCurrentIndex(7)
 
@@ -466,12 +452,21 @@ class Ui_Form(object):
         self.pushButton_2.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb", None))
         self.pushButton_5.setText(QCoreApplication.translate("Form", u"\u505c\u6b62", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), QCoreApplication.translate("Form", u"\u914d\u5361", None))
+        self.pushButton_10.setText(QCoreApplication.translate("Form", u"\u8bfb\u53d6\u6240\u6709UID", None))
+        self.textBrowser.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"hr { height: 1px; border-width: 0; }\n"
+"</style></head><body style=\" font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">NULL</p></body></html>", None))
+        self.label_17.setText(QCoreApplication.translate("Form", u"UID", None))
         self.pushButton_9.setText(QCoreApplication.translate("Form", u"\u5220\u9664\u6240\u6709UID", None))
         self.label_15.setText(QCoreApplication.translate("Form", u"\u5199IC\u5bc6\u94a5", None))
         self.pushButton_7.setText(QCoreApplication.translate("Form", u"\u5199\u5165", None))
-        self.label_14.setText(QCoreApplication.translate("Form", u"PiccKey:", None))
-        self.label_16.setText(QCoreApplication.translate("Form", u"AppKey:", None))
         self.pushButton_6.setText(QCoreApplication.translate("Form", u"\u8bfb\u53d6", None))
         self.pushButton_8.setText(QCoreApplication.translate("Form", u"\u5199\u5165", None))
+        self.label_16.setText(QCoreApplication.translate("Form", u"AppKey:", None))
+        self.label_14.setText(QCoreApplication.translate("Form", u"PiccKey:", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6), QCoreApplication.translate("Form", u"\u5bc6\u94a5", None))
     # retranslateUi
+
