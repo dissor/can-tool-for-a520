@@ -708,103 +708,60 @@ class MyWidget(QtWidgets.QWidget):
     def write_card_id(self):
         crc = 0
         send_data = CAN_DataFrame(
-            nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=8, uID=0x60)
+            nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=8, uID=0x65)
 
         m_str2 = self.ui.lineEdit_2.text()
         m_str3 = self.ui.lineEdit_3.text()
-        if len(m_str2) != 47:
-            print("format error2:", len(m_str2))
-            return
-        if len(m_str3) != 47:
-            print("format error3:", len(m_str3))
-            return
-        print(m_str2, len(m_str2))
-        print(m_str3, len(m_str3))
-        x2 = m_str2.split(" ")
-        x3 = m_str3.split(" ")
+
+        if self.ui.cb_p16.isChecked():
+            if len(m_str2) != 16*2 + 16 - 1:
+                print("format error20:", len(m_str2))
+                return
+        else:
+            if len(m_str2) != 32*2 + 32 - 1:
+                print("format error21:", len(m_str2))
+                return
+
+        if self.ui.cb_a16.isChecked():
+            if len(m_str3) != 16*2 + 16 - 1:
+                print("format error30:", len(m_str3))
+                return
+        else:
+            if len(m_str3) != 32*2 + 32 - 1:
+                print("format error31:", len(m_str3))
+                return
+
+        key_str = m_str2.split(" ") + m_str3.split(" ")
+        print(key_str, len(key_str))
+
+        keyQue = Queue(maxsize= 1024)
+
+        for i in range(len(key_str)):
+            ai = int.from_bytes(bytes.fromhex(key_str[i]), byteorder='little')
+            print(ai, type(ai))
+            keyQue.put(ai)
 
         # PiccKey 5
-        send_data.arryData[0] = 0xFF
-        send_data.arryData[1] = 0x24
-        send_data.arryData[2] = 0xF1
-        for ii in range(3, 8):
-            send_data.arryData[ii] = int.from_bytes(
-                bytes.fromhex(x2[ii-3]), byteorder='little')
-            print(send_data.arryData[ii])
-            crc -= send_data.arryData[ii]
+        send_data.arryData[0] = 0xF1
 
-        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
-        if res != CAN_RESULT_ERROR:
-            print("成功")
-        else:
-            print("失败")
-            get_error_code(devHandle)
+        for i in range(int(len(key_str)/4)):
+            send_data.arryData[1] = i
+            send_data.arryData[2] = int(len(key_str)/4) - (i + 1)
+            for ii in range(4):
+                send_data.arryData[ii+3] = keyQue.get()
+            send_data.arryData[7] = 0x00
+            send_data.arryData[7] = self.uuidCrc(send_data.arryData)
+            for j in range(8):
+                print(send_data.arryData[j], end=' ')
+            res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+            if res != CAN_RESULT_ERROR:
+                print("成功")
+            else:
+                print("失败")
+                get_error_code(devHandle)
 
-        # PiccKey 5+8
-        for ii in range(0, 8):
-            send_data.arryData[ii] = int.from_bytes(
-                bytes.fromhex(x2[ii+5]), byteorder='little')
-            print(send_data.arryData[ii])
-            crc -= send_data.arryData[ii]
 
-        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
-        if res != CAN_RESULT_ERROR:
-            print("成功")
-        else:
-            print("失败")
-            get_error_code(devHandle)
-
-        # PiccKey 5+8+3  AppKey 5
-        for ii in range(0, 3):
-            send_data.arryData[ii] = int.from_bytes(
-                bytes.fromhex(x2[ii+5+8]), byteorder='little')
-            print(send_data.arryData[ii])
-            crc -= send_data.arryData[ii]
-        for ii in range(3, 8):
-            send_data.arryData[ii] = int.from_bytes(
-                bytes.fromhex(x3[ii-3]), byteorder='little')
-            print(send_data.arryData[ii])
-            crc -= send_data.arryData[ii]
-
-        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
-        if res != CAN_RESULT_ERROR:
-            print("成功")
-        else:
-            print("失败")
-            get_error_code(devHandle)
-
-        # AppKey 5+8
-        for ii in range(0, 8):
-            send_data.arryData[ii] = int.from_bytes(
-                bytes.fromhex(x3[ii+5]), byteorder='little')
-            print(send_data.arryData[ii])
-            crc -= send_data.arryData[ii]
-
-        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
-        if res != CAN_RESULT_ERROR:
-            print("成功")
-        else:
-            print("失败")
-            get_error_code(devHandle)
-
-        # AppKey 5+8+3
-        for ii in range(0, 3):
-            send_data.arryData[ii] = int.from_bytes(
-                bytes.fromhex(x3[ii+5+8]), byteorder='little')
-            print(send_data.arryData[ii])
-            crc -= send_data.arryData[ii]
-        send_data.arryData[3] = crc % 0x100
-
-        send_data.nDataLen = 4
-
-        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
-        if res != CAN_RESULT_ERROR:
-            print("成功")
-        else:
-            print("失败")
-            get_error_code(devHandle)
-
-    # 读卡密钥
+    # TODO: 读卡密钥
 
     def read_card_id(self):
         send_data = CAN_DataFrame(
@@ -822,7 +779,7 @@ class MyWidget(QtWidgets.QWidget):
             print("失败")
             get_error_code(devHandle)
 
-    # 写IC密钥
+    # TODO: 写IC密钥
     def write_ic_id(self):
         crc = 0
         send_data = CAN_DataFrame(
