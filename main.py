@@ -510,14 +510,11 @@ class MyWidget(QtWidgets.QWidget):
             self.setWindowTitle("测试工具")
 
         elif recv_data2.uID == 0x65:
-            #TODO: 添加小辉要求
             data_len = recv_data2.nDataLen
 
             # 显示所有UID
             if recv_data2.arryData[0] == 0xF8:
                 global uuidQueue
-                uuidQueue = Queue(maxsize = 1024)
-
                 for i in range(3, data_len - 1):
                     uuidQueue.put(recv_data2.arryData[i])
 
@@ -536,7 +533,39 @@ class MyWidget(QtWidgets.QWidget):
 
                     self.ui.textBrowser.setText(uidStr)
 
+            if recv_data2.arryData[0] == 0xF8:
+                global pakeyQue
+                for i in range(3, data_len - 1):
+                    pakeyQue.put(recv_data2.arryData[i])
 
+                # TODO: 添加密钥显示
+                if recv_data2.arryData[2] == 0:
+                    uidLen = pakeyQue.qsize()
+                    if uidLen == 32*2:
+                        self.ui.cb_p16.setChecked(False)
+                        self.ui.cb_a16.setChecked(False)
+                    else:
+                        self.ui.cb_p16.setChecked(True)
+                        self.ui.cb_a16.setChecked(True)
+                    self.select_picc_16()
+                    self.select_app_16()
+                    piccStr = ""
+                    for i in range(int(uidLen/2)):
+                        hexd = pakeyQue.get()
+                        if hexd <= 0xf:
+                            piccStr += '0'
+                        piccStr += hex(hexd)[2:]
+
+                    self.ui.lineEdit_2.setText(piccStr)
+
+                    appStr = ""
+                    for i in range(int(uidLen/2)):
+                        hexd = pakeyQue.get()
+                        if hexd <= 0xf:
+                            appStr += '0'
+                        appStr += hex(hexd)[2:]
+
+                    self.ui.lineEdit_3.setText(appStr)
 
 
     # 初始化开启界面
@@ -580,6 +609,24 @@ class MyWidget(QtWidgets.QWidget):
         self.ui.pushButton_devClose.setEnabled(False)
 
         # FIXME: This
+        global uuidQueue
+        uuidQueue = Queue(maxsize = 1024)
+        global pakeyQue
+        pakeyQue = Queue(maxsize = 1024)
+
+        # for i in range(64):
+        #     pakeyQue.put(i)
+
+        # s1 = ''
+        # for i in range(32):
+        #     hexd = pakeyQue.get()
+        #     if hexd <= 0xf:
+        #         s1 += '0'
+        #     s1 += hex(hexd)[2:]
+
+        # self.ui.lineEdit_2.setText(s1)
+
+
 
     # 设备开启回调，启动接收线程
     def cb_dev_open(self):
@@ -761,17 +808,16 @@ class MyWidget(QtWidgets.QWidget):
                 get_error_code(devHandle)
 
 
-    # TODO: 读卡密钥
+    # 读卡密钥
 
     def read_card_id(self):
         send_data = CAN_DataFrame(
-            nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=4, uID=0x60)
+            nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=4, uID=0x65)
 
-        send_data.arryData[0] = 0xFF
+        send_data.arryData[0] = 0xFE
         send_data.arryData[1] = 0x04
         send_data.arryData[2] = 0xF3
-        send_data.arryData[3] = 0x00
-
+        send_data.arryData[3] = self.uuidCrc(send_data.arryData)
         res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
         if res != CAN_RESULT_ERROR:
             print("成功")
