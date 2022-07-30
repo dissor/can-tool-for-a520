@@ -533,12 +533,12 @@ class MyWidget(QtWidgets.QWidget):
 
                     self.ui.textBrowser.setText(uidStr)
 
-            if recv_data2.arryData[0] == 0xF8:
+            #FIXME: 显示密钥
+            if recv_data2.arryData[0] == 0xF5:
                 global pakeyQue
                 for i in range(3, data_len - 1):
                     pakeyQue.put(recv_data2.arryData[i])
 
-                # TODO: 添加密钥显示
                 if recv_data2.arryData[2] == 0:
                     uidLen = pakeyQue.qsize()
                     if uidLen == 32*2:
@@ -566,6 +566,28 @@ class MyWidget(QtWidgets.QWidget):
                         appStr += hex(hexd)[2:]
 
                     self.ui.lineEdit_3.setText(appStr)
+
+            #FIXME: 显示ic密钥
+            if recv_data2.arryData[0] == 0xFB:
+                global icpakeyQue
+                for i in range(3, data_len - 1):
+                    icpakeyQue.put(recv_data2.arryData[i])
+
+                if recv_data2.arryData[2] == 0:
+                    uidLen = icpakeyQue.qsize()
+                    if uidLen == 32*2:
+                        self.ui.cb_k16.setChecked(False)
+                    else:
+                        self.ui.cb_k16.setChecked(True)
+                    self.select_ic_16()
+                    icStr = ""
+                    for i in range(int(uidLen/2)):
+                        hexd = icpakeyQue.get()
+                        if hexd <= 0xf:
+                            icStr += '0'
+                        icStr += hex(hexd)[2:]
+
+                    self.ui.lineEdit_4.setText(icStr)
 
 
     # 初始化开启界面
@@ -611,11 +633,14 @@ class MyWidget(QtWidgets.QWidget):
         # print("-->\t500Kbps")
         self.ui.pushButton_devClose.setEnabled(False)
 
-        # FIXME: This
+        # FIXME: This 初始化队列
         global uuidQueue
         uuidQueue = Queue(maxsize = 1024)
         global pakeyQue
         pakeyQue = Queue(maxsize = 1024)
+        global icpakeyQue
+        icpakeyQue = Queue(maxsize = 1024)
+
 
         # for i in range(64):
         #     pakeyQue.put(i)
@@ -1000,6 +1025,25 @@ class MyWidget(QtWidgets.QWidget):
             else:
                 print("失败")
                 get_error_code(devHandle)
+
+    # TODO: 读取ic密钥
+    def read_ic_key(self):
+        print("读取IC密钥")
+        send_data = CAN_DataFrame(
+            nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=4, uID=0x60)
+
+        send_data.arryData[0] = 0xFE
+        send_data.arryData[1] = 0x04
+        send_data.arryData[2] = 0xFA
+        send_data.arryData[3] = self.uuidCrc(send_data.arryData)
+
+        res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+        if res != CAN_RESULT_ERROR:
+            print("成功")
+        else:
+            print("失败")
+            get_error_code(devHandle)
+
 
 
 

@@ -309,7 +309,9 @@ class Ui_Form(object):
         self.label_15.setGeometry(QRect(20, 90, 48, 16))
         self.pushButton_7 = QPushButton(self.tab_6)
         self.pushButton_7.setObjectName(u"pushButton_7")
-        self.pushButton_7.setGeometry(QRect(510, 90, 75, 24))
+        self.pushButton_7.setGeometry(QRect(580, 90, 70, 24))
+        self.pushButton_7.setMinimumSize(QSize(70, 0))
+        self.pushButton_7.setMaximumSize(QSize(70, 16777215))
         self.pushButton_6 = QPushButton(self.tab_6)
         self.pushButton_6.setObjectName(u"pushButton_6")
         self.pushButton_6.setGeometry(QRect(510, 20, 71, 50))
@@ -356,6 +358,11 @@ class Ui_Form(object):
         self.pushButton_11 = QPushButton(self.tab_6)
         self.pushButton_11.setObjectName(u"pushButton_11")
         self.pushButton_11.setGeometry(QRect(510, 300, 75, 24))
+        self.pushButton_12 = QPushButton(self.tab_6)
+        self.pushButton_12.setObjectName(u"pushButton_12")
+        self.pushButton_12.setGeometry(QRect(510, 90, 70, 24))
+        self.pushButton_12.setMinimumSize(QSize(70, 0))
+        self.pushButton_12.setMaximumSize(QSize(70, 16777215))
         self.tabWidget.addTab(self.tab_6, "")
 
         self.horizontalLayout_2.addWidget(self.tabWidget)
@@ -385,6 +392,7 @@ class Ui_Form(object):
         self.cb_a16.clicked.connect(Form.select_app_16)
         self.cb_k16.clicked.connect(Form.select_ic_16)
         self.pushButton_11.clicked.connect(Form.write_uid_single)
+        self.pushButton_12.clicked.connect(Form.read_ic_key)
 
         self.tabWidget.setCurrentIndex(5)
         self.comboBox_bandRate_devCOM.setCurrentIndex(0)
@@ -499,6 +507,7 @@ class Ui_Form(object):
         self.label_18.setText(QCoreApplication.translate("Form", u"16 B", None))
         self.label_19.setText(QCoreApplication.translate("Form", u"\u5199UID", None))
         self.pushButton_11.setText(QCoreApplication.translate("Form", u"\u5199\u5165", None))
+        self.pushButton_12.setText(QCoreApplication.translate("Form", u"\u8bfb\u53d6", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6), QCoreApplication.translate("Form", u"\u5bc6\u94a5", None))
     # retranslateUi
 

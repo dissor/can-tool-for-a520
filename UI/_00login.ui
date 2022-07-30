@@ -893,11 +893,23 @@ hr { height: 1px; border-width: 0; }
       <widget class="QPushButton" name="pushButton_7">
        <property name="geometry">
         <rect>
-         <x>510</x>
+         <x>580</x>
          <y>90</y>
-         <width>75</width>
+         <width>70</width>
          <height>24</height>
         </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>70</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>16777215</height>
+        </size>
        </property>
        <property name="text">
         <string>写入</string>
@@ -1103,6 +1115,31 @@ hr { height: 1px; border-width: 0; }
        </property>
        <property name="text">
         <string>写入</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_12">
+       <property name="geometry">
+        <rect>
+         <x>510</x>
+         <y>90</y>
+         <width>70</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>70</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>读取</string>
        </property>
       </widget>
      </widget>
@@ -1327,7 +1364,7 @@ hr { height: 1px; border-width: 0; }
    <slot>write_ic_id()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>575</x>
+     <x>656</x>
      <y>146</y>
     </hint>
     <hint type="destinationlabel">
@@ -1480,6 +1517,22 @@ hr { height: 1px; border-width: 0; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_12</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>read_ic_key()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>567</x>
+     <y>141</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>745</x>
+     <y>219</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>select_dev_comm()</slot>
@@ -1505,5 +1558,6 @@ hr { height: 1px; border-width: 0; }
   <slot>select_app_16()</slot>
   <slot>select_ic_16()</slot>
   <slot>write_uid_single()</slot>
+  <slot>read_ic_key()</slot>
  </slots>
 </ui>
