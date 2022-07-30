@@ -621,8 +621,8 @@ class MyWidget(QtWidgets.QWidget):
         else:
             self.ui.lineEdit_4.setInputMask(str1 + str2)
 
-        self.ui.lineEdit_5.setInputMask(
-            'HH HH HH HH HH HH HH HH;#')
+        self.ui.lineEdit_5.setInputMask('HH HH HH HH HH HH HH HH;#')
+        self.ui.lineEdit_6.setInputMask('HH HH HH HH HH HH HH HH;#')
 
         # self.ui.lineEdit_2.setInputMask(
         #     'HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH HH;#')
@@ -1043,6 +1043,46 @@ class MyWidget(QtWidgets.QWidget):
         else:
             print("失败")
             get_error_code(devHandle)
+
+    # FIXME: 删除指定UID
+    def delect_uid_single(self):
+        send_data = CAN_DataFrame(
+            nSendType=0, bRemoteFlag=0, bExternFlag=0, nDataLen=8, uID=0x65)
+
+        m_str6 = self.ui.lineEdit_6.text()
+
+        if len(m_str6) != 8*2 + 8 - 1:
+            print("format error61:", len(m_str6))
+            return
+
+        print(m_str6, len(m_str6))
+        key_str = m_str6.split(" ")
+
+
+        keyQue = Queue(maxsize= 1024)
+
+        for i in range(len(key_str)):
+            ai = int.from_bytes(bytes.fromhex(key_str[i]), byteorder='little')
+            print(ai, type(ai))
+            keyQue.put(ai)
+
+        send_data.arryData[0] = 0xFC
+
+        for i in range(int(len(key_str)/4)):
+            send_data.arryData[1] = i
+            send_data.arryData[2] = int(len(key_str)/4) - (i + 1)
+            for ii in range(4):
+                send_data.arryData[ii+3] = keyQue.get()
+            send_data.arryData[7] = 0x00
+            send_data.arryData[7] = self.uuidCrc(send_data.arryData)
+            for j in range(8):
+                print(send_data.arryData[j], end=' ')
+            res = pDll.CAN_ChannelSend(devHandle, 0, pointer(send_data), 1)
+            if res != CAN_RESULT_ERROR:
+                print("成功")
+            else:
+                print("失败")
+                get_error_code(devHandle)
 
 
 

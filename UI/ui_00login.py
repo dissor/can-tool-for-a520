@@ -363,6 +363,16 @@ class Ui_Form(object):
         self.pushButton_12.setGeometry(QRect(510, 90, 70, 24))
         self.pushButton_12.setMinimumSize(QSize(70, 0))
         self.pushButton_12.setMaximumSize(QSize(70, 16777215))
+        self.lineEdit_6 = QLineEdit(self.tab_6)
+        self.lineEdit_6.setObjectName(u"lineEdit_6")
+        self.lineEdit_6.setGeometry(QRect(80, 330, 400, 21))
+        self.lineEdit_6.setMinimumSize(QSize(400, 0))
+        self.label_20 = QLabel(self.tab_6)
+        self.label_20.setObjectName(u"label_20")
+        self.label_20.setGeometry(QRect(20, 330, 48, 16))
+        self.pushButton_13 = QPushButton(self.tab_6)
+        self.pushButton_13.setObjectName(u"pushButton_13")
+        self.pushButton_13.setGeometry(QRect(510, 330, 75, 24))
         self.tabWidget.addTab(self.tab_6, "")
 
         self.horizontalLayout_2.addWidget(self.tabWidget)
@@ -393,6 +403,7 @@ class Ui_Form(object):
         self.cb_k16.clicked.connect(Form.select_ic_16)
         self.pushButton_11.clicked.connect(Form.write_uid_single)
         self.pushButton_12.clicked.connect(Form.read_ic_key)
+        self.pushButton_13.clicked.connect(Form.delect_uid_single)
 
         self.tabWidget.setCurrentIndex(5)
         self.comboBox_bandRate_devCOM.setCurrentIndex(0)
@@ -508,6 +519,8 @@ class Ui_Form(object):
         self.label_19.setText(QCoreApplication.translate("Form", u"\u5199UID", None))
         self.pushButton_11.setText(QCoreApplication.translate("Form", u"\u5199\u5165", None))
         self.pushButton_12.setText(QCoreApplication.translate("Form", u"\u8bfb\u53d6", None))
+        self.label_20.setText(QCoreApplication.translate("Form", u"\u5220\u9664UID", None))
+        self.pushButton_13.setText(QCoreApplication.translate("Form", u"\u5220\u9664", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6), QCoreApplication.translate("Form", u"\u5bc6\u94a5", None))
     # retranslateUi
 

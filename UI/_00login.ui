@@ -1142,6 +1142,48 @@ hr { height: 1px; border-width: 0; }
         <string>读取</string>
        </property>
       </widget>
+      <widget class="QLineEdit" name="lineEdit_6">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>330</y>
+         <width>400</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>400</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_20">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>330</y>
+         <width>48</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>删除UID</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_13">
+       <property name="geometry">
+        <rect>
+         <x>510</x>
+         <y>330</y>
+         <width>75</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>删除</string>
+       </property>
+      </widget>
      </widget>
     </widget>
    </item>
@@ -1533,6 +1575,22 @@ hr { height: 1px; border-width: 0; }
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_13</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>delect_uid_single()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>572</x>
+     <y>373</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>745</x>
+     <y>439</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>select_dev_comm()</slot>
@@ -1559,5 +1617,6 @@ hr { height: 1px; border-width: 0; }
   <slot>select_ic_16()</slot>
   <slot>write_uid_single()</slot>
   <slot>read_ic_key()</slot>
+  <slot>delect_uid_single()</slot>
  </slots>
 </ui>
