@@ -581,7 +581,7 @@ class MyWidget(QtWidgets.QWidget):
                         self.ui.cb_k16.setChecked(True)
                     self.select_ic_16()
                     icStr = ""
-                    for i in range(int(uidLen/2)):
+                    for i in range(uidLen):
                         hexd = icpakeyQue.get()
                         if hexd <= 0xf:
                             icStr += '0'
