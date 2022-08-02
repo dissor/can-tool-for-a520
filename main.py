@@ -407,6 +407,8 @@ class MyWidget(QtWidgets.QWidget):
             test.STATE_PN = recv_data2.arryData[1] & 0x0F
             test.VERSION = recv_data2.arryData[2]
 
+            self.ui.lb_shui.setText("水位：%d"%recv_data2.arryData[3])
+
             self.ui.lb_state.setText("M卡数量："+str(test.STATE_MN)+'\t'+"CPU卡数量："+str(test.STATE_CPUN)+'\t'+"虚拟卡数量："+str(
                 test.STATE_VMN)+'\t'+"唤醒引脚："+str(test.STATE_PN)+'\t'+"软件版本："+str(test.VERSION))
             # print(test.STATE_MN, test.STATE_CPUN, test.STATE_VMN, test.STATE_PN)

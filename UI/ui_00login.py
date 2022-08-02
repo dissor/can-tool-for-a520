@@ -3,22 +3,15 @@
 ################################################################################
 ## Form generated from reading UI file '_00login.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.3.0
+## Created by: Qt User Interface Compiler version 6.1.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QGridLayout,
-    QHBoxLayout, QLabel, QLineEdit, QProgressBar,
-    QPushButton, QSizePolicy, QTabWidget, QTextBrowser,
-    QWidget)
+from PySide6.QtCore import *  # type: ignore
+from PySide6.QtGui import *  # type: ignore
+from PySide6.QtWidgets import *  # type: ignore
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -181,9 +174,27 @@ class Ui_Form(object):
         self.lb_cardcnt = QLabel(self.tab_2)
         self.lb_cardcnt.setObjectName(u"lb_cardcnt")
         self.lb_cardcnt.setGeometry(QRect(420, 20, 151, 31))
-        self.lb_temp = QLabel(self.tab_2)
+        self.frame = QFrame(self.tab_2)
+        self.frame.setObjectName(u"frame")
+        self.frame.setGeometry(QRect(510, 80, 161, 101))
+        self.frame.setFrameShape(QFrame.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout = QVBoxLayout(self.frame)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.lb_temp = QLabel(self.frame)
         self.lb_temp.setObjectName(u"lb_temp")
-        self.lb_temp.setGeometry(QRect(420, 50, 53, 16))
+        font = QFont()
+        font.setPointSize(16)
+        self.lb_temp.setFont(font)
+
+        self.verticalLayout.addWidget(self.lb_temp)
+
+        self.lb_shui = QLabel(self.frame)
+        self.lb_shui.setObjectName(u"lb_shui")
+        self.lb_shui.setFont(font)
+
+        self.verticalLayout.addWidget(self.lb_shui)
+
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_3 = QWidget()
         self.tab_3.setObjectName(u"tab_3")
@@ -394,7 +405,7 @@ class Ui_Form(object):
         self.pushButton_6.clicked.connect(Form.read_card_id)
         self.pushButton_7.clicked.connect(Form.write_ic_id)
         self.pushButton_9.clicked.connect(Form.delete_all_uid)
-        self.pb_state_2.clicked["bool"].connect(Form.update_term)
+        self.pb_state_2.clicked.connect(Form.update_term)
         self.pb_selectbin.clicked.connect(Form.openBinFile)
         self.pb_state.clicked.connect(Form.startUpgrade)
         self.pushButton_10.clicked.connect(Form.read_all_uid)
@@ -405,7 +416,7 @@ class Ui_Form(object):
         self.pushButton_12.clicked.connect(Form.read_ic_key)
         self.pushButton_13.clicked.connect(Form.delect_uid_single)
 
-        self.tabWidget.setCurrentIndex(5)
+        self.tabWidget.setCurrentIndex(1)
         self.comboBox_bandRate_devCOM.setCurrentIndex(0)
         self.comboBox_bandRate.setCurrentIndex(7)
 
@@ -477,6 +488,7 @@ class Ui_Form(object):
         self.lb_state.setText(QCoreApplication.translate("Form", u"\u7a7a", None))
         self.lb_cardcnt.setText(QCoreApplication.translate("Form", u"\u5237\u5361\u7d2f\u8ba1\uff1a0", None))
         self.lb_temp.setText(QCoreApplication.translate("Form", u"\u6e29\u5ea6\uff1a0", None))
+        self.lb_shui.setText(QCoreApplication.translate("Form", u"\u6c34\u4f4d\uff1a0", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Form", u"\u6d4b\u8bd5", None))
         self.lb_updatestate.setText("")
         self.lb_progress.setText("")
@@ -501,7 +513,6 @@ class Ui_Form(object):
         self.textBrowser.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
 "</style></head><body style=\" font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">NULL</p></body></html>", None))
         self.label_17.setText(QCoreApplication.translate("Form", u"UID", None))
