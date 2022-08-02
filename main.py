@@ -481,7 +481,7 @@ class MyWidget(QtWidgets.QWidget):
 
         elif recv_data2.uID == 0x718:
             print("0x718")
-            self.ui.lb_state.setText("温度：%d"%recv_data2.arryData[0])
+            self.ui.lb_temp.setText("温度：%d"%recv_data2.arryData[0])
 
         elif recv_data2.uID == 0x731:
             print("0x731")
@@ -500,10 +500,10 @@ class MyWidget(QtWidgets.QWidget):
                 UID += "%02x" % (recv_data2.arryData[i+1])
             test.CARD_CNT += 1
             self.ui.lb_cardcnt.setText("刷卡累计：%d" % test.CARD_CNT)
-            if flag == 1:
-                QtWidgets.QMessageBox.information(self, "刷卡(已配对)", UID)
-            else:
-                QtWidgets.QMessageBox.information(self, "刷卡(未配对)", UID)
+            # if flag == 1:
+            #     QtWidgets.QMessageBox.information(self, "刷卡(已配对)", UID)
+            # else:
+            #     QtWidgets.QMessageBox.information(self, "刷卡(未配对)", UID)
 
         elif recv_data2.uID == 0x3AE:
             # print("0x3AE")

@@ -3,6 +3,8 @@ from . CanCmd import *
 
 class can_recv_worker(QThread):
 
+    signal = Signal(type(can_dev.RECV))
+
     def __init__(self):
         super().__init__()
 
@@ -14,15 +16,16 @@ class can_recv_worker(QThread):
             # print("get date", res, len)
             if res != CAN_RESULT_ERROR:
                 self.cb_can_receive(can_dev.RECV)
-                print("接收正确")
+                # print("接收正确")
             else:
                 can_dev.PDLL.CAN_ClearReceiveBuffer(can_dev.HANDLE, 0)
                 print("接收错误")
 
     def cb_can_receive(self, data):
-        print(data.uID)
-        for i in range(data.nDataLen):
-            print(data.arryData[i], end='\t')
-        print("接收完成")
+        # print(data.uID)
+        # for i in range(data.nDataLen):
+        #     print(data.arryData[i], end='\t')
+        # print("接收完成")
+        self.signal.emit(data)
 
 recv_task = can_recv_worker()

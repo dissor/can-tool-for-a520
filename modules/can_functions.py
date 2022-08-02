@@ -5,6 +5,10 @@ from mainpre import *
 
 
 class CANFunctions(MainWindow):
+
+    def __init__(self):
+        super().__init__()
+
     # 打开设备
     def open(self):
         print("打开设备:", USBCAN_1CH, end='\t')
@@ -44,6 +48,7 @@ class CANFunctions(MainWindow):
             return
 
         # 开启接收线程和保活线程
+        recv_task.signal.connect(CANFunctions.recv_loop)
         recv_task.start()
         alive_task.start()
 
@@ -56,7 +61,7 @@ class CANFunctions(MainWindow):
     def close(self):
 
         # 关闭接收线程和保活线程
-        recv_task.terminate()
+        # recv_task.terminate()
         alive_task.terminate()
 
         print("关闭通道: 0", end='\t')
@@ -166,3 +171,9 @@ class CANFunctions(MainWindow):
 
     def stopUpdate(self):
         pass
+
+    def recv_loop(data):
+        print(data.uID)
+        for i in range(data.nDataLen):
+            print(data.arryData[i], end='\t')
+        print("接收完成")
